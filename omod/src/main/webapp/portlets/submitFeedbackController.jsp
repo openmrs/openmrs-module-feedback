@@ -1,14 +1,14 @@
 <%@ include file="/WEB-INF/template/include.jsp" %>
 
 <script type="text/javascript">
-    $j(function(){
-        $j("#demoForm").formwizard({
+    $(function(){
+        $("#demoForm").formwizard({
             formPluginEnabled: true,
             validationEnabled: true,
             focusFirstInput : true,
             formOptions :{
-                success: function(data){$j("#status").fadeTo(500,1,function(){ $j(this).html("You are now registered!").fadeTo(5000, 0); })},
-                beforeSubmit: function(data){$j("#data").html("data sent to the server: " + $j.param(data));},
+                success: function(data){$("#status").fadeTo(500,1,function(){ $(this).html("You are now registered!").fadeTo(5000, 0); })},
+                beforeSubmit: function(data){$("#data").html("data sent to the server: " + $.param(data));},
                 dataType: 'json',
                 resetForm: true
             }
