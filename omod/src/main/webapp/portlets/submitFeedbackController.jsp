@@ -20,48 +20,37 @@
 
 <div id="dialog" title="<spring:message code="feedback.submit"/>">
 
-
 <%--<form action="<openmrs:contextPath/>/module/feedback/addFeedback.form" method="post"  enctype="multipart/form-data" >--%>
 
 <form id="demoForm" method="post" action="json.html" class="bbq">
-
+    <br />
     <div id="fieldWrapper">
 				<span class="step" id="first">
-					<span class="font_normal_07em_black">First step - Name</span><br />
-					<label for="firstname">First name</label><br />
-					<input class="input_field_12em" name="firstname" id="firstname" /><br />
-					<label for="surname">Surname</label><br />
-					<input class="input_field_12em" name="surname" id="surname" /><br />
+					<span class="font_normal_07em_black">Feedback Wizard - Step 1 of 3</span><br />
+					<label for="message">Feedback Message Content</label><br />
+					<input class="input_field_12em" name="message" id="message" /><br />
+				<br />
 				</span>
 				<span id="finland" class="step">
-					<span class="font_normal_07em_black">Step 2 - Personal information</span><br />
-					<label for="day_fi">Social Security Number</label><br />
-					<input class="input_field_25em" name="day" id="day_fi" value="DD" />
-					<input class="input_field_25em" name="month" id="month_fi" value="MM" />
-					<input class="input_field_3em" name="year" id="year_fi" value="YYYY" /> -
-					<input class="input_field_3em" name="lastFour" id="lastFour_fi" value="XXXX" /><br />
-					<label for="countryPrefix_fi">Phone number</label><br />
-					<input class="input_field_35em" name="countryPrefix" id="countryPrefix_fi" value="+358" /> -
-					<input class="input_field_3em" name="areaCode" id="areaCode_fi" /> -
-					<input class="input_field_12em" name="phoneNumber" id="phoneNumber_fi" /><br />
-					<label for="email">*Email</label><br />
-					<input class="input_field_12em email required" name="myemail" id="myemail" /><br />
+					<span class="font_normal_07em_black">Feedback Wizard - Step 2 of 3</span><br />
+					<label for="stack">Error Stacktrace (if any)</label><br />
+					<input class="input_field_12em" name="stack" id="stack" /><br />
 				</span>
 				<span id="confirmation" class="step">
-					<span class="font_normal_07em_black">Last step - Username</span><br />
-					<label for="username">User name</label><br />
-					<input class="input_field_12em" name="username" id="username" /><br />
-					<label for="password">Password</label><br />
-					<input class="input_field_12em" name="password" id="password" type="password" /><br />
-					<label for="retypePassword">Retype password</label><br />
-					<input class="input_field_12em" name="retypePassword" id="retypePassword" type="password" /><br />
+					<span class="font_normal_07em_black">Feedback Wizard - Step 3 of 3</span><br />
+					<label for="Subject">Subject</label><br />
+					<input class="input_field_12em" name="Subject" id="Subject" value="Error" /><br />
+					<label for="Severity">Severity</label><br />
+					<input class="input_field_12em" name="Severity" id="Severity" value="High" /><br />
+					<label for="Reciever">Reciever</label><br />
+					<input class="input_field_12em" name="Reciever" id="Reciever" value="Admin" /><br />
 				</span>
     </div>
     <div id="demoNavigation">
         <input class="navigation_button" id="back" value="Back" type="reset" />
         <input class="navigation_button" id="next" value="Next" type="submit" />
     </div>
-
+    <br />
 </form>
 <%--</form>--%>
 
