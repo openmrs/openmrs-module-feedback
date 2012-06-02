@@ -1,0 +1,49 @@
+/**
+ * The contents of this file are subject to the OpenMRS Public License
+ * Version 1.0 (the "License"); you may not use this file except in
+ * compliance with the License. You may obtain a copy of the License at
+ * http://license.openmrs.org
+ *
+ * Software distributed under the License is distributed on an "AS IS"
+ * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied. See the
+ * License for the specific language governing rights and limitations
+ * under the License.
+ *
+ * Copyright (C) OpenMRS, LLC.  All Rights Reserved.
+ */
+
+
+
+package org.openmrs.module.feedback.extension.html;
+
+//~--- non-JDK imports --------------------------------------------------------
+
+import org.openmrs.module.web.extension.HeaderIncludeExt;
+
+//~--- JDK imports ------------------------------------------------------------
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class HeaderInclude extends HeaderIncludeExt {
+    public List<String> getHeaderFiles() {
+        List<String> myHeaderFiles = new ArrayList<String>();
+
+        myHeaderFiles.add("/moduleResources/feedback/fdbk.js");
+
+        myHeaderFiles.add("/moduleResources/feedback/wizard/bbq.js");
+        myHeaderFiles.add("/moduleResources/feedback/wizard/jquery-1.4.2.min.js");
+        myHeaderFiles.add("/moduleResources/feedback/wizard/jquery-ui-1.8.2.custom.css");
+        myHeaderFiles.add("/moduleResources/feedback/wizard/jquery-ui-1.8.5.custom.min.js");
+        myHeaderFiles.add("/moduleResources/feedback/wizard/jquery.form.js");
+        myHeaderFiles.add("/moduleResources/feedback/wizard/jquery.form.wizard-min.js");
+        myHeaderFiles.add("/moduleResources/feedback/wizard/jquery.validate.js");
+
+        myHeaderFiles.add("/moduleResources/feedback/wizard/formStyles.css");
+
+        return myHeaderFiles;
+    }
+}
+
+
+//~ Formatted by Jindent --- http://www.jindent.com

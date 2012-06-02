@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8"?>
+ 
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog/1.9"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog/1.9
+                  http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-1.9.xsd">
+ 
+
+ 	
+	<changeSet id="feedback-2011-06-28-10:59" author="gauravpaliwal">
+		<preConditions onFail="MARK_RAN">
+			<not><tableExists tableName="feedback_severity"/></not>
+                        <not><tableExists tableName="feedback_status"/></not>
+                        <not><tableExists tableName="feedback_predefined_subject"/></not>
+                        <not><tableExists tableName="feedback_feedback"/></not>
+		</preConditions>
+                
+		<comment>
+			Creating the feedback module tables
+		</comment>
+                
+		<createTable tableName="feedback_severity">
+			<column name="feedback_severity_id" type="int">
+				<constraints primaryKey="true" nullable="false"/>
+			</column>
+			<column name="severity" type="varchar(50)"/>
+                        <column name="uuid" type="varchar(38)"/>
+			<column name="sort_weight" type="int" />
+		</createTable>      
+                
+                <createTable tableName="feedback_feedback">
+			<column name="feedback_id" type="int">
+				<constraints primaryKey="true" nullable="false"/>
+			</column>
+			<column name="creator" type="int">                 
+                                <constraints nullable="false"/>
+                        </column>
+                        <column name="changed_by" type="int">                 
+                                <constraints nullable="true"/>
+                        </column>
+                        <column name="subject" type="varchar(255)">
+                                <constraints nullable="false"/>
+                        </column>
+                        <column name="content" type="mediumtext">     
+                                <constraints nullable="false"/>
+                        </column>
+                        <column name="severity" type="varchar(25)">  
+                                <constraints nullable="false"/>
+                        </column>
+                        <column name="comment" type="varchar(5000)"/>   
+                        <column name="status" type="varchar(25)"/>  
+                        <column name="date_created" type="timestamp">
+                            <constraints nullable="false"/>
+                        </column>
+                        <column name="date_changed" type="timestamp" />
+                        <column name="uuid" type="varchar(38)"/>
+                        <column name="attachment" type="mediumblob"/>
+		</createTable>            
+                
+                <createTable tableName="feedback_status">
+			<column name="feedback_status_id" type="int">
+				<constraints primaryKey="true" nullable="false"/>
+			</column>
+			<column name="status" type="varchar(50)"/>
+                        <column name="uuid" type="varchar(38)"/>
+
+		</createTable> 
+                <createTable tableName="feedback_predefined_subject">
+			<column name="feedback_predefined_subject_id" type="int">
+				<constraints primaryKey="true" nullable="false"/>
+			</column>
+			<column name="subject" type="varchar(50)"/>	
+                        <column name="uuid" type="varchar(38)"/>
+			<column name="sort_weight" type="int" />
+		</createTable>
+                                
+                <addAutoIncrement tableName="feedback_severity" columnName="feedback_severity_id" columnDataType="int"/>
+                <addAutoIncrement tableName="feedback_feedback" columnName="feedback_id" columnDataType="int"/>
+                <addAutoIncrement tableName="feedback_predefined_subject" columnName="feedback_predefined_subject_id" columnDataType="int"/>
+                <addAutoIncrement tableName="feedback_status" columnName="feedback_status_id" columnDataType="int"/>
+                
+        </changeSet>
+	
+	<changeSet id="feedback-2011-06-29-12:59" author="gauravpaliwal">
+		<preConditions onFail="MARK_RAN">
+			<not><tableExists tableName="feedback_comment"/></not>
+		</preConditions>
+                
+		<comment>
+			Creating the feedback comment tables
+		</comment> 
+                
+                <createTable tableName="feedback_comment">
+			<column name="feedback_comment_id" type="int">
+				<constraints primaryKey="true" nullable="false"/>
+			</column>
+			<column name="creator" type="int">                 
+                                <constraints nullable="false"/>
+                        </column>
+                        <column name="changed_by" type="int">                 
+                                <constraints nullable="true"/>
+                        </column>
+                        <column name="comment" type="mediumtext">     
+                                <constraints nullable="false"/>
+                        </column>
+                        <column name="date_created" type="timestamp">
+                            <constraints nullable="false"/>
+                        </column>
+                        <column name="date_changed" type="timestamp" />
+                        <column name="uuid" type="varchar(38)"/>
+                        <column name="attachment" type="mediumblob"/>
+			<column name="feedback_id" type="int" />
+		</createTable>                          
+                                
+                <addAutoIncrement tableName="feedback_comment" columnName="feedback_comment_id" columnDataType="int"/>
+                
+        </changeSet>
+	
+	<changeSet id="feedback-2011-07-02-12:59" author="gauravpaliwal">
+              
+		<comment>
+			Adding dummy value
+		</comment> 
+		<insert tableName="feedback_severity">
+			<column name="severity" value="Urgent"/>
+		</insert>
+		<insert tableName="feedback_severity">
+			<column name="severity" value="High"/>
+		</insert>
+		<insert tableName="feedback_severity">
+			<column name="severity" value="Medium"/>
+		</insert>
+		<insert tableName="feedback_severity">
+			<column name="severity" value="Low"/>
+		</insert>
+		<insert tableName="feedback_severity">
+			<column name="severity" value="Low"/>
+		</insert>		
+		<insert tableName="feedback_predefined_subject">
+			<column name="subject" value="Add Concept"/>
+		</insert>
+		<insert tableName="feedback_predefined_subject">
+			<column name="subject" value="Patient Not Found"/>
+		</insert>
+		<insert tableName="feedback_predefined_subject">
+			<column name="subject" value="Error"/>
+		</insert>
+		<insert tableName="feedback_predefined_subject">
+			<column name="subject" value="Record Not Found"/>
+		</insert>
+		<insert tableName="feedback_status">
+			<column name="status" value="Solved"/>
+		</insert>
+		<insert tableName="feedback_status">
+			<column name="status" value="Forwarded"/>
+		</insert>
+		<insert tableName="feedback_status">
+			<column name="status" value="Pending"/>
+		</insert>
+		<insert tableName="feedback_status">
+			<column name="status" value="Waiting for Data"/>
+		</insert>
+                       
+        </changeSet>
+               
+</databaseChangeLog>

@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE module PUBLIC "-//OpenMRS//DTD OpenMRS Config 1.0//EN" "http://resources.openmrs.org/doctype/config-1.0.dtd">
+
+<module configVersion="1.0">
+	
+	<!-- Feedback Module Properties -->
+	<id>feedback</id>
+	<name>General Feedback Mechanism</name>
+	<version>1.0.0</version>
+	<package>org.openmrs.module.@MODULE_ID@</package>
+	<author>Gaurav Paliwal</author>
+	<description>
+			General Feedback Mechanism Module
+	</description>
+
+	<activator>@MODULE_PACKAGE@.FeedbackActivator</activator>
+	
+	<require_version>1.6</require_version>
+	<require_modules>
+		<!--
+		<require_module>org.openmrs.module.formEntry</require_module>
+		<require_module>org.openmrs.module.reporting</require_module>
+		-->
+	</require_modules>
+	
+	<!-- /Basic Module Properties -->
+	
+	<!-- Extensions -->
+        
+        <!-- To include the fdbk.js -->	
+	<extension>
+		<point>org.openmrs.headerFullIncludeExt</point>
+		<class>@MODULE_PACKAGE@.extension.html.HeaderInclude</class>
+	</extension>
+        
+        <!-- To include the Options on the Admin page -->	
+	<extension>
+		<point>org.openmrs.admin.list</point>
+		<class>@MODULE_PACKAGE@.extension.html.AdminList</class>
+	</extension>
+        
+        <!-- To include the PopUp link on every page -->	
+        <extension>
+		<point>org.openmrs.headerFull.userBar</point>
+		<class>@MODULE_PACKAGE@.extension.html.FeedbackForm</class>
+	</extension>
+        
+        <!-- Servlets -->
+	<!-- Accessed through the url /pageContext()/moduleServlet/<moduleId>/<servlet-name> -->
+	<servlet>
+		<servlet-name>fileDownloadServlet</servlet-name>
+		<servlet-class>@MODULE_PACKAGE@.web.FileDownloadServlet</servlet-class>
+	</servlet>
+	<!-- /Servlets -->	
+	
+	<!-- /Extensions -->
+				
+				
+	<!-- AOP Advice descriptors 
+	<advice>
+		<point>org.openmrs.api.UserService</point>
+		<class>org.openmrs.module.feedback.advice.CountingBeforeAdvice</class>
+	</advice>
+	
+	<advice>
+		<point>org.openmrs.api.PatientService</point>
+		<class>org.openmrs.module.feedback.advice.CountingAfterAdvice</class>
+	</advice>
+	
+	<advice>
+		<point>org.openmrs.api.ConceptService</point>
+		<class>org.openmrs.module.feedback.advice.PrintingAroundAdvisor</class>
+	</advice>
+	-->
+	
+			
+	<!-- Required Privileges -->
+	<privilege>
+		<name>Add Feedback</name>
+		<description>The User should be able to Submit Feedback</description>
+	</privilege>
+	
+	<privilege>
+		<name>Admin Feedback</name>
+		<description>The user should be able to Manage the Feedback Module</description>
+	</privilege>
+	<!-- /Required Privileges -->
+	
+	
+	<globalProperty>
+		<property>feedback.notification</property>
+		<defaultValue>A New Feedback Submitted Successfully</defaultValue>
+		<description>What message should be sent to the user once feedback is successfully submitted</description>
+	</globalProperty>
+	
+	<globalProperty>
+		<property>feedback.notification.email</property>
+		<defaultValue>A New Feedback Submitted Successfully</defaultValue>
+		<description>Email ID to be used to send email notification to users</description>
+	</globalProperty>
+	
+	<globalProperty>
+		<property>feedback.admin.notification</property>
+		<defaultValue>A New Feedback Submitted Successfully</defaultValue>
+		<description>What message should be sent to the admin once feedback is successfully submitted</description>
+	</globalProperty>
+	
+	<globalProperty>
+		<property>feedback.ui.notification</property>
+		<defaultValue>A New Feedback Submitted Successfully</defaultValue>
+		<description>What message should be shown to the user once feedback is successfully submitted</description>
+	</globalProperty>
+	
+	<globalProperty>
+		<property>feedback.admin.notification.email</property>
+		<defaultValue>A New Feedback Submitted Successfully</defaultValue>
+		<description>Email Id to be used to send email notification to admin</description>
+	</globalProperty>
+	
+	
+	<!-- Servlets -->
+	<!-- Accessed through the url /pageContext()/moduleServlet/<moduleId>/<servlet-name> -->
+	<!--
+        <servlet>
+		<servlet-name>sayHelloThroughServlet</servlet-name>
+		<servlet-class>org.openmrs.module.feedback.web.HelloWorldServlet</servlet-class>
+	</servlet>
+	-->
+	<!-- Internationalization -->
+	<!-- All message codes should start with moduleId.* -->
+	<messages>
+		<lang>en</lang>
+		<file>messages.properties</file>
+	</messages>
+	<messages>
+		<lang>fr</lang>
+		<file>messages_fr.properties</file>
+	</messages>
+	<messages>
+		<lang>es</lang>
+		<file>messages_es.properties</file>
+	</messages>
+	<!-- /Internationalization -->
+	
+	<mappingFiles>
+		${omodHbmConfig}
+	</mappingFiles>
+	
+</module>
