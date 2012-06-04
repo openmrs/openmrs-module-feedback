@@ -37,11 +37,9 @@ public class HeaderInclude extends HeaderIncludeExt {
         myHeaderFiles.add("/moduleResources/feedback/wizard/jquery-ui-1.8.5.custom.min.js");
         myHeaderFiles.add("/moduleResources/feedback/wizard/jquery.form.js");
         myHeaderFiles.add("/moduleResources/feedback/wizard/jquery.form.wizard-min.js");
-        myHeaderFiles.add("/moduleResources/feedback/wizard/jquery.validate.js");
 
         return myHeaderFiles;
     }
 }
-
 
 //~ Formatted by Jindent --- http://www.jindent.com
