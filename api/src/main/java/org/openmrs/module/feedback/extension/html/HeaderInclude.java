@@ -30,11 +30,7 @@ public class HeaderInclude extends HeaderIncludeExt {
         List<String> myHeaderFiles = new ArrayList<String>();
 
         myHeaderFiles.add("/moduleResources/feedback/fdbk.js");
-
         myHeaderFiles.add("/moduleResources/feedback/wizard/bbq.js");
-        myHeaderFiles.add("/moduleResources/feedback/wizard/jquery-1.4.2.min.js");
-        myHeaderFiles.add("/moduleResources/feedback/wizard/jquery-ui-1.8.2.custom.css");
-        myHeaderFiles.add("/moduleResources/feedback/wizard/jquery-ui-1.8.5.custom.min.js");
         myHeaderFiles.add("/moduleResources/feedback/wizard/jquery.form.js");
         myHeaderFiles.add("/moduleResources/feedback/wizard/jquery.form.wizard-min.js");
 

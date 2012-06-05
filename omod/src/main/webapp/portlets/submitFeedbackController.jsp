@@ -1,8 +1,13 @@
 <%@ include file="/WEB-INF/template/include.jsp" %>
 
+<openmrs:htmlInclude file="/scripts/jquery/jquery.min.js" />
+<openmrs:htmlInclude file="/scripts/jquery-ui/js/jquery-ui.custom.min.js" />
+<link href="<openmrs:contextPath/>/scripts/jquery-ui/css/<spring:theme code='jqueryui.theme.name' />/jquery-ui.custom.css" type="text/css" rel="stylesheet" />
+
 <script type="text/javascript">
-    $(function(){
-        $("#feedbackForm").formwizard({
+    var $j = jQuery.noConflict();
+    $j(document).ready(function(){
+        $j("#feedbackForm").formwizard({
             formPluginEnabled: true,
             validationEnabled: true,
             focusFirstInput : true
@@ -11,18 +16,12 @@
     });
 </script>
 
-<script type="text/javascript">
-    var c=document.getElementById("myCanvas");
-    var ctx=c.getContext("2d");
-    ctx.fillStyle="#FF0000";
-    ctx.drawRect(0,0,200,100);
-</script>
-
 <div id="dialog" title="<spring:message code="feedback.submit"/>">
 <form id="feedbackForm" method="post" action="<openmrs:contextPath/>/module/feedback/addFeedback.form" class="bbq" enctype="multipart/form-data" >
     <div id="fieldWrapper">
                 <span id="step1" class="step">
-	                <span><spring:message code="feedback.wizard.step1"/></span><br /><br/>
+                    <b><spring:message code="feedback.wizard.step1"/></b>
+	                <br /><br/>
                     <table>
                         <tr>
                             <td><spring:message code="feedback.subject"/> </td>
@@ -55,18 +54,36 @@
                         </tr>
                     </table>
 	            </span>
-	             <span id="step2" class="step">
-					<span><spring:message code="feedback.wizard.step2"/></span><br />
-					<spring:message code="feedback.feedback"/><br />
-                    <textarea id="fdbk_msg" rows="4" cols="40" ></textarea><br />
+	            <span id="step2" class="step">
+                    <b><spring:message code="feedback.wizard.step2"/></b>
+	                <br /><br/>
+                    <table>
+                        <tr>
+                            <td><spring:message code="feedback.feedback"/></td>
+                        </tr>
+                        <tr>
+                            <td><textarea name="feedback" rows="4" cols="40" ></textarea></td>
+                        </tr>
+                    </table>
 		        </span>
 		        <span id="step3" class="step">
-					<span><spring:message code="feedback.wizard.step3"/></span><br />
-					<spring:message code="feedback.pageContext"/><br />
-                    <textarea id="fdbk_stack" rows="4" cols="40" ></textarea><br />
+                    <b><spring:message code="feedback.wizard.step3"/></b>
+	                <br /><br/>
+                    <table>
+                        <tr>
+                            <td><spring:message code="feedback.pageContext"/></td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <input type="checkbox" name="pagecontext" value="Yes"/><br />
+                                <textarea name="stack" rows="4" cols="40" ></textarea>
+                            </td>
+                        </tr>
+                    </table>
 				</span>
 				<span id="step4" class="step">
-					<span><spring:message code="feedback.wizard.step4"/></span><br />
+                    <b><spring:message code="feedback.wizard.step4"/></b>
+	                <br /><br/>
                     <spring:message code="feedback.wizard.editscreenshot"/><br /><br />
                     <table>
                         <tr>
@@ -80,19 +97,22 @@
                     </table>
 				</span>
    				<span id="step5" class="step">
-					<span><spring:message code="feedback.wizard.step5"/></span><br /><br />
+                    <b><spring:message code="feedback.wizard.step5"/></b>
+	                <br /><br/>
                     <center>
                         <canvas id="fdbk_processed_screenshot" width="400" height="200" style="border:3px solid #c3c3c3;"></canvas><br/>
                         <spring:message code="feedback.wizard.screenshot"/><br />
                         <hr/>
                     </center>
                        <spring:message code="feedback.attachment"/><br /><br />
-                       <input type="button" id="fdbk_upload" value="Upload" /><spring:message code="feedback.wizard.attach2"/><br />
+                       <input type="file" name="file" size="40"/> < <spring:message code="feedback.wizard.attach2"/><br />
 				</span>
                 <span id="confirmation" class="step">
-					<span><spring:message code="feedback.wizard.step6"/></span><br />
+                    <b><spring:message code="feedback.wizard.step6"/></b>
+	                <br /><br/>
                     <center>
-                        <h3><spring:message code="feedback.wizard.fdbkconfirm"/></h3>
+                        <b><spring:message code="feedback.wizard.fdbkconfirm"/></b>
+                        <br /><br/>
                         <canvas id="fdbk_screenshot" width="400" height="200" style="border:3px solid #c3c3c3;"></canvas><br/>
                         <spring:message code="feedback.wizard.screenshot.preview"/><br />
                     </center>
@@ -106,18 +126,18 @@
                         mythread.run(exec3.java:16)</label>
                     <hr/>
                      <table>
-                        <tr>
-                            <td><spring:message code="feedback.subject"/></td>
-                            <td>Record Not Found</td>
-                        </tr>
-                        <tr>
-                            <td><spring:message code="feedback.severity"/></td>
-                            <td>Urgent</td>
-                        </tr>
-                        <tr>
-                            <td><spring:message code="feedback.wizard.receiver"/></td>
-                            <td>Admin</td>
-                        </tr>
+                         <tr>
+                             <td><spring:message code="feedback.subject"/></td>
+                             <td>Record Not Found</td>
+                         </tr>
+                         <tr>
+                             <td><spring:message code="feedback.severity"/></td>
+                             <td>Urgent</td>
+                         </tr>
+                         <tr>
+                             <td><spring:message code="feedback.wizard.receiver"/></td>
+                             <td>Admin</td>
+                         </tr>
                      </table>
                     <hr/></a><label><spring:message code="feedback.wizard.pageInfo"/>http://localhost:8080/openmrs/patient.html</label>
                     <hr/>
@@ -133,4 +153,14 @@
     </div>
     <br/>
 </form>
+
+</br>
+<b class="boxHeader"><spring:message code="feedback.help"/></b>
+<ul>
+    <li><i><spring:message code="feedback.submitfeedback.help.l1"/></i></li>
+    <li><i><spring:message code="feedback.submitfeedback.help.l2"/></i></li>
+    <li><i><spring:message code="feedback.submitfeedback.help.l3"/></i></li>
+    <li><i><spring:message code="feedback.submitfeedback.help.l4"/></i></li>
+</ul>
+
 </div>
