@@ -16,6 +16,17 @@
     });
 </script>
 
+<script type="text/javascript">
+    var $j = jQuery.noConflict();
+    $j(document).ready(function(){
+        $j('#fdbk_capture_screen').click(
+            function() {
+              $j('body').feedback();
+            }
+        )
+    });
+</script>
+
 <div id="dialog" title="<spring:message code="feedback.submit"/>">
 <form id="feedbackForm" method="post" action="<openmrs:contextPath/>/module/feedback/addFeedback.form" class="bbq" enctype="multipart/form-data" >
     <div id="fieldWrapper">
@@ -85,6 +96,7 @@
                     <b><spring:message code="feedback.wizard.step4"/></b>
 	                <br /><br/>
                     <spring:message code="feedback.wizard.editscreenshot"/><br /><br />
+                          <input type="button" id="fdbk_capture_screen" value="Capture Screenshot" /></br></br>
                     <table>
                         <tr>
                             <td><input type="button" id="fdbk_highlight" value="Highlight" /></td>
@@ -95,6 +107,8 @@
                             <td><spring:message code="feedback.wizard.edit.blackout"/></td>
                         </tr>
                     </table>
+                    </br></br>
+                    <input type="button" id="fdbk_capture_next" value="Preview Screenshot" /></br></br>
 				</span>
    				<span id="step5" class="step">
                     <b><spring:message code="feedback.wizard.step5"/></b>
