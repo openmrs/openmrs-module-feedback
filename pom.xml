@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>org.openmrs.module</groupId>
-	<artifactId>feedback-parent</artifactId>
+	<artifactId>feedback</artifactId>
 	<version>1.0.0-SNAPSHOT</version>
 	<packaging>pom</packaging>
 	<name>General Feedback Mechanism Module</name>
@@ -76,7 +76,7 @@
 	</dependencyManagement>
 
 	<properties>
-		<openMRSVersion>1.8.0-SNAPSHOT</openMRSVersion>
+		<openMRSVersion>1.8.1</openMRSVersion>
 	</properties>
 
 	<build>
