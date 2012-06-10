@@ -30,10 +30,16 @@ public class HeaderInclude extends HeaderIncludeExt {
         List<String> myHeaderFiles = new ArrayList<String>();
 
         myHeaderFiles.add("/moduleResources/feedback/fdbk.js");
+        myHeaderFiles.add("/moduleResources/feedback/wizard/jquery.ba-bbq.min.js");
+        myHeaderFiles.add("/moduleResources/feedback/wizard/jquery.form.js");
+        myHeaderFiles.add("/moduleResources/feedback/wizard/jquery.form.wizard-min.js");
+
+        myHeaderFiles.add("/moduleResources/feedback/jsFeedback/feedback.css");
+        myHeaderFiles.add("/moduleResources/feedback/jsFeedback/html2canvas.js");
+        myHeaderFiles.add("/moduleResources/feedback/jsFeedback/jsfeedback.js");
 
         return myHeaderFiles;
     }
 }
-
 
 //~ Formatted by Jindent --- http://www.jindent.com
