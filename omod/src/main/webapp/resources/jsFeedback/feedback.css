@@ -6,7 +6,7 @@
         Purpose of the stylesheet follows.
 */
 
-#jsfeedback123{
+#jsFeedback{
     position:fixed;
     bottom:0;
     right:0;
@@ -19,7 +19,7 @@
     z-index:99;
 }
 
-#jsfeedback123, .feedback-form{
+#jsFeedback, .feedback-form{
    font-family: arial,sans-serif;
     font-size:13px;
     -moz-box-shadow: -4px -4px 8px #cacaca; 
@@ -51,3 +51,11 @@
     height:150px;
 }
 
+/* Instead of box header */
+
+.stepHeading {
+	background-color: #1aac9b;
+	color: white;
+	/*display: block;*/
+	padding: 2px;
+}

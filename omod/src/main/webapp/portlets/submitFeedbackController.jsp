@@ -31,7 +31,7 @@
 <form id="feedbackForm" method="post" action="<openmrs:contextPath/>/module/feedback/addFeedback.form" class="bbq" enctype="multipart/form-data" >
     <div id="fieldWrapper">
                 <span id="step1" class="step">
-                    <b><spring:message code="feedback.wizard.step1"/></b>
+                    <span class="stepHeading"><spring:message code="feedback.wizard.step1"/></span>
 	                <br /><br/>
                     <table>
                         <tr>
@@ -66,7 +66,7 @@
                     </table>
 	            </span>
 	            <span id="step2" class="step">
-                    <b><spring:message code="feedback.wizard.step2"/></b>
+                    <span class="stepHeading"><spring:message code="feedback.wizard.step2"/></span>
 	                <br /><br/>
                     <table>
                         <tr>
@@ -78,7 +78,7 @@
                     </table>
 		        </span>
 		        <span id="step3" class="step">
-                    <b><spring:message code="feedback.wizard.step3"/></b>
+                    <span class="stepHeading"><spring:message code="feedback.wizard.step3"/></span>
 	                <br /><br/>
                     <table>
                         <tr>
@@ -93,7 +93,7 @@
                     </table>
 				</span>
 				<span id="step4" class="step">
-                    <b><spring:message code="feedback.wizard.step4"/></b>
+                    <span class="stepHeading"><spring:message code="feedback.wizard.step4"/></span>
 	                <br /><br/>
                     <spring:message code="feedback.wizard.editscreenshot"/><br /><br />
                           <input type="button" id="fdbk_capture_screen" value="Capture Screenshot" /></br></br>
@@ -111,7 +111,7 @@
                     <input type="button" id="fdbk_capture_next" value="Preview Screenshot" /></br></br>
 				</span>
    				<span id="step5" class="step">
-                    <b><spring:message code="feedback.wizard.step5"/></b>
+                    <span class="stepHeading"><spring:message code="feedback.wizard.step5"/></span>
 	                <br /><br/>
                     <center>
                         <canvas id="fdbk_processed_screenshot" width="400" height="200" style="border:3px solid #c3c3c3;"></canvas><br/>
@@ -122,7 +122,7 @@
                        <input type="file" name="file" size="40"/> < <spring:message code="feedback.wizard.attach2"/><br />
 				</span>
                 <span id="confirmation" class="step">
-                    <b><spring:message code="feedback.wizard.step6"/></b>
+                    <span class="stepHeading"><spring:message code="feedback.wizard.step6"/></span>
 	                <br /><br/>
                     <center>
                         <b><spring:message code="feedback.wizard.fdbkconfirm"/></b>
