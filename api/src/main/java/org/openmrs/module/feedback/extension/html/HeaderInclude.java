@@ -12,8 +12,6 @@
  * Copyright (C) OpenMRS, LLC.  All Rights Reserved.
  */
 
-
-
 package org.openmrs.module.feedback.extension.html;
 
 //~--- non-JDK imports --------------------------------------------------------
