@@ -33,8 +33,8 @@
            // canvasDom.title = "Send feedback";
 
             window.setTimeout(function(){
-                var canvas = $('body').html2canvas({
-                    ready:function(canvas){
+                var canvas = html2canvas([document.body], {
+                    onrendered: function(canvas){
                         var canvasElement = canvas[0];
                         var ctx = canvasElement.getContext('2d');
                         ctx.strokeStyle = "rgb(255,0,0)";

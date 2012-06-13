@@ -16,16 +16,47 @@
     });
 </script>
 
+
+
+
 <script type="text/javascript">
+
     var $j = jQuery.noConflict();
     $j(document).ready(function(){
-        $j('#fdbk_capture_screen').click(
-            function() {
-              $j('body').feedback();
+    $j('#fdbk_capture_screen').click(
+      function() {
+        html2canvas([document.getElementById("pageBody")], {
+        logging: true,
+        onrendered:
+        function( canvas) {
+//            document.body.appendChild( canvas);
+            var w = window.open();
+            var canvasDom=w.document;
+            canvasDom.write('-------------------- Loading... Please wait --------------------');
+            var a = canvas.toDataURL();
+            canvasDom.write("<img src='"+a+"' style='border:1px solid black; width:1000px;' />");
+        }});
             }
         )
     });
-</script>
+
+    //              $j('body').feedback();
+
+
+//    html2canvas([ document.body ], {
+//        onrendered: function( canvas) {
+//            document.body.appendChild( canvas);
+//            var w = window.open();
+//            var canvasDom=w.document;
+//            canvasDom.write('Loading... Please wait');
+//            var a = canvas.toDataURL();
+//            canvasDom.write("<h1>Send Feedback</h1>"+"<img src='"+a+"' style='border:1px solid black; width:400px;' />");
+//        }});
+
+
+
+
+  </script>
 
 <div id="dialog" title="<spring:message code="feedback.submit"/>">
 <form id="feedbackForm" method="post" action="<openmrs:contextPath/>/module/feedback/addFeedback.form" class="bbq" enctype="multipart/form-data" >

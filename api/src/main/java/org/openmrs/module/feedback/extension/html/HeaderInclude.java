@@ -35,6 +35,8 @@ public class HeaderInclude extends HeaderIncludeExt {
         myHeaderFiles.add("/moduleResources/feedback/jsFeedback/feedback.css");
         myHeaderFiles.add("/moduleResources/feedback/jsFeedback/html2canvas.js");
         myHeaderFiles.add("/moduleResources/feedback/jsFeedback/jsfeedback.js");
+        myHeaderFiles.add("/moduleResources/feedback/jsFeedback/jquery.plugin.html2canvas.js");
+
 
         return myHeaderFiles;
     }
