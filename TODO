@@ -4,7 +4,7 @@
 
 [01]    initial jQuery Wizard implementation                     [DONE]
 [02]    initial jsFeedback implementation (html2canvas)          [DONE]
-[03]    highlight feature                                        [-]
+[03]    NO highlight feature                                     [NO]
 [04]    blackout feature                                         [-]
 [05]    Finalizing jQuery Wizard and improve the Look and feel   [-]
 [06]    Finalizing jsFeedback and improve workability            [-]
