@@ -1,86 +1,157 @@
-/*
- * @author Niklas von Hertzen <niklas at hertzen.com>
- * @created 13.7.2011
- * @website http://hertzen.com
- */
+var $j = jQuery.noConflict();
 
-(function( $ ){
-    $.fn.feedback = function(options) {
-        var self = this;
-        var reset = {
-            'margin':0
-        },
-        createDiv,
-        createDivLeft,
-        createDivTop,
-        overlay,
-        feedbackDiv;
+$j(document).ready(function(){
 
-//        var textMessage = $('<textarea />');
-//        var preview = $('<button />').text('Preview').click(function(){
+    var self = this;
+       var reset = {
+           'margin':0
+       },
+       createDiv,
+       createDivLeft,
+       createDivTop,
+       overlayHighlight,
+       overlayBlackout,
+       feedbackDiv;
+     var isShadedBlackout = false;
+    var isShadedHighlight = false;
 
-//        fdbk_capture_next
-        $('#fdbk_capture_next').click(function(){
-        var overlayChildren = overlay.children().clone();
-            // var w = window.open();
-            overlay.remove();
+$j('#fdbk_capture_screen').click(
+  function() {
 
-            feedbackDiv.remove();
-//            $('#fdbk_capture_screen').hide();
-            var w = window.open();
-            var canvasDom=w.document;
-            canvasDom.write('Loading... Please wait');
-           // canvasDom.title = "Send feedback";
+      try{
 
-            window.setTimeout(function(){
-                var canvas = html2canvas([document.body], {
-                    onrendered: function(canvas){
-                        var canvasElement = canvas[0];
-                        var ctx = canvasElement.getContext('2d');
-                        ctx.strokeStyle = "rgb(255,0,0)";
-                        ctx.lineWidth = 4;
-                         $.each(overlayChildren,function(i,e){
-                             ctx.moveTo(0,0);
-                             var left = parseInt($(e).css('left'));
-                             var top = parseInt($(e).css('top'));
-                             var width = $(e).width();
-                             var height = $(e).height();
-                             ctx.strokeRect(left,top,width,height);
-                         });
+          var overlayChildrenBlackout = overlayBlackout.children().clone();
+          var overlayChildrenHighlight = overlayHighlight.children().clone();
 
-                        var a = canvasElement.toDataURL();
-                        canvasDom.body.innerHTML = "";
-                        canvasDom.write("<h1>Send Feedback</h1>"+"<img src='"+a+"' style='border:1px solid black; width:1000px;' />");
-                        canvasDom.write('<br /><br />Message:<br /><textarea style="width:400px;height:200px;">'+textMessage.val()+'</textarea>');
-                        canvasDom.write('<br /><button>Submit (disabled in the example)</button>');
-                        $('#feedback').show();
-                    }
-                });
-            },1000);
+          overlayHighlight.remove();
+          overlayBlackout.remove();
+          overlayShade.remove();
+
+      } catch(err) {
+      }
+
+      window.setTimeout(function(){
+          var canvas = html2canvas([document.getElementById("pageBody")], {
+              logging: true,
+              onrendered:
+              function(canvas){
+                  var canvasElement = canvas[0];
+                  var ctx = canvas.getContext('2d');
+                  ctx.fillStyle = "black";
+//                  ctx.lineWidth = 4;
+
+                  $j.each(overlayChildrenBlackout,function(i,e){
+                      ctx.moveTo(0,0);
+                      var left = parseInt($j(e).css('left'));
+                      var top = parseInt($j(e).css('top'));
+                      var width = $j(e).width();
+                      var height = $j(e).height();
+                      ctx.fillRect(left,top,width,height);
+                  });
+
+                  /////////////////////////
+
+//                      var canvasElement = canvas[0];
+//                      var ctx = canvasElement.getContext('2d');
+                      ctx.strokeStyle = "rgb(255,0,0)";
+                      ctx.lineWidth = 4;
+
+                      $j.each(overlayChildrenHighlight,function(i,e){
+                          ctx.moveTo(0,0);
+                          var left = parseInt($j(e).css('left'));
+                          var top = parseInt($j(e).css('top'));
+                          var width = $j(e).width();
+                          var height = $j(e).height();
+                          ctx.strokeRect(left,top,width,height);
+                      });
+
+                  ////////////////////////
+
+                  var w = window.open();
+                  var canvasDom=w.document;
+                  var a = canvas.toDataURL();
+                  canvasDom.write("<img src='"+a+"' style='border:1px solid black; width:1000px;' />");
+
+              }
+          });
+      },1000);
+        }
+    )
+
+$j('#fdbk_blackout').click(
+        function() {
+
+            if (isShadedBlackout==false){
+                overlayShade = $j('<div />')
+                    .css(reset)
+                    .css({
+                        'background-color':'#000',
+                        'opacity':0.5,
+                        'position':'absolute',
+                        'top':0,
+                        'left':0,
+                        'width':$j(document).width(),
+                        'height':$j(document).height(),
+                        'margin':0
+                    }).appendTo('body')
+                isShadedBlackout = true;
+            }
+
+    overlayBlackout = $j('<div />')
+    .css(reset)
+    .css({
+//        'background-color':'#000',
+//        'opacity':0.5,
+        'position':'absolute',
+        'top':0,
+        'left':0,
+        'width':$j(document).width(),
+        'height':$j(document).height(),
+        'margin':0
+    })
+    .appendTo('body').mousedown(function(e){
+        createDiv = $j('<div />')
+        .css(reset)
+        .css({
+            //    'border':'3px solid black',
+            'position':'absolute',
+            'left':e.pageX,
+            'top':e.pageY,
+            'opacity':1,
+            'background':'#000',
+            'cursor':'pointer'
+        }).appendTo(overlayBlackout);
+
+        createDivLeft  = e.pageX;
+        createDivTop = e.pageY;
+            overlayBlackout.bind('mousemove',function(e){
+            createDiv.width(Math.abs(e.pageX-createDivLeft));
+            createDiv.height(Math.abs(e.pageY-createDivTop));
+            if (e.pageX<createDivLeft){
+                createDiv.css('left',e.pageX);
+            }
+            if (e.pageY<createDivTop){
+                createDiv.css('top',e.pageY);
+            }
         });
+    }).mouseup(function(e){
+        var whiteDiv = createDiv;
+        var deleteButton;
+        var onDelete = false;
+        var onWhiteDiv = false;
+        createDiv.click(function(){
+            $j(this).remove();
+        });
+            overlayBlackout.unbind('mousemove');
+    });
+  })
 
-        feedbackDiv =  $('<div />')
-//        .css(reset)
-//        .css({
-//            'position':'fixed',
-//            'right':0,
-//            'bottom':0,
-//            'background':'#fff',
-//            'z-index':999
-//        })
-//        .addClass('feedback-form')
-//        .append(
-//            $('<h2 />').text('Send feedback')
-//            )
-//        .append(
-//            $('<label />').text('Describe your problem:')
-//            )
-//        .append(textMessage)
-//        .append(preview)
-//        .appendTo('body');
+  $j('#fdbk_highlight').click(
+      function() {
 
-        overlay = $('<div />')
+      if (isShadedHighlight==false){
 
+        overlayHighlight = $j('<div />')
         .css(reset)
         .css({
             'background-color':'#000',
@@ -88,44 +159,57 @@
             'position':'absolute',
             'top':0,
             'left':0,
-            'width':$(document).width(),
-            'height':$(document).height(),
+            'width':$j(document).width(),
+            'height':$j(document).height(),
             'margin':0
         })
         .appendTo('body').mousedown(function(e){
-            createDiv = $('<div />')
-            .css(reset)
-            .css({
-                //    'border':'3px solid black',
-                'position':'absolute',
-                'left':e.pageX,
-                'top':e.pageY,
-                'opacity':1,
-                'background':'#fff',
-                'cursor':'pointer'
-            }).appendTo(overlay);
+            createDiv = $j('<div />')
+                .css(reset)
+                .css({
+                    //    'border':'3px solid black',
+                    'position':'absolute',
+                    'left':e.pageX,
+                    'top':e.pageY,
+                    'opacity':1,
+                    'background':'#fff',
+                    'cursor':'pointer'
+                }).appendTo(overlayHighlight);
+
 
             createDivLeft  = e.pageX;
             createDivTop = e.pageY;
-            overlay.bind('mousemove',function(e){
+
+                overlayHighlight.bind('mousemove',function(e){
+
                 createDiv.width(Math.abs(e.pageX-createDivLeft));
                 createDiv.height(Math.abs(e.pageY-createDivTop));
+
                 if (e.pageX<createDivLeft){
                     createDiv.css('left',e.pageX);
                 }
+
                 if (e.pageY<createDivTop){
                     createDiv.css('top',e.pageY);
                 }
+
             });
+
         }).mouseup(function(e){
+
             var whiteDiv = createDiv;
             var deleteButton;
             var onDelete = false;
             var onWhiteDiv = false;
+
             createDiv.click(function(){
-                $(this).remove();
+                $j(this).remove();
             });
-            overlay.unbind('mousemove');
+            overlayHighlight.unbind('mousemove');
         });
-    };
-})( jQuery );
+
+        isShadedHighlight=true;
+     }
+
+     })
+});
