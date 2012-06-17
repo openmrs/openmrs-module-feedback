@@ -13,13 +13,12 @@ $j(document).ready(function(){
        overlayBlackout,
        feedbackDiv;
      var isShadedBlackout = false;
-    var isShadedHighlight = false;
+     var isShadedHighlight = false;
 
 $j('#fdbk_capture_screen').click(
   function() {
 
       try{
-
           var overlayChildrenBlackout = overlayBlackout.children().clone();
           var overlayChildrenHighlight = overlayHighlight.children().clone();
 
@@ -149,7 +148,7 @@ $j('#fdbk_blackout').click(
   $j('#fdbk_highlight').click(
       function() {
 
-      if (isShadedHighlight==false){
+//      if (isShadedHighlight==false){
 
         overlayHighlight = $j('<div />')
         .css(reset)
@@ -208,8 +207,8 @@ $j('#fdbk_blackout').click(
             overlayHighlight.unbind('mousemove');
         });
 
-        isShadedHighlight=true;
-     }
+//        isShadedHighlight=true;
+//     }
 
      })
 });
