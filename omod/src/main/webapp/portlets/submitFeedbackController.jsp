@@ -85,7 +85,7 @@
                     <span class="stepHeading"><spring:message code="feedback.wizard.step4"/></span>
 	                <br /><br/>
                     <spring:message code="feedback.wizard.editscreenshot"/><br /><br />
-                          <input type="button" id="fdbk_capture_screen" value="Capture Screenshot" /></br></br>
+                    </br></br>
                     <table>
                         <tr>
                             <td><input type="button" id="fdbk_highlight" value="Highlight" /></td>
@@ -97,13 +97,18 @@
                         </tr>
                     </table>
                     </br></br>
-                    <input type="button" id="fdbk_capture_next" value="Preview Screenshot" /></br></br>
 				</span>
    				<span id="step5" class="step">
                     <span class="stepHeading"><spring:message code="feedback.wizard.step5"/></span>
 	                <br /><br/>
                     <center>
-                        <canvas id="fdbk_processed_screenshot" width="400" height="200" style="border:3px solid #c3c3c3;"></canvas><br/>
+
+                        <a id="screenshot_thumbnail" target="_blank">
+                            <img id="fdbk_processed_screenshot" width="500" height="250" style="border:3px solid #c3c3c3;" /><br/>
+                        </a>
+
+                        <%--<canvas class="thumbnail" id="fdbk_processed_screenshot" width="400" height="200" style="border:3px solid #c3c3c3;"></canvas><br/>--%>
+
                         <spring:message code="feedback.wizard.screenshot"/><br />
                         <hr/>
                     </center>

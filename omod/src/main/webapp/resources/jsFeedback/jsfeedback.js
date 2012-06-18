@@ -2,6 +2,35 @@ var $j = jQuery.noConflict();
 
 $j(document).ready(function(){
 
+    $j("#next").click(function () {
+
+                var $step = $j(".step:visible"); // get current step
+                var stepIndex = $j(".step").index($step); //index returns 0 based index so second step would be 1.
+
+                if(stepIndex == 3) //if you are on second step then validate your table
+                {
+                    $j.blockUI({
+                    css: {
+                        border: 'none',
+                        padding: '15px',
+                        backgroundColor: '#000',
+                        '-webkit-border-radius': '10px',
+                        '-moz-border-radius': '10px',
+                         opacity: .5,
+                        color: '#fff'
+                    },
+                    // message: '<h1>Please wait a moment while processing your screen..</h1>'
+                    message: '<h1>Please wait a moment..</h1>'
+                    });
+                    setTimeout($j.unblockUI, 2000);
+
+                    captureScreen();
+                }
+
+    });
+
+    /////////////////////////////////
+
     var self = this;
        var reset = {
            'margin':0
@@ -15,13 +44,13 @@ $j(document).ready(function(){
      var isShadedBlackout = false;
      var isShadedHighlight = false;
 
-$j('#fdbk_capture_screen').click(
-  function() {
+//$j('#fdbk_capture_screen').click(
+    function captureScreen() {
+
+      var overlayChildrenBlackout = overlayBlackout.children().clone();
+      var overlayChildrenHighlight = overlayHighlight.children().clone();
 
       try{
-          var overlayChildrenBlackout = overlayBlackout.children().clone();
-          var overlayChildrenHighlight = overlayHighlight.children().clone();
-
           overlayHighlight.remove();
           overlayBlackout.remove();
           overlayShade.remove();
@@ -64,18 +93,37 @@ $j('#fdbk_capture_screen').click(
                           ctx.strokeRect(left,top,width,height);
                       });
 
+                      var imageURL = canvas.toDataURL();
+
                   ////////////////////////
 
-                  var w = window.open();
-                  var canvasDom=w.document;
-                  var a = canvas.toDataURL();
-                  canvasDom.write("<img src='"+a+"' style='border:1px solid black; width:1000px;' />");
+var img_screen = document.getElementById('fdbk_processed_screenshot');
+img_screen.src = imageURL;
+
+var ref_thumbnail = document.getElementById('screenshot_thumbnail');
+ref_thumbnail.href = imageURL;
+
+//var can = document.getElementById('fdbk_processed_screenshot');
+//var ctx = can.getContext('2d');
+//
+//var img = new Image();
+//img.src = imageURL;
+//
+//img.onload = function(){
+//    can.width = 600;
+//    can.height = 300;
+//    ctx.drawImage(img, 0, 0, can.width, can.height);
+//}
+
+//                  var w = window.open();
+//                  var canvasDom=w.document;
+//                  canvasDom.write("<img src='"+a+"' style='border:1px solid black; width:1000px;' />");
 
               }
           });
       },1000);
-        }
-    )
+    }
+//    )
 
 $j('#fdbk_blackout').click(
         function() {
