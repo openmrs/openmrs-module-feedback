@@ -121,8 +121,8 @@
                     <center>
                         <b><spring:message code="feedback.wizard.fdbkconfirm"/></b>
                         <br /><br/>
-                        <canvas id="fdbk_screenshot" width="400" height="200" style="border:3px solid #c3c3c3;"></canvas><br/>
-                        <spring:message code="feedback.wizard.screenshot.preview"/><br />
+                            <img id="fdbk_screenshot_final" width="400" height="200" style="border:3px solid #c3c3c3;" /><br/>
+                            <spring:message code="feedback.wizard.screenshot.preview"/><br />
                     </center>
                     <hr/>
                     <u><spring:message code="feedback.feedback"/></u><br/>

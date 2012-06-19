@@ -2,35 +2,6 @@ var $j = jQuery.noConflict();
 
 $j(document).ready(function(){
 
-    $j("#next").click(function () {
-
-                var $step = $j(".step:visible"); // get current step
-                var stepIndex = $j(".step").index($step); //index returns 0 based index so second step would be 1.
-
-                if(stepIndex == 3) //if you are on second step then validate your table
-                {
-                    $j.blockUI({
-                    css: {
-                        border: 'none',
-                        padding: '15px',
-                        backgroundColor: '#000',
-                        '-webkit-border-radius': '10px',
-                        '-moz-border-radius': '10px',
-                         opacity: .5,
-                        color: '#fff'
-                    },
-                    // message: '<h1>Please wait a moment while processing your screen..</h1>'
-                    message: '<h1>Please wait a moment..</h1>'
-                    });
-                    setTimeout($j.unblockUI, 2000);
-
-                    captureScreen();
-                }
-
-    });
-
-    /////////////////////////////////
-
     var self = this;
        var reset = {
            'margin':0
@@ -44,29 +15,50 @@ $j(document).ready(function(){
      var isShadedBlackout = false;
      var isShadedHighlight = false;
 
-//$j('#fdbk_capture_screen').click(
+    $j("#next").click(function () {
+                var $step = $j(".step:visible");
+                var stepIndex = $j(".step").index($step);
+                if(stepIndex == 3) {
+                    $j.blockUI({
+                    css: {
+                        border: 'none',
+                        padding: '15px',
+                        backgroundColor: '#000',
+                        '-webkit-border-radius': '10px',
+                        '-moz-border-radius': '10px',
+                         opacity: .5,
+                        color: '#fff'
+                    },
+                    message: '<h1>Please wait a moment..</h1>'
+                    });
+                    setTimeout($j.unblockUI, 2000);
+
+                    captureScreen();
+                }
+    });
+
     function captureScreen() {
 
-      var overlayChildrenBlackout = overlayBlackout.children().clone();
-      var overlayChildrenHighlight = overlayHighlight.children().clone();
+      try {
+          var overlayChildrenBlackout = overlayBlackout.children().clone();
+          var overlayChildrenHighlight = overlayHighlight.children().clone();
 
-      try{
           overlayHighlight.remove();
           overlayBlackout.remove();
           overlayShade.remove();
 
-      } catch(err) {
-      }
+      } catch(err) { }
 
       window.setTimeout(function(){
           var canvas = html2canvas([document.getElementById("pageBody")], {
               logging: true,
               onrendered:
               function(canvas){
+
+                if (overlayChildrenBlackout.length >= 1) {
                   var canvasElement = canvas[0];
                   var ctx = canvas.getContext('2d');
                   ctx.fillStyle = "black";
-//                  ctx.lineWidth = 4;
 
                   $j.each(overlayChildrenBlackout,function(i,e){
                       ctx.moveTo(0,0);
@@ -76,11 +68,9 @@ $j(document).ready(function(){
                       var height = $j(e).height();
                       ctx.fillRect(left,top,width,height);
                   });
+                }
 
-                  /////////////////////////
-
-//                      var canvasElement = canvas[0];
-//                      var ctx = canvasElement.getContext('2d');
+                  if (overlayChildrenHighlight.length >= 1) {
                       ctx.strokeStyle = "rgb(255,0,0)";
                       ctx.lineWidth = 4;
 
@@ -92,41 +82,27 @@ $j(document).ready(function(){
                           var height = $j(e).height();
                           ctx.strokeRect(left,top,width,height);
                       });
+                  }
 
-                      var imageURL = canvas.toDataURL();
+                  var imageURL = canvas.toDataURL();
 
-                  ////////////////////////
+                  var img_screen = document.getElementById('fdbk_processed_screenshot');
+                  img_screen.src = imageURL;
 
-var img_screen = document.getElementById('fdbk_processed_screenshot');
-img_screen.src = imageURL;
+                  var ref_thumbnail = document.getElementById('screenshot_thumbnail');
+                  ref_thumbnail.href = imageURL;
 
-var ref_thumbnail = document.getElementById('screenshot_thumbnail');
-ref_thumbnail.href = imageURL;
-
-//var can = document.getElementById('fdbk_processed_screenshot');
-//var ctx = can.getContext('2d');
-//
-//var img = new Image();
-//img.src = imageURL;
-//
-//img.onload = function(){
-//    can.width = 600;
-//    can.height = 300;
-//    ctx.drawImage(img, 0, 0, can.width, can.height);
-//}
-
-//                  var w = window.open();
-//                  var canvasDom=w.document;
-//                  canvasDom.write("<img src='"+a+"' style='border:1px solid black; width:1000px;' />");
-
+                  var snap_final = document.getElementById('fdbk_screenshot_final');
+                  snap_final.src = imageURL;
               }
           });
       },1000);
     }
-//    )
 
 $j('#fdbk_blackout').click(
         function() {
+            var closeButton = $j("#dialog").parent().find('.ui-dialog-titlebar a');
+            closeButton.click();
 
             if (isShadedBlackout==false){
                 overlayShade = $j('<div />')
@@ -147,8 +123,6 @@ $j('#fdbk_blackout').click(
     overlayBlackout = $j('<div />')
     .css(reset)
     .css({
-//        'background-color':'#000',
-//        'opacity':0.5,
         'position':'absolute',
         'top':0,
         'left':0,
@@ -195,9 +169,10 @@ $j('#fdbk_blackout').click(
 
   $j('#fdbk_highlight').click(
       function() {
+          var closeButton = $j("#dialog").parent().find('.ui-dialog-titlebar a');
+          closeButton.click();
 
 //      if (isShadedHighlight==false){
-
         overlayHighlight = $j('<div />')
         .css(reset)
         .css({
@@ -223,7 +198,6 @@ $j('#fdbk_blackout').click(
                     'cursor':'pointer'
                 }).appendTo(overlayHighlight);
 
-
             createDivLeft  = e.pageX;
             createDivTop = e.pageY;
 
@@ -239,9 +213,7 @@ $j('#fdbk_blackout').click(
                 if (e.pageY<createDivTop){
                     createDiv.css('top',e.pageY);
                 }
-
             });
-
         }).mouseup(function(e){
 
             var whiteDiv = createDiv;
@@ -257,6 +229,5 @@ $j('#fdbk_blackout').click(
 
 //        isShadedHighlight=true;
 //     }
-
      })
 });
