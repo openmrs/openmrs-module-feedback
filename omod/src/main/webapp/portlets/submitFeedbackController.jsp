@@ -5,15 +5,47 @@
 <link href="<openmrs:contextPath/>/scripts/jquery-ui/css/<spring:theme code='jqueryui.theme.name' />/jquery-ui.custom.css" type="text/css" rel="stylesheet" />
 
 <script type="text/javascript">
-    var $j = jQuery.noConflict();
+
     $j(document).ready(function(){
+
+        var $j = jQuery.noConflict();
+        $j('#quickFeedbackForm').hide();
+
         $j("#feedbackForm").formwizard({
             formPluginEnabled: true,
             validationEnabled: true,
             focusFirstInput : true
         }
                 );
+
+        $j("#switchFeedback").click(function(){
+
+            if($j("#switchFeedback").prop("value") == "Switch to Quick Wizard") {
+                $j("#feedbackForm").hide();
+                $j("#quickFeedbackForm").show();
+                $j("#switchFeedback").prop("value", "Switch to Feedback Wizard");
+            }
+
+            else if($j("#switchFeedback").prop("value") == "Switch to Feedback Wizard") {
+                $j("#quickFeedbackForm").hide();
+                $j("#feedbackForm").show();
+                $j("#switchFeedback").prop("value", "Switch to Quick Wizard");
+            }
+
+        });
+
+        $j('#quickFeedbackForm').submit(function(){
+
+            $j('<input />').attr('type', 'hidden')
+                    .attr('subject', "Default")
+                    .attr('severity', "Default")
+                    .attr('fdbk_receiver', "Admin" )
+                    .appendTo('#quickFeedbackForm');
+            return true;
+        });
+
     });
+
 </script>
 
 <div id="dialog" title="<spring:message code="feedback.submit"/>">
@@ -121,8 +153,8 @@
                     <center>
                         <b><spring:message code="feedback.wizard.fdbkconfirm"/></b>
                         <br /><br/>
-                            <img id="fdbk_screenshot_final" width="400" height="200" style="border:3px solid #c3c3c3;" /><br/>
-                            <spring:message code="feedback.wizard.screenshot.preview"/><br />
+                        <img id="fdbk_screenshot_final" width="400" height="200" style="border:3px solid #c3c3c3;" /><br/>
+                        <spring:message code="feedback.wizard.screenshot.preview"/><br />
                     </center>
                     <hr/>
                     <u><spring:message code="feedback.feedback"/></u><br/>
@@ -161,6 +193,25 @@
     </div>
     <br/>
 </form>
+
+<form id="quickFeedbackForm" method="post" action="<openmrs:contextPath/>/module/feedback/addFeedback.form" class="bbq" enctype="multipart/form-data" >
+    <div id="quickFeedbackFieldWrapper">
+        </br></br>
+        <table>
+            <tr>
+                <td valign="top"><spring:message code="feedback.feedback"/> </td>
+                <td><textarea name="feedback" rows="7" cols="100" type="_moz" size="35"></textarea> </td>
+            </tr>
+        </table>
+    </div>
+    </br>
+    <input type="button" value="<spring:message code="feedback.addFeedback" />" />
+</form>
+
+</br>
+<div>
+    <input align="right" type="button" id="switchFeedback" value="Switch to Quick Wizard" />
+</div>
 
 </br>
 <b class="boxHeader"><spring:message code="feedback.help"/></b>
