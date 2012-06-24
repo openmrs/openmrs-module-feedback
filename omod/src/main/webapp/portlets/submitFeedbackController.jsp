@@ -20,7 +20,7 @@
 
         $j("#switchFeedback").click(function(){
 
-            if($j("#switchFeedback").prop("value") == "Switch to Quick Wizard") {
+            if($j("#switchFeedback").prop("value") == "Switch to Quick Feedback") {
                 $j("#feedbackForm").hide();
                 $j("#quickFeedbackForm").show();
                 $j("#switchFeedback").prop("value", "Switch to Feedback Wizard");
@@ -29,7 +29,7 @@
             else if($j("#switchFeedback").prop("value") == "Switch to Feedback Wizard") {
                 $j("#quickFeedbackForm").hide();
                 $j("#feedbackForm").show();
-                $j("#switchFeedback").prop("value", "Switch to Quick Wizard");
+                $j("#switchFeedback").prop("value", "Switch to Quick Feedback");
             }
 
         });
@@ -210,7 +210,7 @@
 
 </br>
 <div>
-    <input align="right" type="button" id="switchFeedback" value="Switch to Quick Wizard" />
+    <input align="right" type="button" id="switchFeedback" value="Switch to Quick Feedback" />
 </div>
 
 </br>
