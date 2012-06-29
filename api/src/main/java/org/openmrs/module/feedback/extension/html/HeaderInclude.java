@@ -31,6 +31,7 @@ public class HeaderInclude extends HeaderIncludeExt {
         myHeaderFiles.add("/moduleResources/feedback/wizard/jquery.ba-bbq.min.js");
         myHeaderFiles.add("/moduleResources/feedback/wizard/jquery.form.js");
         myHeaderFiles.add("/moduleResources/feedback/wizard/jquery.form.wizard-min.js");
+        myHeaderFiles.add("/moduleResources/feedback/wizard/jquery.validate.js");
 
         myHeaderFiles.add("/moduleResources/feedback/jsFeedback/feedback.css");
         myHeaderFiles.add("/moduleResources/feedback/jsFeedback/html2canvas.js");

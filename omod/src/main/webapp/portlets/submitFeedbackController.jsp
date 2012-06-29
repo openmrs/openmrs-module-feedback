@@ -10,6 +10,7 @@
 
         var $j = jQuery.noConflict();
         $j('#quickFeedbackForm').hide();
+        $j("#stack").hide();
 
         $j("span:contains('Submit Feedback')").click(function(){
             $j("span:contains('Submit Feedback')").css("background-color", "");
@@ -47,6 +48,14 @@
                     .attr('fdbk_receiver', "Admin" )
                     .appendTo('#quickFeedbackForm');
             return true;
+        });
+
+        $j('#stackCheckbox').click(function() {
+            if( $j(this).is(':checked')) {
+                 $j("#stack").show("slow");
+            } else {
+                 $j("#stack").hide("slow");
+            }
         });
 
     });
@@ -112,8 +121,12 @@
                         </tr>
                         <tr>
                             <td>
-                                <input type="checkbox" name="pagecontext" value="Yes"/><br />
-                                <textarea name="stack" rows="4" cols="40" ></textarea>
+                                <label>
+                                    <input type="checkbox" id="stackCheckbox" />
+                                    <spring:message code="feedback.wizard.stack.checkbox"/>
+                                </label>
+                                <br />
+                                <textarea id="stack" name="stack" rows="4" cols="40" ></textarea>
                             </td>
                         </tr>
                     </table>
