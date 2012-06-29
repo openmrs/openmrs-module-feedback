@@ -100,7 +100,9 @@ $j(document).ready(function(){
     }
 
 $j('#fdbk_blackout').click(
+
         function() {
+            $j("span:contains('Submit Feedback')").css("background-color", "yellow");
             var closeButton = $j("#dialog").parent().find('.ui-dialog-titlebar a');
             closeButton.click();
 
@@ -168,7 +170,9 @@ $j('#fdbk_blackout').click(
   })
 
   $j('#fdbk_highlight').click(
+
       function() {
+          $j("span:contains('Submit Feedback')").css("background-color", "yellow");
           var closeButton = $j("#dialog").parent().find('.ui-dialog-titlebar a');
           closeButton.click();
 

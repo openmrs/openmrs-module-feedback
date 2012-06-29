@@ -11,6 +11,10 @@
         var $j = jQuery.noConflict();
         $j('#quickFeedbackForm').hide();
 
+        $j("span:contains('Submit Feedback')").click(function(){
+            $j("span:contains('Submit Feedback')").css("background-color", "");
+        });
+
         $j("#feedbackForm").formwizard({
             formPluginEnabled: true,
             validationEnabled: true,
@@ -142,10 +146,11 @@
 
                         <%--<canvas class="thumbnail" id="fdbk_processed_screenshot" width="400" height="200" style="border:3px solid #c3c3c3;"></canvas><br/>--%>
 
-                        <spring:message code="feedback.wizard.screenshot"/><br />
+                        <b><spring:message code="feedback.wizard.screenshot"/></b><br /><br />
+                        <spring:message code="feedback.wizard.screenshot.note"/><br />
                         <hr/>
                     </center>
-                       <spring:message code="feedback.attachment"/><br /><br />
+                       <spring:message code="feedback.wizard.attachment"/><br /><br />
                        <input type="file" name="file" size="40"/> < <spring:message code="feedback.wizard.attach2"/><br />
 				</span>
                 <span id="confirmation" class="step">
@@ -180,7 +185,7 @@
                              <td>Admin</td>
                          </tr>
                      </table>
-                    <hr/></a><label><spring:message code="feedback.wizard.pageInfo"/>http://localhost:8080/openmrs/patient.html</label>
+                    <hr/></a><label><spring:message code="feedback.wizard.pageInfo"/> : http://localhost:8080/openmrs/patient.html</label>
                     <hr/>
                        <u><spring:message code="feedback.wizard.attach"/></u><br />
                        <label>Attachment1.zip, Attachment2.png</label>
