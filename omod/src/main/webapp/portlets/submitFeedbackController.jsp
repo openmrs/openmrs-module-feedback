@@ -25,17 +25,17 @@
 
         $j("#switchFeedback").click(function(){
 
-            if($j("#switchFeedback").prop("value") == "Switch to Quick Feedback") {
+            if($j("#switchFeedback").attr("value") == "Switch to Quick Feedback") {
                 $j("#feedbackForm").hide("slow", function(){
                     $j("#quickFeedbackForm").show();
-                    $j("#switchFeedback").prop("value", "Switch to Feedback Wizard");
+                    $j("#switchFeedback").attr("value", "Switch to Feedback Wizard");
                 });
             }
 
-            else if($j("#switchFeedback").prop("value") == "Switch to Feedback Wizard") {
+            else if($j("#switchFeedback").attr("value") == "Switch to Feedback Wizard") {
                 $j("#quickFeedbackForm").hide("slow", function(){
                     $j("#feedbackForm").show();
-                    $j("#switchFeedback").prop("value", "Switch to Quick Feedback");
+                    $j("#switchFeedback").attr("value", "Switch to Quick Feedback");
                 });
             }
         });

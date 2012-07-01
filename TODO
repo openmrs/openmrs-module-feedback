@@ -1,14 +1,13 @@
 ------------------------------------------------------------------
-     TODO - General Feedback Mechanism v2 - BESP FDBK
+     TODO - General Feedback Mechanism v2.0 - BESP FDBK
 ------------------------------------------------------------------
 
-[01]    initial jQuery Wizard implementation                     [DONE]
-[02]    initial jsFeedback implementation (html2canvas)          [DONE]
-[03]    NO highlight feature                                     [NO]
-[04]    blackout feature                                         [-]
-[05]    Finalizing jQuery Wizard and improve the Look and feel   [-]
-[06]    Finalizing jsFeedback and improve workability            [-]
-[07]    make support for cross browser compatible                [-]
-[08]    user-to-user communication                               [-]
-[09]    Collect the relevant details from the current page       [-]
-[10]    Final polishing of the product                           [-]
+[01]    initial jQuery Wizard implementation 			[DONE]
+[02]    initial jsFeedback implementation (html2canvas) [DONE]
+[03]    highlight feature and blackout feature			[DONE]
+[04]    Finalizing jsFeedback and improve workability 	[DOING]
+[05]    Quick feedback submission wizard			    [DONE]
+[06]    modifications for the existing system			[UNDONE]
+[07]    user-to-user communication				        [UNDONE]
+[08]    Final improvements of the module			    [UNDONE]
+

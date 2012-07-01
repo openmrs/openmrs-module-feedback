@@ -40,20 +40,21 @@ $j(document).ready(function(){
     function captureScreen() {
 
       try {
-          var overlayChildrenBlackout = overlayBlackout.children().clone();
-          var overlayChildrenHighlight = overlayHighlight.children().clone();
 
-          overlayHighlight.remove();
-          overlayBlackout.remove();
-          overlayShade.remove();
+          var overlayChildrenBlackout = overlayBlackout.children();
+          var overlayChildrenHighlight = overlayHighlight.children();
 
-      } catch(err) { }
+      } catch(err) {
+      }
 
       window.setTimeout(function(){
           var canvas = html2canvas([document.getElementById("pageBody")], {
               logging: true,
               onrendered:
               function(canvas){
+
+                  console.log(overlayChildrenHighlight);
+                  console.log(overlayChildrenBlackout);
 
                 if (overlayChildrenBlackout.length >= 1) {
                   var canvasElement = canvas[0];
@@ -66,7 +67,14 @@ $j(document).ready(function(){
                       var top = parseInt($j(e).css('top'));
                       var width = $j(e).width();
                       var height = $j(e).height();
+
+                       console.log(left);
+                       console.log(top);
+                       console.log(width);
+                       console.log(height);
+
                       ctx.fillRect(left,top,width,height);
+
                   });
                 }
 
@@ -80,11 +88,24 @@ $j(document).ready(function(){
                           var top = parseInt($j(e).css('top'));
                           var width = $j(e).width();
                           var height = $j(e).height();
+
+                          console.log(left);
+                          console.log(top);
+                          console.log(width);
+                          console.log(height)
+
                           ctx.strokeRect(left,top,width,height);
+
                       });
                   }
 
                   var imageURL = canvas.toDataURL();
+
+                  try {
+                      overlayHighlight.remove();
+                      overlayBlackout.remove();
+                      overlayShade.remove();
+                  } catch(err) { }
 
                   var img_screen = document.getElementById('fdbk_processed_screenshot');
                   img_screen.src = imageURL;
