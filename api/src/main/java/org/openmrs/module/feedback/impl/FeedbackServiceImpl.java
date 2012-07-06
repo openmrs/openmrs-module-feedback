@@ -23,12 +23,7 @@ import org.apache.commons.logging.LogFactory;
 
 import org.openmrs.User;
 import org.openmrs.api.APIException;
-import org.openmrs.module.feedback.Feedback;
-import org.openmrs.module.feedback.FeedbackComment;
-import org.openmrs.module.feedback.FeedbackService;
-import org.openmrs.module.feedback.PredefinedSubject;
-import org.openmrs.module.feedback.Severity;
-import org.openmrs.module.feedback.Status;
+import org.openmrs.module.feedback.*;
 import org.openmrs.module.feedback.db.FeedbackDAO;
 
 //~--- JDK imports ------------------------------------------------------------
@@ -80,6 +75,10 @@ public class FeedbackServiceImpl implements FeedbackService {
         getFeedbackdDAO().saveFeedbackComment(FeedbackComment);
     }
 
+    public void saveFeedbackUser(FeedbackUser FeedbackUser) throws APIException {
+        getFeedbackdDAO().saveFeedbackUser(FeedbackUser);
+    }
+
     public Severity getSeverity(Integer SeverityId) throws APIException {
         return getFeedbackdDAO().getSeverity(SeverityId);
     }
@@ -94,6 +93,10 @@ public class FeedbackServiceImpl implements FeedbackService {
 
     public Feedback getFeedback(Integer FeedbackId) throws APIException {
         return getFeedbackdDAO().getFeedback(FeedbackId);
+    }
+
+    public FeedbackUser getFeedbackUser(Integer FeedbackId) throws APIException {
+        return getFeedbackdDAO().getFeedbackUser(FeedbackId);
     }
 
     public FeedbackComment getFeedbackComment(Integer FeedbackCommentId) throws APIException {
@@ -114,6 +117,10 @@ public class FeedbackServiceImpl implements FeedbackService {
 
     public void updateFeedback(Feedback Feedback) throws APIException {
         getFeedbackdDAO().updateFeedback(Feedback);
+    }
+
+    public void updateFeedbackUser(FeedbackUser FeedbackUser) throws APIException {
+        getFeedbackdDAO().updateFeedbackUser(FeedbackUser);
     }
 
     public List<Severity> getSeverities() throws APIException {
@@ -154,6 +161,10 @@ public class FeedbackServiceImpl implements FeedbackService {
 
     public void deleteFeedback(Feedback Feedback) throws APIException {
         getFeedbackdDAO().deleteFeedback(Feedback);
+    }
+
+    public void deleteFeedbackUser(FeedbackUser FeedbackUser) throws APIException {
+        getFeedbackdDAO().deleteFeedbackUser(FeedbackUser);
     }
 }
 

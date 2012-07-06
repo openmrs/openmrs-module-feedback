@@ -90,7 +90,7 @@
 			Creating the feedback comment tables
 		</comment> 
                 
-                <createTable tableName="feedback_comment">
+        <createTable tableName="feedback_comment">
 			<column name="feedback_comment_id" type="int">
 				<constraints primaryKey="true" nullable="false"/>
 			</column>
@@ -162,5 +162,26 @@
 		</insert>
                        
         </changeSet>
-               
+
+    <changeSet id="feedback-2012-07-06-10:15" author="harshadura">
+
+        <preConditions onFail="MARK_RAN">
+            <not><tableExists tableName="feedback_userAccess"/></not>
+        </preConditions>
+
+        <comment>
+            Creating the Feedback User Access tables
+        </comment>
+
+        <createTable tableName="feedback_userAccess">
+            <column name="feedback_id" type="int">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="user_id" type="int">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+    </changeSet>
+
 </databaseChangeLog>

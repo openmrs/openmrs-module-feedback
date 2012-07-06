@@ -50,6 +50,8 @@ public interface FeedbackService {
 
     public void saveFeedbackComment(FeedbackComment FeedbackComment) throws APIException;
 
+    public void saveFeedbackUser(FeedbackUser FeedbackUser) throws APIException;
+
     /**
      * Get response by internal identifier
      *
@@ -69,6 +71,8 @@ public interface FeedbackService {
 
     public FeedbackComment getFeedbackComment(Integer feedbackCommentId) throws APIException;
 
+    public FeedbackUser getFeedbackUser(Integer feedbackId) throws APIException;
+
     /**
      * Save response
      *
@@ -78,6 +82,8 @@ public interface FeedbackService {
     public void updateSeverity(Severity severity) throws APIException;
 
     public void updateStatus(Status status) throws APIException;
+
+    public void updateFeedbackUser(FeedbackUser feedbackUser) throws APIException;
 
     @Authorized({ "Admin Feedback" })
     public void updatePredefinedSubject(PredefinedSubject PredefinedSubject) throws APIException;
@@ -90,6 +96,8 @@ public interface FeedbackService {
     public void deleteSeverity(Severity feedbackSeverity) throws APIException;
 
     public void deleteFeedback(Feedback Feedback) throws APIException;
+
+    public void deleteFeedbackUser(FeedbackUser FeedbackUser) throws APIException;
 
     @Transactional(readOnly = true)
     public List<Severity> getSeverities() throws APIException;

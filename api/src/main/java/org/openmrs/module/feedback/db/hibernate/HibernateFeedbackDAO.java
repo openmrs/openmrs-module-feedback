@@ -32,6 +32,7 @@ import org.openmrs.User;
 import org.openmrs.api.db.DAOException;
 import org.openmrs.module.feedback.Feedback;
 import org.openmrs.module.feedback.FeedbackComment;
+import org.openmrs.module.feedback.FeedbackUser;
 import org.openmrs.module.feedback.PredefinedSubject;
 import org.openmrs.module.feedback.Severity;
 import org.openmrs.module.feedback.Status;
@@ -60,9 +61,6 @@ public class HibernateFeedbackDAO implements FeedbackDAO {
         this.sessionFactory = sessionFactory;
     }
 
-    /**
-     * @see org.openmrs.api.db.HelloWorldResponseService#getHelloWorldResponse(java.lang.Long)
-     */
     public Severity getSeverity(Integer SeverityId) {
         return (Severity) sessionFactory.getCurrentSession().get(Severity.class, SeverityId);
     }
@@ -77,6 +75,10 @@ public class HibernateFeedbackDAO implements FeedbackDAO {
 
     public Feedback getFeedback(Integer FeedbackId) {
         return (Feedback) sessionFactory.getCurrentSession().get(Feedback.class, FeedbackId);
+    }
+
+    public FeedbackUser getFeedbackUser(Integer FeedbackId) {
+        return (FeedbackUser) sessionFactory.getCurrentSession().get(FeedbackUser.class, FeedbackId);
     }
 
     public FeedbackComment getFeedbackComment(Integer FeedbackCommentId) {
@@ -103,6 +105,10 @@ public class HibernateFeedbackDAO implements FeedbackDAO {
         sessionFactory.getCurrentSession().saveOrUpdate(FeedbackComment);
     }
 
+    public void saveFeedbackUser(FeedbackUser FeedbackUser) throws DAOException {
+        sessionFactory.getCurrentSession().saveOrUpdate(FeedbackUser);
+    }
+
     public void updateSeverity(Severity Severity) throws DAOException {
         sessionFactory.getCurrentSession().delete(Severity);
     }
@@ -117,6 +123,10 @@ public class HibernateFeedbackDAO implements FeedbackDAO {
 
     public void updateFeedback(Feedback Feedback) throws DAOException {
         sessionFactory.getCurrentSession().delete(Feedback);
+    }
+
+    public void updateFeedbackUser(FeedbackUser FeedbackUser) throws DAOException {
+        sessionFactory.getCurrentSession().delete(FeedbackUser);
     }
 
     @SuppressWarnings("unchecked")
@@ -175,6 +185,10 @@ public class HibernateFeedbackDAO implements FeedbackDAO {
 
     public void deleteFeedback(Feedback Feedback) throws DAOException {
         sessionFactory.getCurrentSession().delete(Feedback);
+    }
+
+    public void deleteFeedbackUser(FeedbackUser FeedbackUser) throws DAOException {
+        sessionFactory.getCurrentSession().delete(FeedbackUser);
     }
 }
 
