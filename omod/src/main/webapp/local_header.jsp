@@ -73,6 +73,15 @@
                         <a href="<openmrs:contextPath/>/module/feedback/preference.form"><spring:message code="feedback.user.preference"/></a>
         </li>
 	</openmrs:hasPrivilege>
+
+    <openmrs:hasPrivilege privilege="Add Feedback,Admin Feedback">
+        <li
+            <c:if test='<%= request.getRequestURI().contains("preference") %>'>class="active"</c:if>>
+                        <a href="<openmrs:contextPath/>/module/feedback/feedbackUserAccess.form">Feedback User Access</a>
+        </li>
+    </openmrs:hasPrivilege>
+
+
         <openmrs:extensionPoint pointId="org.openmrs.module.feedback.localHeader" type="html">
             <openmrs:hasPrivilege privilege="${extension.requiredPrivilege}">
                 <c:if test="${extension.portletUrl != null}">

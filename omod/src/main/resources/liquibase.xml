@@ -184,4 +184,13 @@
 
     </changeSet>
 
+    <changeSet id="feedback-2012-07-08-10:15" author="harshadura">
+
+      <insert tableName="feedback_userAccess">
+			<column name="feedback_id" value="111"/>
+            <column name="user_id" value="112"/>
+		</insert>
+
+    </changeSet>
+
 </databaseChangeLog>

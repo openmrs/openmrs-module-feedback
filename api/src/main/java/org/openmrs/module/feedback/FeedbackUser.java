@@ -1,9 +1,13 @@
 package org.openmrs.module.feedback;
 
-public class FeedbackUser {
+import org.openmrs.BaseOpenmrsObject;
+
+public class FeedbackUser extends BaseOpenmrsObject implements java.io.Serializable {
 
     private Integer feedbackId;
     private Integer userId;
+
+    public FeedbackUser() {}
 
     public FeedbackUser(int feedbackId, int userId){
         this.feedbackId = feedbackId;
@@ -24,5 +28,13 @@ public class FeedbackUser {
 
     public void setUserId(Integer userId) {
         this.userId = userId;
+    }
+
+    public Integer getId() {
+        return this.feedbackId;
+    }
+
+    public void setId(Integer feedbackId) {
+        this.feedbackId = feedbackId;
     }
 }
