@@ -21,9 +21,11 @@ package org.openmrs.module.feedback.web;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+import org.openmrs.User;
 import org.openmrs.api.context.Context;
 import org.openmrs.module.feedback.Feedback;
 import org.openmrs.module.feedback.FeedbackService;
+import org.openmrs.module.feedback.FeedbackUser;
 import org.openmrs.notification.Message;
 import org.openmrs.web.WebConstants;
 
@@ -55,6 +57,7 @@ public class AddFeedbackFormController extends SimpleFormController {
         String  subject         = request.getParameter("subject");
         String  severity        = request.getParameter("severity");
         String  feedback        = request.getParameter("feedback");
+        String  receiver        = request.getParameter("fdbk_receiver");
 
         if (StringUtils.hasLength(subject) && StringUtils.hasLength(severity) && StringUtils.hasLength(severity)) {
             Object          o       = Context.getService(FeedbackService.class);
@@ -104,6 +107,12 @@ public class AddFeedbackFormController extends SimpleFormController {
 
             /* Save the Feedback */
             service.saveFeedback(s);
+
+            FeedbackUser feedbackUser = new FeedbackUser();
+            feedbackUser.setFeedbackId(s.getFeedbackId());
+            feedbackUser.setUserId(Context.getUserService().getUserByUsername(receiver).getId());
+            service.saveFeedbackUser(feedbackUser);
+
             request.getSession().setAttribute(
                 WebConstants.OPENMRS_MSG_ATTR,
                 Context.getAdministrationService().getGlobalProperty("feedback.ui.notification"));
