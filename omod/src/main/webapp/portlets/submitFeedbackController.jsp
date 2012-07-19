@@ -92,9 +92,10 @@
                         <tr>
                             <td><spring:message code="feedback.wizard.receiver"/>  </td>
                             <td>
-                                <select id="fdbk_receiver" >
-                                    <option value="admin">Admin</option>
-                                    <option value="user1">User1</option>
+                                <select name="fdbk_receiver">
+                                    <c:forEach items="${model.allusers}" var="allusersObj">
+                                        <option value="<c:out value="${allusersObj.username}"/>"> <c:out value="${allusersObj.username}"/> </option>
+                                    </c:forEach>
                                 </select>
                             </td>
                         </tr>

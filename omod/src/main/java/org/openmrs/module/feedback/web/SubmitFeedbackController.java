@@ -35,6 +35,8 @@ public class SubmitFeedbackController extends PortletController {
 
         model.put("predefinedsubjects", hService.getPredefinedSubjects());
         model.put("severities", hService.getSeverities());
+        model.put("allusers", Context.getUserService().getAllUsers());
+
     }
 }
 
