@@ -4,6 +4,7 @@ import org.openmrs.BaseOpenmrsObject;
 
 public class FeedbackUser extends BaseOpenmrsObject implements java.io.Serializable {
 
+    private Integer id;
     private Integer feedbackId;
     private Integer userId;
 
@@ -31,10 +32,10 @@ public class FeedbackUser extends BaseOpenmrsObject implements java.io.Serializa
     }
 
     public Integer getId() {
-        return this.feedbackId;
+        return this.id;
     }
 
-    public void setId(Integer feedbackId) {
-        this.feedbackId = feedbackId;
+    public void setId(Integer id) {
+        this.id = id;
     }
 }

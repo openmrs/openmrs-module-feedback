@@ -109,7 +109,7 @@ public class AddFeedbackFormController extends SimpleFormController {
             service.saveFeedback(s);
 
             FeedbackUser feedbackUser = new FeedbackUser();
-            feedbackUser.setFeedbackId(s.getFeedbackId());
+//            feedbackUser.setFeedbackId(s.getFeedbackId());
             feedbackUser.setUserId(Context.getUserService().getUserByUsername(receiver).getId());
             service.saveFeedbackUser(feedbackUser);
 

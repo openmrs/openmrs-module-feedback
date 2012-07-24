@@ -52,7 +52,7 @@
             </tr>
     </thead>
     <tbody> 
-            <c:forEach items="${feedbacks}" var="feedbackObj" varStatus="loopStatus">
+            <c:forEach items="${assigned_feedbacks}" var="feedbackObj" varStatus="loopStatus">
                 <tr class="">
                     <td><c:out value="${feedbackObj.creator.personName} "/> </td>
                     <td><a href="<openmrs:contextPath/>/module/feedback/feedback.form?feedbackId=<c:out value="${feedbackObj.feedbackId}"/>"><c:out value="${feedbackObj.subject} "/> </td>

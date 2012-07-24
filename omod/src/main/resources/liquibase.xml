@@ -4,9 +4,7 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog/1.9
                   http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-1.9.xsd">
- 
 
- 	
 	<changeSet id="feedback-2011-06-28-10:59" author="gauravpaliwal">
 		<preConditions onFail="MARK_RAN">
 			<not><tableExists tableName="feedback_severity"/></not>
@@ -163,7 +161,7 @@
                        
         </changeSet>
 
-    <changeSet id="feedback-2012-07-06-10:15" author="harshadura">
+    <changeSet id="feedback-2012-07-23-04:16" author="harshadura">
 
         <preConditions onFail="MARK_RAN">
             <not><tableExists tableName="feedback_userAccess"/></not>
@@ -174,22 +172,22 @@
         </comment>
 
         <createTable tableName="feedback_userAccess">
+
+            <column name="id" type="int" autoIncrement="true" >
+                <constraints primaryKey="true" nullable="false" />
+            </column>
+
             <column name="feedback_id" type="int">
-                <constraints primaryKey="true" nullable="false"/>
             </column>
+
             <column name="user_id" type="int">
-                <constraints nullable="false"/>
             </column>
+
         </createTable>
 
-    </changeSet>
-
-    <changeSet id="feedback-2012-07-08-10:15" author="harshadura">
-
-      <insert tableName="feedback_userAccess">
-			<column name="feedback_id" value="111"/>
-            <column name="user_id" value="112"/>
-		</insert>
+        <addForeignKeyConstraint constraintName="fk_feedback_id"
+			referencedTableName="feedback_feedback" baseColumnNames="feedback_id"
+			baseTableName="feedback_userAccess" referencedColumnNames="feedback_id" />
 
     </changeSet>
 

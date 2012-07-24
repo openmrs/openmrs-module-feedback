@@ -1,31 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <hibernate-mapping package="org.openmrs.module.feedback">
-  <class name="org.openmrs.module.feedback.Feedback" table="feedback_feedback">
-    <id name="feedbackId" type="java.lang.Integer">
-      <column name="feedback_id"/>
-      <generator class="native"/>
-    </id>
-    <many-to-one class="org.openmrs.User" column="creator" name="creator" not-null="true"/>
-    <many-to-one class="org.openmrs.User" column="changed_by" name="changedBy"/>
-    <property name="subject" type="string">
-      <column name="subject" not-null="true"/>
-    </property>
-    <property name="content" type="string">
-      <column length="16777215" name="content" not-null="true"/>
-    </property>
-    <property name="severity" type="string">
-      <column length="25" name="severity" not-null="true"/>
-    </property>
-    <property name="comment" type="string">
-      <column length="5000" name="comment"/>
-    </property>
-    <property name="status" type="string">
-      <column length="25" name="status"/>
-    </property>
-    <property column="date_created" length="19" name="dateCreated" not-null="true" type="timestamp"/>
-    <property column="date_changed" length="19" name="dateChanged" type="timestamp"/>
-    <property length="38" name="uuid" not-null="true" type="string"/>
-    <property column="attachment" name="message" not-null="false" type="binary"/>
-  </class>
+    <class name="org.openmrs.module.feedback.Feedback" table="feedback_feedback">
+        <id name="feedbackId" type="java.lang.Integer">
+            <column name="feedback_id"/>
+            <generator class="native"/>
+        </id>
+        <many-to-one class="org.openmrs.User" column="creator" name="creator" not-null="true"/>
+        <many-to-one class="org.openmrs.User" column="changed_by" name="changedBy"/>
+
+        <property name="subject" type="string">
+            <column name="subject" not-null="true"/>
+        </property>
+        <property name="content" type="string">
+            <column length="16777215" name="content" not-null="true"/>
+        </property>
+        <property name="severity" type="string">
+            <column length="25" name="severity" not-null="true"/>
+        </property>
+        <property name="comment" type="string">
+            <column length="5000" name="comment"/>
+        </property>
+        <property name="status" type="string">
+            <column length="25" name="status"/>
+        </property>
+        <property column="date_created" length="19" name="dateCreated" not-null="true" type="timestamp"/>
+        <property column="date_changed" length="19" name="dateChanged" type="timestamp"/>
+        <property length="38" name="uuid" not-null="true" type="string"/>
+        <property column="attachment" name="message" not-null="false" type="binary"/>
+    </class>
 </hibernate-mapping>

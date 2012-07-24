@@ -1,12 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <hibernate-mapping package="org.openmrs.module.feedback">
-  <class name="org.openmrs.module.feedback.FeedbackUser" table="feedback_userAccess">
-    <id column="feedback_id" name="feedbackId" type="int">
-      <!--<generator class="identity"/>-->
-    </id>
-    <property name="userId" type="int">
-      <column name="user_id"/>
-    </property>
-  </class>
+    <class name="org.openmrs.module.feedback.FeedbackUser" table="feedback_userAccess">
+
+        <id name="id" type="java.lang.Integer">
+            <column name="id"/>
+            <generator class="identity"/>
+        </id>
+
+        <set name="feedbackId" cascade="save-update,delete-orphan" >
+            <key>
+                <column name="feedback_id"> </column>
+            </key>
+            <one-to-many class="org.openmrs.module.feedback.Feedback" />
+        </set>
+
+        <property name="userId" type="int">
+            <column name="user_id"/>
+        </property>
+
+    </class>
 </hibernate-mapping>

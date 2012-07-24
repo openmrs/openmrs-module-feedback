@@ -36,7 +36,7 @@ public interface FeedbackService {
     /**
      * Saves (creates) a new feedback module data
      *
-     * @param saying to be created
+     * @param //saying to be created
      * @throws APIException
      */
     public void saveSeverity(Severity feedbackSeverity) throws APIException;
@@ -55,7 +55,7 @@ public interface FeedbackService {
     /**
      * Get response by internal identifier
      *
-     * @param responseId internal saying identifier
+     * @param //responseId internal saying identifier
      * @return response with given internal identifier
      * @throws APIException
      */
@@ -76,7 +76,7 @@ public interface FeedbackService {
     /**
      * Save response
      *
-     * @param response to be updated
+     * @param //response to be updated
      * @throws APIException
      */
     public void updateSeverity(Severity severity) throws APIException;
@@ -107,6 +107,8 @@ public interface FeedbackService {
     public List<PredefinedSubject> getPredefinedSubjects() throws APIException;
 
     public List<Feedback> getFeedbacks() throws APIException;
+
+    public List<Feedback> getAssignedFeedbacks(User assignedUser) throws APIException;
 
     public List<Feedback> getFeedbacks(User user) throws APIException;
 

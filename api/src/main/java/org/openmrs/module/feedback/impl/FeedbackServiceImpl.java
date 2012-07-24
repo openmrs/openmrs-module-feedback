@@ -52,7 +52,7 @@ public class FeedbackServiceImpl implements FeedbackService {
     /**
      * Creates a new helloWorldResponse record
      *
-     * @param helloWorldResponse to be created
+     * @param //helloWorldResponse to be created
      * @throws APIException
      */
     public void saveSeverity(Severity Severity) throws APIException {
@@ -137,6 +137,10 @@ public class FeedbackServiceImpl implements FeedbackService {
 
     public List<Feedback> getFeedbacks() throws APIException {
         return getFeedbackdDAO().getFeedbacks();
+    }
+
+    public List<Feedback> getAssignedFeedbacks(User assignedUser) throws APIException {
+        return getFeedbackdDAO().getAssignedFeedbacks(assignedUser);
     }
 
     public List<Feedback> getFeedbacks(User user) throws APIException {

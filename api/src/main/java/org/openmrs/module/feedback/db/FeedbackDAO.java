@@ -41,7 +41,7 @@ public interface FeedbackDAO {
     /**
      * Creates a new GeneralFeedbackModule record
      *
-     * @param GeneralFeedbackModule to be created
+     * @param //GeneralFeedbackModule to be created
      * @throws DAOException
      */
     public void saveSeverity(Severity Severity) throws DAOException;
@@ -59,7 +59,7 @@ public interface FeedbackDAO {
     /**
      * Get GeneralFeedbackModule by internal identifier
      *
-     * @param GeneralFeedbackModule internal identifier
+     * @param //GeneralFeedbackModule internal identifier
      * @return GeneralFeedbackModule with given internal identifier
      * @throws DAOException
      */
@@ -78,7 +78,7 @@ public interface FeedbackDAO {
     /**
      * Update GeneralFeedbackModule
      *
-     * @param GeneralFeedbackModule to be updated
+     * @param //GeneralFeedbackModule to be updated
      * @throws DAOException
      */
     public void updateSeverity(Severity Severity) throws DAOException;
@@ -99,6 +99,8 @@ public interface FeedbackDAO {
     public List<PredefinedSubject> getPredefinedSubjects() throws DAOException;
 
     public List<Feedback> getFeedbacks() throws DAOException;
+
+    public List<Feedback> getAssignedFeedbacks(User assignedUser) throws DAOException;
 
     public List<Feedback> getFeedbacks(User user) throws DAOException;
 

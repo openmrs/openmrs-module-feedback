@@ -155,6 +155,16 @@ public class HibernateFeedbackDAO implements FeedbackDAO {
         return criteria.list();
     }
 
+    public List<Feedback> getAssignedFeedbacks(User assignedUser) throws DAOException {
+        Criteria criteria = sessionFactory.getCurrentSession().createCriteria(FeedbackUser.class);
+        criteria.add(Restrictions.eq("userId", assignedUser.getUserId()));
+
+
+
+        return criteria.list();
+     }
+
+
     public List<Feedback> getFeedbacks(User user) throws DAOException {
         Criteria criteria = sessionFactory.getCurrentSession().createCriteria(Feedback.class);
 

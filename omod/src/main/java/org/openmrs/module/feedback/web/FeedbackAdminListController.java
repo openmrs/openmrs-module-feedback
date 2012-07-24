@@ -21,6 +21,7 @@ package org.openmrs.module.feedback.web;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+import org.openmrs.User;
 import org.openmrs.api.context.Context;
 import org.openmrs.module.feedback.FeedbackService;
 
@@ -29,6 +30,7 @@ import org.springframework.web.servlet.mvc.SimpleFormController;
 //~--- JDK imports ------------------------------------------------------------
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -54,8 +56,12 @@ public class FeedbackAdminListController extends SimpleFormController {
 
         /* It sends the list of all the feedback submitted till now */
         FeedbackService hService = (FeedbackService) Context.getService(FeedbackService.class);
-
         map.put("feedbacks", hService.getFeedbacks());
+
+        User assignedUser = Context.getAuthenticatedUser();
+        List assignedFeedbacks = hService.getAssignedFeedbacks(assignedUser);
+
+        map.put("assigned_feedbacks", assignedFeedbacks);
 
         return map;
     }
