@@ -5,19 +5,23 @@
 
         <id name="id" type="java.lang.Integer">
             <column name="id"/>
-            <generator class="identity"/>
+            <generator class="native"/>
         </id>
 
-        <set name="feedbackId" cascade="save-update,delete-orphan" >
-            <key>
-                <column name="feedback_id"> </column>
-            </key>
-            <one-to-many class="org.openmrs.module.feedback.Feedback" />
-        </set>
+        <many-to-one class="org.openmrs.module.feedback.Feedback" column="feedback_id" name="feedbackId" />
 
-        <property name="userId" type="int">
-            <column name="user_id"/>
-        </property>
+        <many-to-one class="org.openmrs.User" column="user_id" name="userId" />
+
+        <!--<set name="feedbacks" cascade="save-update,delete-orphan" table="feedback_feedback" >-->
+            <!--<key>-->
+                <!--<column name="feedback_id"> </column>-->
+            <!--</key>-->
+            <!--<one-to-many class="org.openmrs.module.feedback.Feedback" />-->
+        <!--</set>-->
+
+        <!--<property name="userId" type="int">-->
+            <!--<column name="user_id"/>-->
+        <!--</property>-->
 
     </class>
 </hibernate-mapping>

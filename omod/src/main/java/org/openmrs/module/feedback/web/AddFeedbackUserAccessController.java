@@ -28,8 +28,8 @@ public class AddFeedbackUserAccessController extends SimpleFormController {
              int feedback = Integer.parseInt(FeedbackId);
              int user = Integer.parseInt(UserId);
 
-            FeedbackUser feedbackUser = new FeedbackUser(feedback, user);
-            service.saveFeedbackUser(feedbackUser);
+//            FeedbackUser feedbackUser = new FeedbackUser(feedback, user);
+//            service.saveFeedbackUser(feedbackUser);
             request.getSession().setAttribute(WebConstants.OPENMRS_MSG_ATTR, "Feedback User Access Added Successfully!");
             text = FeedbackId;
         }
