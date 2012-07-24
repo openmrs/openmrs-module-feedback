@@ -8,20 +8,9 @@
             <generator class="native"/>
         </id>
 
-        <many-to-one class="org.openmrs.module.feedback.Feedback" column="feedback_id" name="feedbackId" />
+        <many-to-one class="org.openmrs.module.feedback.Feedback" column="feedback_id" name="feedback" />
 
-        <many-to-one class="org.openmrs.User" column="user_id" name="userId" />
-
-        <!--<set name="feedbacks" cascade="save-update,delete-orphan" table="feedback_feedback" >-->
-            <!--<key>-->
-                <!--<column name="feedback_id"> </column>-->
-            <!--</key>-->
-            <!--<one-to-many class="org.openmrs.module.feedback.Feedback" />-->
-        <!--</set>-->
-
-        <!--<property name="userId" type="int">-->
-            <!--<column name="user_id"/>-->
-        <!--</property>-->
+        <many-to-one class="org.openmrs.User" column="user_id" name="user" />
 
     </class>
 </hibernate-mapping>

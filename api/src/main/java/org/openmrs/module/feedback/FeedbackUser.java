@@ -6,29 +6,25 @@ import org.openmrs.User;
 public class FeedbackUser extends BaseOpenmrsObject implements java.io.Serializable {
 
     private Integer id;
-    private Feedback feedbackId;
-    private User userId;
+    private Feedback feedback;
+    private User user;
 
     public FeedbackUser() {}
 
-    public FeedbackUser(User userId){
-        this.userId = userId;
+    public Feedback getFeedback() {
+        return feedback;
     }
 
-    public Feedback getFeedbackId() {
-        return feedbackId;
+    public void setFeedback(Feedback feedback) {
+        this.feedback = feedback;
     }
 
-    public void setFeedbackId(Feedback feedbackId) {
-        this.feedbackId = feedbackId;
+    public User getUser() {
+        return user;
     }
 
-    public User getUserId() {
-        return userId;
-    }
-
-    public void setUserId(User userId) {
-        this.userId = userId;
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public Integer getId() {

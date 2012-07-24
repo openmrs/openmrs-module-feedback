@@ -56,7 +56,7 @@ public class FeedbackAdminListController extends SimpleFormController {
 
         /* It sends the list of all the feedback submitted till now */
         FeedbackService hService = (FeedbackService) Context.getService(FeedbackService.class);
-        map.put("feedbacks", hService.getFeedbacks());
+//        map.put("feedbacks", hService.getFeedbacks());
 
         User assignedUser = Context.getAuthenticatedUser();
         List assignedFeedbacks = hService.getAssignedFeedbacks(assignedUser);
