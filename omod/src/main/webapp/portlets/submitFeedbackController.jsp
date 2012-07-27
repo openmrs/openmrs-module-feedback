@@ -7,8 +7,25 @@
 <script type="text/javascript">
 
     $j(document).ready(function(){
-
         var $j = jQuery.noConflict();
+
+        var browser_os_info = "Browser: " + BrowserDetect.browser + " - " + BrowserDetect.version + " | O/S: " + BrowserDetect.OS;
+        var pageURL = document.location.href
+        document.getElementById("pageInfo").innerText = "URL: " + pageURL + " | " + browser_os_info;
+
+//        var f1 = document.getElementByName('feedback').value;
+//        var f2 = document.getElementByName('stack').value;
+<%----%>
+//        document.getElementById("feedbackSummary_feedback").innerText = f1;
+//        document.getElementById("feedbackSummary_stack").innerText = f2;
+
+        $j("#next").click(function() {
+            if ($j("#next").val() == "Submit" ) {
+                var closeButton = $j("#dialog").parent().find('.ui-dialog-titlebar a');
+                closeButton.click();
+            }
+        });
+
         $j('#quickFeedbackForm').hide();
         $j("#stack").hide();
 
@@ -178,12 +195,10 @@
                     </center>
                     <hr/>
                     <u><spring:message code="feedback.feedback"/></u><br/>
-                    <label>Error occurred while adding a new patient</label>
+                    <label id="feedbackSummary_feedback"></label>
                     <hr/>
                     <u><spring:message code="feedback.pageContext"/></u><br/>
-                    <label>"Thread-5" (TID:0xee703b78, sys_thread_t:0xee261db8, state:R) prio=5
-                        mythread.stopper(exec3.java:10)
-                        mythread.run(exec3.java:16)</label>
+                    <label id="feedbackSummary_stack"></label>
                     <hr/>
                      <table>
                          <tr>
@@ -199,7 +214,9 @@
                              <td>Admin</td>
                          </tr>
                      </table>
-                    <hr/></a><label><spring:message code="feedback.wizard.pageInfo"/> : http://localhost:8080/openmrs/patient.html</label>
+                    <hr/>
+                    <label><spring:message code="feedback.wizard.pageInfo"/></label> :
+                    <label id="pageInfo"></label>
                     <hr/>
                        <u><spring:message code="feedback.wizard.attach"/></u><br />
                        <label>Attachment1.zip, Attachment2.png</label>
