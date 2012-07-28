@@ -39,6 +39,13 @@ $j(document).ready(function(){
 
     function captureScreen() {
 
+        $j('#feedbackSummary_feedback').html($j('#feedback').val());
+        $j('#feedbackSummary_stack').html($j('#stack').val());
+
+        $j('#feedbackSummary_subject').html($j('#subject option:selected').val());
+        $j('#feedbackSummary_severity').html($j('#severity option:selected').val());
+        $j('#feedbackSummary_receiver').html($j('#fdbk_receiver option:selected').val());
+
       try {
 
           var overlayChildrenBlackout = overlayBlackout.children();

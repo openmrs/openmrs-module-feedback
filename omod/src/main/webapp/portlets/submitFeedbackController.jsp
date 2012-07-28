@@ -6,18 +6,12 @@
 
 <script type="text/javascript">
 
-    $j(document).ready(function(){
+    $j(document).ready(function(){ logging: true;
         var $j = jQuery.noConflict();
 
         var browser_os_info = "Browser: " + BrowserDetect.browser + " - " + BrowserDetect.version + " | O/S: " + BrowserDetect.OS;
         var pageURL = document.location.href
         document.getElementById("pageInfo").innerText = "URL: " + pageURL + " | " + browser_os_info;
-
-//        var f1 = document.getElementByName('feedback').value;
-//        var f2 = document.getElementByName('stack').value;
-<%----%>
-//        document.getElementById("feedbackSummary_feedback").innerText = f1;
-//        document.getElementById("feedbackSummary_stack").innerText = f2;
 
         $j("#next").click(function() {
             if ($j("#next").val() == "Submit" ) {
@@ -89,7 +83,7 @@
                         <tr>
                             <td><spring:message code="feedback.subject"/> </td>
                             <td>
-                                <select name="subject">
+                                <select id="subject" name="subject">
                                     <c:forEach items="${model.predefinedsubjects}" var="predefinedsubjectObj" >
                                         <option value="<c:out value="${predefinedsubjectObj.subject}"/>"> <c:out value="${predefinedsubjectObj.subject}"/> </option>
                                     </c:forEach>
@@ -99,7 +93,7 @@
                         <tr>
                             <td><spring:message code="feedback.severity"/>  </td>
                             <td>
-                                <select name="severity">
+                                <select id="severity" name="severity">
                                     <c:forEach items="${model.severities}" var="severityObj">
                                         <option value="<c:out value="${severityObj.severity}"/>"> <c:out value="${severityObj.severity}"/> </option>
                                     </c:forEach>
@@ -109,7 +103,7 @@
                         <tr>
                             <td><spring:message code="feedback.wizard.receiver"/>  </td>
                             <td>
-                                <select name="fdbk_receiver">
+                                <select id="fdbk_receiver" name="fdbk_receiver">
                                     <c:forEach items="${model.allusers}" var="allusersObj">
                                         <option value="<c:out value="${allusersObj.username}"/>"> <c:out value="${allusersObj.username}"/> </option>
                                     </c:forEach>
@@ -126,7 +120,7 @@
                             <td><spring:message code="feedback.feedback"/></td>
                         </tr>
                         <tr>
-                            <td><textarea name="feedback" rows="4" cols="40" ></textarea></td>
+                            <td><textarea id="feedback" name="feedback" rows="4" cols="40" ></textarea></td>
                         </tr>
                     </table>
 		        </span>
@@ -195,23 +189,23 @@
                     </center>
                     <hr/>
                     <u><spring:message code="feedback.feedback"/></u><br/>
-                    <label id="feedbackSummary_feedback"></label>
+                    <span id="feedbackSummary_feedback"></span>
                     <hr/>
                     <u><spring:message code="feedback.pageContext"/></u><br/>
-                    <label id="feedbackSummary_stack"></label>
+                    <span id="feedbackSummary_stack"></span>
                     <hr/>
                      <table>
                          <tr>
                              <td><spring:message code="feedback.subject"/></td>
-                             <td>Record Not Found</td>
+                             <td><span id="feedbackSummary_subject"></span></td>
                          </tr>
                          <tr>
                              <td><spring:message code="feedback.severity"/></td>
-                             <td>Urgent</td>
+                             <td><span id="feedbackSummary_severity"></span></td>
                          </tr>
                          <tr>
                              <td><spring:message code="feedback.wizard.receiver"/></td>
-                             <td>Admin</td>
+                             <td><span id="feedbackSummary_receiver"></span></td>
                          </tr>
                      </table>
                     <hr/>
@@ -219,7 +213,7 @@
                     <label id="pageInfo"></label>
                     <hr/>
                        <u><spring:message code="feedback.wizard.attach"/></u><br />
-                       <label>Attachment1.zip, Attachment2.png</label>
+                       <span id="feedbackSummary_attach"></span>
                     <hr/>
 				</span>
     </div>
