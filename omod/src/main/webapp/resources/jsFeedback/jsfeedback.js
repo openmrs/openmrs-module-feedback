@@ -39,6 +39,7 @@ $j(document).ready(function(){
 
     function captureScreen() {
 
+        // Setting values for the Last step - Feedback Summary
         $j('#feedbackSummary_feedback').html($j('#feedback').val());
         $j('#feedbackSummary_stack').html($j('#stack').val());
 
@@ -46,13 +47,15 @@ $j(document).ready(function(){
         $j('#feedbackSummary_severity').html($j('#severity option:selected').val());
         $j('#feedbackSummary_receiver').html($j('#fdbk_receiver option:selected').val());
 
-      try {
-
-          var overlayChildrenBlackout = overlayBlackout.children();
-          var overlayChildrenHighlight = overlayHighlight.children();
-
-      } catch(err) {
-      }
+        try {
+            if(overlayBlackout !== undefined ) {
+                var overlayChildrenBlackout = overlayBlackout.children();
+            }
+            if(overlayHighlight !== undefined ) {
+                var overlayChildrenHighlight = overlayHighlight.children();
+            }
+        } catch(err) {
+        }
 
       window.setTimeout(function(){
           var canvas = html2canvas([document.getElementById("pageBody")], {
@@ -63,9 +66,10 @@ $j(document).ready(function(){
                   console.log(overlayChildrenHighlight);
                   console.log(overlayChildrenBlackout);
 
-                if (overlayChildrenBlackout.length >= 1) {
-                  var canvasElement = canvas[0];
                   var ctx = canvas.getContext('2d');
+
+              if (overlayChildrenBlackout !== undefined && overlayChildrenBlackout.length >= 1) {
+                  var canvasElement = canvas[0];
                   ctx.fillStyle = "black";
 
                   $j.each(overlayChildrenBlackout,function(i,e){
@@ -85,7 +89,7 @@ $j(document).ready(function(){
                   });
                 }
 
-                  if (overlayChildrenHighlight.length >= 1) {
+                  if (overlayChildrenHighlight !== undefined && overlayChildrenHighlight.length >= 1) {
                       ctx.strokeStyle = "rgb(255,0,0)";
                       ctx.lineWidth = 4;
 
@@ -109,8 +113,12 @@ $j(document).ready(function(){
                   var imageURL = canvas.toDataURL();
 
                   try {
-                      overlayHighlight.remove();
-                      overlayBlackout.remove();
+                      if(overlayBlackout !== undefined ) {
+                          overlayBlackout.remove();
+                      }
+                      if(overlayHighlight !== undefined ) {
+                          overlayHighlight.remove();
+                      }
                       overlayShade.remove();
                   } catch(err) { }
 
