@@ -17,6 +17,7 @@
             if ($j("#next").val() == "Submit" ) {
                 var closeButton = $j("#dialog").parent().find('.ui-dialog-titlebar a');
                 closeButton.click();
+                alert("Thanks! Your Feedback Submitted Successfully!");
             }
         });
 
