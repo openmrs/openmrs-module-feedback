@@ -197,15 +197,15 @@
                      <table>
                          <tr>
                              <td><spring:message code="feedback.subject"/></td>
-                             <td><span id="feedbackSummary_subject"></span></td>
+                             <td> : <span id="feedbackSummary_subject"></span></td>
                          </tr>
                          <tr>
                              <td><spring:message code="feedback.severity"/></td>
-                             <td><span id="feedbackSummary_severity"></span></td>
+                             <td> : <span id="feedbackSummary_severity"></span></td>
                          </tr>
                          <tr>
                              <td><spring:message code="feedback.wizard.receiver"/></td>
-                             <td><span id="feedbackSummary_receiver"></span></td>
+                             <td> : <span id="feedbackSummary_receiver"></span></td>
                          </tr>
                      </table>
                     <hr/>
