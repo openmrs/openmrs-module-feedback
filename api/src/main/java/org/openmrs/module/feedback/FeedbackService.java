@@ -100,7 +100,6 @@ public interface FeedbackService {
     public void deleteFeedbackUser(FeedbackUser FeedbackUser) throws APIException;
 
     @Transactional(readOnly = true)
-//    @Authorized({ "Add Feedback" })
     public List<Severity> getSeverities() throws APIException;
 
     public List<Status> getStatuses() throws APIException;
