@@ -73,7 +73,7 @@ public interface FeedbackDAO {
 
     public FeedbackComment getFeedbackComment(Integer FeedbackCommentId) throws DAOException;
 
-    public FeedbackUser getFeedbackUser(Integer FeedbackId) throws DAOException;
+    public User getFeedbackUser(Feedback Feedback) throws DAOException;
 
     /**
      * Update GeneralFeedbackModule

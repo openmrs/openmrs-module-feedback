@@ -191,16 +191,4 @@
 
     </changeSet>
 
-    <changeSet id="feedback-2012-07-27-12:16" author="harshadura">
-
-        <comment>
-            Adding "No status" Row for the Status List as Ben noted in the review
-        </comment>
-
-        <insert tableName="feedback_status">
-            <column name="status" value="-"/>
-        </insert>
-
-    </changeSet>
-
 </databaseChangeLog>

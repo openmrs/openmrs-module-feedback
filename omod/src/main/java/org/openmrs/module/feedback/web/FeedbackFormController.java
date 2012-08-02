@@ -6,6 +6,7 @@ import java.util.Date;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+import org.openmrs.User;
 import org.openmrs.api.context.Context;
 import org.openmrs.module.feedback.Feedback;
 import org.openmrs.module.feedback.FeedbackComment;
@@ -40,6 +41,25 @@ public class FeedbackFormController extends SimpleFormController {
         String              comment = request.getParameter("comment");
         Map<String, Object> map     = new HashMap<String, Object>();
 
+
+        ///////////////
+
+        FeedbackService     hService = (FeedbackService) Context.getService(FeedbackService.class);
+        boolean canComment = false;
+        int fId = Integer.parseInt(request.getParameter("feedbackId"));
+        Feedback feedback = hService.getFeedback(fId);
+        int loggedUserId = Context.getAuthenticatedUser().getUserId();
+        int feedbackCreatorId = hService.getFeedback(fId).getCreator().getUserId();
+        int feedbackAssignedUserId = hService.getFeedbackUser(feedback).getUserId();
+
+        log.error("\n\n\n\n\n****************** \n\n\n" + feedbackCreatorId + " | "
+                + feedbackAssignedUserId + " | " + loggedUserId + " \n\n\n\n************");
+
+        if ( (loggedUserId == feedbackCreatorId) || (loggedUserId == feedbackAssignedUserId) ) {
+            canComment = true;
+        }
+            ///////////////
+
         if (StringUtils.hasLength(status)
                 && (Context.getAuthenticatedUser().isSuperUser()
                     || Context.getAuthenticatedUser().hasPrivilege("Admin Feedback"))) {
@@ -51,7 +71,13 @@ public class FeedbackFormController extends SimpleFormController {
             } catch (Exception e) {
                 log.error(e);
             }
-        } else if (StringUtils.hasLength(comment)) {
+        } else if (StringUtils.hasLength(comment) && canComment==true) {
+
+
+log.error("\n\n\n\n\n****************** \n\n\n" + feedbackCreatorId + " | "
+                + feedbackAssignedUserId + " | " + loggedUserId + " \n\n\n\n************");
+
+
             try {
                 Feedback        s = service.getFeedback((Integer.parseInt(request.getParameter("feedbackId"))));
                 FeedbackComment k = new FeedbackComment();

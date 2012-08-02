@@ -103,6 +103,7 @@
                         <c:forEach items="${statuses}" var="statusObj" >
                             <option value="<c:out value="${statusObj.status}"/>"> <c:out value="${statusObj.status}"/> </option>      
                         </c:forEach>
+                        <option value="-" selected="selected">-</option>
                     </select> 
             	<input type="submit" value="<spring:message code="feedback.status.change" />" />  
 		</form>              
@@ -129,7 +130,7 @@
 	</td>
 	<td>
             <input type=hidden name=feedbackId value=<c:out value="${feedback.feedbackId}"/> >
-            <input type="submit" value="<spring:message code="feedback.comment" />" />                
+            <input type="submit" value="<spring:message code="feedback.comment.add" />" />
             </form>
 
           <openmrs:hasPrivilege privilege="Admin Feedback">

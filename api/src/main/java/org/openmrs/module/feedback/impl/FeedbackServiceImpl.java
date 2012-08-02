@@ -95,8 +95,8 @@ public class FeedbackServiceImpl implements FeedbackService {
         return getFeedbackdDAO().getFeedback(FeedbackId);
     }
 
-    public FeedbackUser getFeedbackUser(Integer FeedbackId) throws APIException {
-        return getFeedbackdDAO().getFeedbackUser(FeedbackId);
+    public User getFeedbackUser(Feedback feedback) throws APIException {
+        return getFeedbackdDAO().getFeedbackUser(feedback);
     }
 
     public FeedbackComment getFeedbackComment(Integer FeedbackCommentId) throws APIException {

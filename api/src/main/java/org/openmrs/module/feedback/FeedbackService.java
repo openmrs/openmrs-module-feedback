@@ -50,6 +50,7 @@ public interface FeedbackService {
 
     public void saveFeedbackComment(FeedbackComment FeedbackComment) throws APIException;
 
+    @Authorized({ "Add Feedback" })
     public void saveFeedbackUser(FeedbackUser FeedbackUser) throws APIException;
 
     /**
@@ -71,7 +72,7 @@ public interface FeedbackService {
 
     public FeedbackComment getFeedbackComment(Integer feedbackCommentId) throws APIException;
 
-    public FeedbackUser getFeedbackUser(Integer feedbackId) throws APIException;
+    public User getFeedbackUser(Feedback feedback) throws APIException;
 
     /**
      * Save response
