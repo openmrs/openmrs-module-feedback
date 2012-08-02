@@ -13,15 +13,47 @@
         var pageURL = document.location.href
         document.getElementById("pageInfo").innerText = "URL: " + pageURL + " | " + browser_os_info;
 
+        $j("#quick").click(function(){
+
+            $j('#feedbackForm').submit();
+//            return true;
+//
+
+            var closeButton = $j("#dialog").parent().find('.ui-dialog-titlebar a');
+            closeButton.click();
+            alert("Thanks! Your Feedback Submitted Successfully!");
+
+        });
+
+//              $j('#feedbackForm').submit(function(){
+//                $j('<input />').attr('type', 'hidden')
+//                        .attr('subject', "Default")
+//                        .attr('severity', "Default")
+//                        .attr('fdbk_receiver', "Admin" )
+//                        .appendTo('#feedbackForm');
+//                return true;
+//            });
+
         $j("#next").click(function() {
             if ($j("#next").val() == "Submit" ) {
                 var closeButton = $j("#dialog").parent().find('.ui-dialog-titlebar a');
                 closeButton.click();
                 alert("Thanks! Your Feedback Submitted Successfully!");
             }
+
+            if ($j("#stepHeading").text() != "Step 1 of 6"){
+                $j('#quick').hide();
+            }
         });
 
-        $j('#quickFeedbackForm').hide();
+        $j("#back").click(function() {
+            setTimeout(function(){
+                if ($j('#back').is(':disabled') == true) {
+                    $j('#quick').show();
+                }
+            }, 1000);
+        });
+
         $j("#stack").hide();
 
         $j("span:contains('Submit Feedback')").click(function(){
@@ -32,41 +64,13 @@
             formPluginEnabled: true,
             validationEnabled: true,
             focusFirstInput : true
-        }
-                );
-
-        $j("#switchFeedback").click(function(){
-
-            if($j("#switchFeedback").attr("value") == "Switch to Quick Feedback") {
-                $j("#feedbackForm").hide("slow", function(){
-                    $j("#quickFeedbackForm").show();
-                    $j("#switchFeedback").attr("value", "Switch to Feedback Wizard");
-                });
-            }
-
-            else if($j("#switchFeedback").attr("value") == "Switch to Feedback Wizard") {
-                $j("#quickFeedbackForm").hide("slow", function(){
-                    $j("#feedbackForm").show();
-                    $j("#switchFeedback").attr("value", "Switch to Quick Feedback");
-                });
-            }
-        });
-
-        $j('#quickFeedbackForm').submit(function(){
-
-            $j('<input />').attr('type', 'hidden')
-                    .attr('subject', "Default")
-                    .attr('severity', "Default")
-                    .attr('fdbk_receiver', "Admin" )
-                    .appendTo('#quickFeedbackForm');
-            return true;
         });
 
         $j('#stackCheckbox').click(function() {
             if( $j(this).is(':checked')) {
-                 $j("#stack").show("slow");
+                $j("#stack").show("slow");
             } else {
-                 $j("#stack").hide("slow");
+                $j("#stack").hide("slow");
             }
         });
 
@@ -80,6 +84,37 @@
                 <span id="step1" class="step">
                     <span class="stepHeading"><spring:message code="feedback.wizard.step1"/></span>
 	                <br /><br/>
+                    <table>
+                        <tr>
+                            <td><spring:message code="feedback.feedback"/></td>
+                        </tr>
+                        <tr>
+                            <td><textarea id="feedback" name="feedback" rows="4" cols="40" ></textarea></td>
+                        </tr>
+                    </table>
+		        </span>
+		        <span id="step2" class="step">
+                    <span class="stepHeading"><spring:message code="feedback.wizard.step2"/></span>
+	                <br /><br/>
+                    <table>
+                        <tr>
+                            <td><spring:message code="feedback.pageContext"/></td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label>
+                                    <input type="checkbox" id="stackCheckbox" />
+                                    <spring:message code="feedback.wizard.stack.checkbox"/>
+                                </label>
+                                <br />
+                                <textarea id="stack" name="stack" rows="4" cols="40" ></textarea>
+                            </td>
+                        </tr>
+                    </table>
+				</span>
+                <span id="step3" class="step">
+                    <span class="stepHeading"><spring:message code="feedback.wizard.step3"/></span>
+                    <br /><br/>
                     <table>
                         <tr>
                             <td><spring:message code="feedback.subject"/> </td>
@@ -112,66 +147,31 @@
                             </td>
                         </tr>
                     </table>
-	            </span>
-	            <span id="step2" class="step">
-                    <span class="stepHeading"><spring:message code="feedback.wizard.step2"/></span>
-	                <br /><br/>
-                    <table>
-                        <tr>
-                            <td><spring:message code="feedback.feedback"/></td>
-                        </tr>
-                        <tr>
-                            <td><textarea id="feedback" name="feedback" rows="4" cols="40" ></textarea></td>
-                        </tr>
-                    </table>
-		        </span>
-		        <span id="step3" class="step">
-                    <span class="stepHeading"><spring:message code="feedback.wizard.step3"/></span>
-	                <br /><br/>
-                    <table>
-                        <tr>
-                            <td><spring:message code="feedback.pageContext"/></td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <label>
-                                    <input type="checkbox" id="stackCheckbox" />
-                                    <spring:message code="feedback.wizard.stack.checkbox"/>
-                                </label>
-                                <br />
-                                <textarea id="stack" name="stack" rows="4" cols="40" ></textarea>
-                            </td>
-                        </tr>
-                    </table>
-				</span>
-				<span id="step4" class="step">
+                    </span>
+                    <span id="step4" class="step">
                     <span class="stepHeading"><spring:message code="feedback.wizard.step4"/></span>
 	                <br /><br/>
                     <spring:message code="feedback.wizard.editscreenshot"/><br /><br />
-                    </br></br>
-                    <table>
-                        <tr>
-                            <td><input type="button" id="fdbk_highlight" value="Highlight" /></td>
-                            <td><spring:message code="feedback.wizard.edit.highlight"/></td>
-                        </tr>
-                        <tr>
-                            <td><input type="button" id="fdbk_blackout" value="Blackout" /></td>
-                            <td><spring:message code="feedback.wizard.edit.blackout"/></td>
-                        </tr>
-                    </table>
-                    </br></br>
+                        </br></br>
+                        <table>
+                            <tr>
+                                <td><input type="button" id="fdbk_highlight" value="Highlight" /></td>
+                                <td><spring:message code="feedback.wizard.edit.highlight"/></td>
+                            </tr>
+                            <tr>
+                                <td><input type="button" id="fdbk_blackout" value="Blackout" /></td>
+                                <td><spring:message code="feedback.wizard.edit.blackout"/></td>
+                            </tr>
+                        </table>
+                        </br></br>
 				</span>
    				<span id="step5" class="step">
                     <span class="stepHeading"><spring:message code="feedback.wizard.step5"/></span>
 	                <br /><br/>
                     <center>
-
                         <a id="screenshot_thumbnail" target="_blank">
                             <img id="fdbk_processed_screenshot" width="500" height="250" style="border:3px solid #c3c3c3;" /><br/>
                         </a>
-
-                        <%--<canvas class="thumbnail" id="fdbk_processed_screenshot" width="400" height="200" style="border:3px solid #c3c3c3;"></canvas><br/>--%>
-
                         <b><spring:message code="feedback.wizard.screenshot"/></b><br /><br />
                         <spring:message code="feedback.wizard.screenshot.note"/><br />
                         <hr/>
@@ -222,28 +222,10 @@
     <div id="bottomNavigation">
         <input id="back" value="Back" type="reset" />
         <input id="next" value="Next" type="submit" />
+        <input id="quick" value="Just submit now with all the defaults!" type="button" />
     </div>
     <br/>
 </form>
-
-<form id="quickFeedbackForm" method="post" action="<openmrs:contextPath/>/module/feedback/addFeedback.form" class="bbq" enctype="multipart/form-data" >
-    <div id="quickFeedbackFieldWrapper">
-        </br></br>
-        <table>
-            <tr>
-                <td valign="top"><spring:message code="feedback.feedback"/> </td>
-                <td><textarea name="feedback" rows="7" cols="100" type="_moz" size="35"></textarea> </td>
-            </tr>
-        </table>
-    </div>
-    </br>
-    <input type="button" value="<spring:message code="feedback.addFeedback" />" />
-</form>
-
-</br>
-<div>
-    <input align="right" type="button" id="switchFeedback" value="Switch to Quick Feedback" />
-</div>
 
 </br>
 <b class="boxHeader"><spring:message code="feedback.help"/></b>
