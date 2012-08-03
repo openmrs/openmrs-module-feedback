@@ -114,7 +114,7 @@ public interface FeedbackDAO {
 
     public void deleteFeedback(Feedback Feedback) throws DAOException;
 
-    public void deleteFeedbackUser(FeedbackUser FeedbackUser) throws DAOException;
+    public void deleteFeedbackUser(Feedback feedback, User user) throws DAOException;
 
 }
 

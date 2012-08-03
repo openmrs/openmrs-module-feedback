@@ -98,7 +98,7 @@ public interface FeedbackService {
 
     public void deleteFeedback(Feedback Feedback) throws APIException;
 
-    public void deleteFeedbackUser(FeedbackUser FeedbackUser) throws APIException;
+    public void deleteFeedbackUser(Feedback feedback, User user) throws APIException;
 
     @Transactional(readOnly = true)
     public List<Severity> getSeverities() throws APIException;

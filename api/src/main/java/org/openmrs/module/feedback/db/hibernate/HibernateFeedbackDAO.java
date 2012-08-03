@@ -37,6 +37,7 @@ import org.openmrs.module.feedback.db.FeedbackDAO;
 
 //~--- JDK imports ------------------------------------------------------------
 
+import javax.mail.Session;
 import java.util.List;
 
 public class HibernateFeedbackDAO implements FeedbackDAO {
@@ -198,8 +199,16 @@ public class HibernateFeedbackDAO implements FeedbackDAO {
         sessionFactory.getCurrentSession().delete(Feedback);
     }
 
-    public void deleteFeedbackUser(FeedbackUser FeedbackUser) throws DAOException {
-        sessionFactory.getCurrentSession().delete(FeedbackUser);
+    public void deleteFeedbackUser(Feedback feedback, User user) throws DAOException {
+//        sessionFactory.getCurrentSession().delete(FeedbackUser);
+
+        Criteria criteria = sessionFactory.getCurrentSession().createCriteria(FeedbackUser.class);
+        criteria.add(Restrictions.eq("feedback", feedback));
+        criteria.add(Restrictions.eq("user", user));
+        FeedbackUser feedbackUser = (FeedbackUser)criteria.uniqueResult();
+        sessionFactory.getCurrentSession().delete(feedbackUser);
+//
+
     }
 }
 

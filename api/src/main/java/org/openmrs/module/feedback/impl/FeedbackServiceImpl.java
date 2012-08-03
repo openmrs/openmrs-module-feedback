@@ -167,8 +167,8 @@ public class FeedbackServiceImpl implements FeedbackService {
         getFeedbackdDAO().deleteFeedback(Feedback);
     }
 
-    public void deleteFeedbackUser(FeedbackUser FeedbackUser) throws APIException {
-        getFeedbackdDAO().deleteFeedbackUser(FeedbackUser);
+    public void deleteFeedbackUser(Feedback feedback, User user) throws APIException {
+        getFeedbackdDAO().deleteFeedbackUser(feedback, user);
     }
 }
 

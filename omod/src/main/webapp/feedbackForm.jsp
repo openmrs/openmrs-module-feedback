@@ -1,6 +1,6 @@
 <%@ include file="local_header.jsp"%>
 
-<openmrs:hasPrivilege privilege="Add Feedback,Admin Feedback">
+<openmrs:hasPrivilege privilege="Add Feedback">
 
     <%@ taglib prefix="kc" tagdir="/WEB-INF/tags/module/feedback/"%>
 
@@ -38,7 +38,7 @@
             </tr>
             <tr>
                 <th width="300"><spring:message code="feedback.creator"/></th>
-                <td><c:out value="${feedback.creator} "/> </td>
+                <td><c:out value="${feedback.creator.personName} "/> </td>
             </tr>
             <tr>
                 <th width="400"><spring:message code="feedback.subject"/></th>
@@ -76,9 +76,10 @@
                     </a>
                 </td>
             </tr>
-            <c:forEach items="${comments}" var="commentObj" >
-                <tr>
-                    <td colspan="2">
+            <tr>
+                <th width="400"><spring:message code="feedback.reply.list"/></th>
+                <td colspan="2">
+                    <c:forEach items="${comments}" var="commentObj" >
                         <c:out value="${commentObj.comment}"/>
                         <div class="description">
                             <c:if test="${not empty commentObj.attachment}">
@@ -90,9 +91,48 @@
                             <c:out value="${commentObj.creator.personName}"/>
                             <kc:prettyTime date="${commentObj.dateCreated}"></kc:prettyTime>
                         </div>
-                    </td>
-                </tr>
-            </c:forEach>
+                    </c:forEach>
+                </td>
+            </tr>
+
+<%----%>
+                <openmrs:hasPrivilege privilege="Admin Feedback">
+
+                    <tr>
+                        <th><spring:message code="feedback.assigned.user"/> </th>
+                        <td>
+                            <form method="post">
+                                <input type=hidden name=feedbackId value=<c:out value="${feedback.feedbackId}"/> >
+                                <select name="delAssignedUser">
+                                    <c:forEach items="${assigned_users}" var="usersObj" >
+                                        <option value="<c:out value="${usersObj.username}"/>"> <c:out value="${usersObj.username}"/> </option>
+                                    </c:forEach>
+                                    <%--<option value="-" selected="selected">-</option>--%>
+                                </select>
+                                <input type="submit" id="delAssigned" name="delAssigned" value="<spring:message code="feedback.delete.user" />" />
+                            </form>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <th></th>
+                        <td>
+                            <form method="post">
+                                <input type=hidden name=feedbackId value=<c:out value="${feedback.feedbackId}"/> >
+                                <select name="addAssignedUser">
+                                    <c:forEach items="${allusers}" var="usersObj" >
+                                        <option value="<c:out value="${usersObj.username}"/>"> <c:out value="${usersObj.username}"/> </option>
+                                    </c:forEach>
+                                    <%--<option value="-" selected="selected">-</option>--%>
+                                </select>
+                                <input type="submit" id="addAssigned" name="addAssigned" value="<spring:message code="feedback.add.user" />" />
+                            </form>
+                        </td>
+                    </tr>
+
+                </openmrs:hasPrivilege>
+<%----%>
+
             <openmrs:hasPrivilege privilege="Admin Feedback">
                 <tr>
                     <th width="400"><spring:message code="feedback.status"/></th>
@@ -120,28 +160,6 @@
                         </div>
                     </td>
                 </tr>
-
-<%----%>
-                <br/>
-                <openmrs:hasPrivilege privilege="Admin Feedback">
-                    <tr>
-                        <th><spring:message code="feedback.assigned.user"/> </th>
-                        <td>
-                            <form method="post">
-                                <input type=hidden name=feedbackId value=<c:out value="${feedback.feedbackId}"/> >
-                                <select name="assignedUser">
-                                    <c:forEach items="${assigned_users}" var="usersObj" >
-                                        <option value="<c:out value="${usersObj.personName}"/>"> <c:out value="${usersObj.personName}"/> </option>
-                                    </c:forEach>
-                                    <%--<option value="-" selected="selected">-</option>--%>
-                                </select>
-                                <input type="submit" value="<spring:message code="feedback.add.user" />" />
-                            </form>
-                        </td>
-                    </tr>
-                </openmrs:hasPrivilege>
-<%----%>
-                <br/>
                 <tr>
                     <th valign="top"><spring:message code="feedback.comment"/> </th>
                     <td><textarea name="comment" rows="10" cols="120" type="_moz" size="35"></textarea> </td>
