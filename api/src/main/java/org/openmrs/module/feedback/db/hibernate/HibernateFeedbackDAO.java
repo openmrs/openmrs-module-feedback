@@ -74,12 +74,12 @@ public class HibernateFeedbackDAO implements FeedbackDAO {
         return (Feedback) sessionFactory.getCurrentSession().get(Feedback.class, FeedbackId);
     }
 
-    public User getFeedbackUser(Feedback feedback) {
+    public List<User> getFeedbackUser(Feedback feedback) {
 //        return (FeedbackUser) sessionFactory.getCurrentSession().get(FeedbackUser.class, id);
 
          Criteria criteria = sessionFactory.getCurrentSession().createCriteria(FeedbackUser.class);
          criteria.setProjection(Projections.property("user")).add(Restrictions.eq("feedback", feedback)).list();
-         return (User) criteria.list().get(0);
+         return criteria.list();
 
     }
 

@@ -72,7 +72,7 @@ public interface FeedbackService {
 
     public FeedbackComment getFeedbackComment(Integer feedbackCommentId) throws APIException;
 
-    public User getFeedbackUser(Feedback feedback) throws APIException;
+    public List<User> getFeedbackUser(Feedback feedback) throws APIException;
 
     /**
      * Save response

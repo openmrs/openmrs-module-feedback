@@ -15,9 +15,11 @@
 		"bProcessing": true,
 		"bJQueryUI": true,
 		"sPaginationType": "full_numbers",
-		"aaSorting": [[ 5, "desc" ]],
+		"aaSorting": [[ 6, "desc" ]],
 		"aoColumns": [ 
 		   	  { "bSearchable": true,
+			    "bVisible":    true },
+              { "bSearchable": true,
 			    "bVisible":    true },
 			  { "bSearchable": true,
 			    "bVisible":    true },
@@ -28,6 +30,7 @@
 			  { "bSearchable": true,
 			    "bVisible":    true } ,
 			  { "bVisible":    false } ,
+
 		]
 
 	} );
@@ -43,10 +46,11 @@
         <table cellspacing="0" cellpadding="2" id="table" class="display">
     <thead>
             <tr>
+                <th width="200"><spring:message code="feedback.feedbackId"/></th>
                 <th width="300"><spring:message code="feedback.creator"/></th>
-                <th width="400"><spring:message code="feedback.subject"/></th>
+                <th width="300"><spring:message code="feedback.subject"/></th>
                 <th width="300"><spring:message code="feedback.severity"/></th>
-                <th width="400"><spring:message code="feedback.status"/></th>
+                <th width="300"><spring:message code="feedback.status"/></th>
                 <th width="400"><spring:message code="feedback.dateCreated"/></th>
                 <th width="400"><spring:message code="feedback.dateCreated"/></th>
             </tr>
@@ -54,8 +58,9 @@
     <tbody> 
             <c:forEach items="${assigned_feedbacks}" var="feedbackObj" varStatus="loopStatus">
                 <tr class="">
+                    <td><a href="<openmrs:contextPath/>/module/feedback/feedback.form?feedbackId=<c:out value="${feedbackObj.feedbackId}"/>"><c:out value="${feedbackObj.feedbackId} "/> </td>
                     <td><c:out value="${feedbackObj.creator.personName} "/> </td>
-                    <td><a href="<openmrs:contextPath/>/module/feedback/feedback.form?feedbackId=<c:out value="${feedbackObj.feedbackId}"/>"><c:out value="${feedbackObj.subject} "/> </td>
+                    <td><c:out value="${feedbackObj.subject} "/> </td>
                     <td><c:out value="${feedbackObj.severity} "/> </td>
                     <td><c:out value="${feedbackObj.status} "/> </td>
                     <td><kc:prettyTime date="${feedbackObj.dateCreated}"></kc:prettyTime></td>          

@@ -50,7 +50,7 @@ public class FeedbackFormController extends SimpleFormController {
         Feedback feedback = hService.getFeedback(fId);
         int loggedUserId = Context.getAuthenticatedUser().getUserId();
         int feedbackCreatorId = hService.getFeedback(fId).getCreator().getUserId();
-        int feedbackAssignedUserId = hService.getFeedbackUser(feedback).getUserId();
+        int feedbackAssignedUserId = hService.getFeedbackUser(feedback).get(0).getUserId();
 
         log.error("\n\n\n\n\n****************** \n\n\n" + feedbackCreatorId + " | "
                 + feedbackAssignedUserId + " | " + loggedUserId + " \n\n\n\n************");
@@ -209,6 +209,8 @@ log.error("\n\n\n\n\n****************** \n\n\n" + feedbackCreatorId + " | "
                     return map;
                 }
 
+                Feedback feedback = service.getFeedback((Integer.parseInt(req.getParameter("feedbackId"))));
+
                 if (Context.getUserContext().getAuthenticatedUser().isSuperUser()
                         || Context.hasPrivilege("Admin Feedback")
                         || Context.getAuthenticatedUser().equals(
@@ -217,6 +219,8 @@ log.error("\n\n\n\n\n****************** \n\n\n" + feedbackCreatorId + " | "
                     map.put("comments", hService.getFeedbackComments(Integer.parseInt(req.getParameter("feedbackId"))));
                     map.put("feedbackId", req.getParameter("feedbackId"));
                     map.put("feedback", hService.getFeedback((Integer.parseInt(req.getParameter("feedbackId")))));
+                    map.put("assigned_users", hService.getFeedbackUser(feedback));
+
                 }
             } catch (Exception exception) {
                 log.error(exception);

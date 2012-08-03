@@ -53,15 +53,15 @@ public class FeedbackAdminListController extends SimpleFormController {
     @Override
     protected Map referenceData(HttpServletRequest req) throws Exception {
         Map<String, Object> map = new HashMap<String, Object>();
-
-        /* It sends the list of all the feedback submitted till now */
         FeedbackService hService = (FeedbackService) Context.getService(FeedbackService.class);
-//        map.put("feedbacks", hService.getFeedbacks());
-
         User assignedUser = Context.getAuthenticatedUser();
         List assignedFeedbacks = hService.getAssignedFeedbacks(assignedUser);
 
-        map.put("assigned_feedbacks", assignedFeedbacks);
+        if (Context.getAuthenticatedUser().isSuperUser()){
+            map.put("assigned_feedbacks", hService.getFeedbacks());
+        } else {
+            map.put("assigned_feedbacks", assignedFeedbacks);
+        }
 
         return map;
     }
