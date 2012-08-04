@@ -80,8 +80,8 @@
             <tr>
                 <th width="400"><spring:message code="feedback.screenshot.label"/></th>
                 <td>
-                    <a href="javascript:fdbkPhotoPopUp()" >
-                        <img src="<openmrs:contextPath/>/moduleServlet/feedback/fileDownloadServlet?feedbackScreenshotId=<c:out value="${feedback.feedbackId}"/>" height="100" width="100">
+                    <a target="_blank" href="<openmrs:contextPath/>/moduleServlet/feedback/fileDownloadServlet?feedbackScreenshotId=<c:out value="${feedback.feedbackId}"/>" >
+                        <img src="<openmrs:contextPath/>/moduleServlet/feedback/fileDownloadServlet?feedbackScreenshotId=<c:out value="${feedback.feedbackId}"/>" height="200" width="400">
                         </img>
                     </a>
                 </td>

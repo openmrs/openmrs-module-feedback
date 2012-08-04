@@ -21,6 +21,7 @@ package org.openmrs.module.feedback.web;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+import org.hibernate.criterion.Example;
 import org.openmrs.User;
 import org.openmrs.api.context.Context;
 import org.openmrs.module.feedback.Feedback;
@@ -58,9 +59,15 @@ public class FileDownloadServlet extends HttpServlet {
                 User u = Context.getUserContext().getAuthenticatedUser();
 
                 try {
-                    feedback = service.getFeedback(Integer.parseInt(feedbackId));
+                    if (request.getParameter("feedbackScreenshotId") != null) {
+                        feedback = service.getFeedback(Integer.parseInt(request.getParameter("feedbackScreenshotId")));
+                    }
+                    else {
+                        feedback = service.getFeedback(Integer.parseInt(feedbackId));
+                    }
                 } catch (Exception e) {
                     log.error(e);
+                     e.printStackTrace();
                 }
 
                 if (!"".equals(request.getParameter("feedbackId")) && (request.getParameter("feedbackId") != null)
@@ -84,11 +91,28 @@ public class FileDownloadServlet extends HttpServlet {
                     response.getOutputStream().write(feedback.getMessage());
                 }
 
-                else if (!"".equals(request.getParameter("feedbackScreenshotId")) && (request.getParameter("feedbackScreenshotId") != null)
-                        && (service.getFeedback(Integer.parseInt(feedbackId)) != null)
+
+                try{
+//                    String screenshot = feedback.getScreenshot();
+                    log.error("\n\n\n\n*************************HERE 1 ******************\n\n\n\n");
+                }catch (Exception e){
+                    log.error(">>>>>>>" + e);
+                    e.printStackTrace();
+                }
+
+                if (!"".equals(request.getParameter("feedbackScreenshotId")) && (request.getParameter("feedbackScreenshotId") != null)
                         && (u.isSuperUser() || Context.hasPrivilege("Admin Feedback") || Context.hasPrivilege("Add Feedback"))) {
 
-                    feedback = service.getFeedback(Integer.parseInt(feedbackId));
+
+                    try{
+//                    String screenshot = feedback.getScreenshot();
+                                   log.error("\n\n\n\n*************************HERE 222 ******************\n\n\n\n");
+                               }catch (Exception e){
+                                   log.error(">>>>>>>" + e);
+                                   e.printStackTrace();
+                               }
+
+
                     byte[] screenshot = feedback.getScreenshot();
 
                     // Keeping these same as these are for the versionedfilemodule. Modify response to disable caching
@@ -102,9 +126,10 @@ public class FileDownloadServlet extends HttpServlet {
                     // String contentType = vf.getContentType() != null ? vf.getContentType() : defaultContentType;
                     response.setContentType("images");
                     response.getOutputStream().write(feedback.getScreenshot());
+
                 }
 
-                else if (!"".equals(request.getParameter("feedbackCommentId"))
+                if (!"".equals(request.getParameter("feedbackCommentId"))
                            && (request.getParameter("feedbackCommentId") != null)
                            && (service.getFeedbackComment(Integer.parseInt(request.getParameter("feedbackCommentId")))
                                != null)) {

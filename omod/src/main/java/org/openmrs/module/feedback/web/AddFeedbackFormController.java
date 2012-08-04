@@ -34,6 +34,7 @@ import org.springframework.web.bind.ServletRequestUtils;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.mvc.SimpleFormController;
+import sun.misc.BASE64Decoder;
 
 //~--- JDK imports ------------------------------------------------------------
 
@@ -114,7 +115,17 @@ public class AddFeedbackFormController extends SimpleFormController {
 
             if (screenshotURL != null) {
 
-                log.error("\n\n\n\n***************************" + screenshotURL + "\n\n******************\n\n\n\n");
+                try {
+                    String parts[] = screenshotURL.split(",");
+                    BASE64Decoder decoder = new BASE64Decoder();
+                    byte[] decodedBytes = decoder.decodeBuffer(parts[1]);
+                    s.setScreenshot(decodedBytes);
+
+                } catch(Exception e){
+                    e.printStackTrace();
+                }
+//                log.error("\n\n\n\n***************************" + screenshotURL + "\n\n******************\n\n\n\n");
+
 
 //                MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) request;
 //                MultipartFile               file             = (MultipartFile) multipartRequest.getFile("file");
