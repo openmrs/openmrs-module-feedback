@@ -105,6 +105,42 @@ public class AddFeedbackFormController extends SimpleFormController {
                 }
             }
 
+            /////////////////
+
+            String screenshotURL = request.getParameter("screenshotFile");
+
+            log.error("\n\n\n\n***************************" + screenshotURL + "\n\n******************\n\n\n\n");
+
+
+            if (screenshotURL != null) {
+
+                log.error("\n\n\n\n***************************" + screenshotURL + "\n\n******************\n\n\n\n");
+
+//                MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) request;
+//                MultipartFile               file             = (MultipartFile) multipartRequest.getFile("file");
+//
+//                if (!file.isEmpty()) {
+//                    if (file.getSize() <= 5242880) {
+//                        if () {
+//                            s.setScreenshot(file.getBytes());
+//                        } else {
+//                            request.getSession().setAttribute(WebConstants.OPENMRS_ERROR_ATTR,
+//                                                              "feedback.notification.feedback.error");
+//
+//                            return false;
+//                        }
+//                    } else {
+//                        request.getSession().setAttribute(WebConstants.OPENMRS_ERROR_ATTR,
+//                                                          "feedback.notification.feedback.error");
+//
+//                        return false;
+//                    }
+//                }
+            }
+
+            //////////////////
+
+
             /* Save the Feedback */
             service.saveFeedback(s);
 

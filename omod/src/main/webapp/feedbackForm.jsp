@@ -68,7 +68,7 @@
                 </td>
             </tr>
             <tr>
-                <th width="400"><spring:message code="feedback.message"/></th>
+                <th width="400"><spring:message code="feedback.attachment.label"/></th>
                 <td>
                     <a href="javascript:fdbkPhotoPopUp()" >
                         <img src="<openmrs:contextPath/>/moduleServlet/feedback/fileDownloadServlet?feedbackId=<c:out value="${feedback.feedbackId}"/>" height="100" width="100">
@@ -76,6 +76,17 @@
                     </a>
                 </td>
             </tr>
+
+            <tr>
+                <th width="400"><spring:message code="feedback.screenshot.label"/></th>
+                <td>
+                    <a href="javascript:fdbkPhotoPopUp()" >
+                        <img src="<openmrs:contextPath/>/moduleServlet/feedback/fileDownloadServlet?feedbackScreenshotId=<c:out value="${feedback.feedbackId}"/>" height="100" width="100">
+                        </img>
+                    </a>
+                </td>
+            </tr>
+
             <tr>
                 <th width="400"><spring:message code="feedback.reply.list"/></th>
                 <td colspan="2">

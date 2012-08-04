@@ -67,9 +67,8 @@ public class FileDownloadServlet extends HttpServlet {
                         && (service.getFeedback(Integer.parseInt(feedbackId)) != null)
                         && (u.isSuperUser() || Context.hasPrivilege("Admin Feedback")
                             || u.getUserId().equals(feedback.getCreator().getUserId()))) {
-                    feedback = service.getFeedback(Integer.parseInt(feedbackId));
-                    feedback = service.getFeedback(Integer.parseInt(feedbackId));
 
+                    feedback = service.getFeedback(Integer.parseInt(feedbackId));
                     byte[] attachment = feedback.getMessage();
 
                     // Keeping these same as these are for the versionedfilemodule. Modify response to disable caching
@@ -83,7 +82,29 @@ public class FileDownloadServlet extends HttpServlet {
                     // String contentType = vf.getContentType() != null ? vf.getContentType() : defaultContentType;
                     response.setContentType("images");
                     response.getOutputStream().write(feedback.getMessage());
-                } else if (!"".equals(request.getParameter("feedbackCommentId"))
+                }
+
+                else if (!"".equals(request.getParameter("feedbackScreenshotId")) && (request.getParameter("feedbackScreenshotId") != null)
+                        && (service.getFeedback(Integer.parseInt(feedbackId)) != null)
+                        && (u.isSuperUser() || Context.hasPrivilege("Admin Feedback") || Context.hasPrivilege("Add Feedback"))) {
+
+                    feedback = service.getFeedback(Integer.parseInt(feedbackId));
+                    byte[] screenshot = feedback.getScreenshot();
+
+                    // Keeping these same as these are for the versionedfilemodule. Modify response to disable caching
+                    response.setHeader("Pragma", "No-cache");
+                    response.setDateHeader("Expires", 0);
+                    response.setHeader("Cache-Control", "no-cache");
+                    response.setContentLength(screenshot.length);
+
+                    // response.setHeader("Content-Disposition", "attachment; filename=" + vf.getFullName().replace(" ", "_"));
+                    // Determine content type for response
+                    // String contentType = vf.getContentType() != null ? vf.getContentType() : defaultContentType;
+                    response.setContentType("images");
+                    response.getOutputStream().write(feedback.getScreenshot());
+                }
+
+                else if (!"".equals(request.getParameter("feedbackCommentId"))
                            && (request.getParameter("feedbackCommentId") != null)
                            && (service.getFeedbackComment(Integer.parseInt(request.getParameter("feedbackCommentId")))
                                != null)) {

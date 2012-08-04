@@ -28,5 +28,7 @@
         <property column="date_changed" length="19" name="dateChanged" type="timestamp"/>
         <property length="38" name="uuid" not-null="true" type="string"/>
         <property column="attachment" name="message" not-null="false" type="binary"/>
+        <property column="screenshot" name="screenshot" not-null="false" type="binary"/>
+
     </class>
 </hibernate-mapping>

@@ -169,8 +169,9 @@
                     <span class="stepHeading"><spring:message code="feedback.wizard.step5"/></span>
 	                <br /><br/>
                     <center>
+                        <input type=hidden name=screenshotFile id=screenshotFile />
                         <a id="screenshot_thumbnail" target="_blank">
-                            <img id="fdbk_processed_screenshot" width="500" height="250" style="border:3px solid #c3c3c3;" /><br/>
+                            <img id="fdbk_processed_screenshot" name="fdbk_processed_screenshot" width="500" height="250" style="border:3px solid #c3c3c3;" /><br/>
                         </a>
                         <b><spring:message code="feedback.wizard.screenshot"/></b><br /><br />
                         <spring:message code="feedback.wizard.screenshot.note"/><br />

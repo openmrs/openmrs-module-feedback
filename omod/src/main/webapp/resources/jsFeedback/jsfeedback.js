@@ -125,6 +125,8 @@ $j(document).ready(function(){
                   var img_screen = document.getElementById('fdbk_processed_screenshot');
                   img_screen.src = imageURL;
 
+                  $j("#screenshotFile").val(imageURL);
+
                   var ref_thumbnail = document.getElementById('screenshot_thumbnail');
                   ref_thumbnail.href = imageURL;
 
