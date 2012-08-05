@@ -15,7 +15,9 @@
         document.getElementById("pageInfo").innerText = pageInformation;
         $j("#pageInfoPass").val(pageInformation);
 
-        $j("#quick").click(function(){
+        /////////////////////
+
+        $j("#quick").click(function() {
 
             $j('#feedbackForm').submit();
 //            return true;
@@ -36,6 +38,9 @@
 //                return true;
 //            });
 
+        /////////////////////
+
+
         $j("#next").click(function() {
             if ($j("#next").val() == "Submit" ) {
                 var closeButton = $j("#dialog").parent().find('.ui-dialog-titlebar a');
@@ -46,6 +51,12 @@
             if ($j("#stepHeading").text() != "Step 1 of 6"){
                 $j('#quick').hide();
             }
+
+            $j(":contains('Feedback Confirmation')").each(function() {
+                if($j(this).find(":contains('Feedback Confirmation')").length > 0) {
+                    $j('#feedbackSummary_attach').html($j('#file').val());
+                }
+            });
         });
 
         $j("#back").click(function() {
