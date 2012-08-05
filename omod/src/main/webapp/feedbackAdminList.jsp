@@ -1,6 +1,6 @@
 <%@ include file="local_header.jsp"%>
 
-<openmrs:hasPrivilege privilege="Admin Feedback">
+<openmrs:hasPrivilege privilege="Add Feedback,Admin Feedback">
     
 <%@ taglib prefix="kc" tagdir="/WEB-INF/tags/module/feedback/"%>
 <openmrs:htmlInclude file="/moduleResources/feedback/demo_table_jui.css" />
