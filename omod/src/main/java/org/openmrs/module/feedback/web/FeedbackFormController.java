@@ -40,19 +40,12 @@ public class FeedbackFormController extends SimpleFormController {
         String              comment = request.getParameter("comment");
         Map<String, Object> map     = new HashMap<String, Object>();
 
-        ///////////////
-
         FeedbackService     hService = (FeedbackService) Context.getService(FeedbackService.class);
         boolean assignedOrNot = false;
         int fId = Integer.parseInt(request.getParameter("feedbackId"));
         Feedback feedback = hService.getFeedback(fId);
         int loggedUserId = Context.getAuthenticatedUser().getUserId();
         int feedbackCreatorId = hService.getFeedback(fId).getCreator().getUserId();
-
-//        int feedbackAssignedUserId = hService.getFeedbackUser(feedback).get(0).getUserId();
-
-//        log.error("\n\n\n\n\n****************** \n\n\n" + feedbackCreatorId + " | "
-//                + feedbackAssignedUserId + " | " + loggedUserId + " \n\n\n\n************");
 
         List<User> usersList = hService.getFeedbackUser(feedback);
         Iterator<User> iterator = usersList.iterator();
@@ -63,7 +56,6 @@ public class FeedbackFormController extends SimpleFormController {
                 break;
             }
         }
-        ///////////////
 
         if (StringUtils.hasLength(status)
                 && (Context.getAuthenticatedUser().isSuperUser()
@@ -79,10 +71,8 @@ public class FeedbackFormController extends SimpleFormController {
         } else if (StringUtils.hasLength(comment) &&
                 (assignedOrNot==true || (loggedUserId == feedbackCreatorId) || Context.getAuthenticatedUser().isSuperUser())) {
 
-
-log.error("\n\n\n\n\n****************** \n\n\n" + feedbackCreatorId + " | "
-               + " | " + loggedUserId + " \n\n\n\n************");
-
+//        log.error("\n\n\n\n\n****************** \n\n\n" + feedbackCreatorId + " | "
+//               + " | " + loggedUserId + " \n\n\n\n************");
 
             try {
                 Feedback        s = service.getFeedback((Integer.parseInt(request.getParameter("feedbackId"))));
@@ -190,13 +180,11 @@ log.error("\n\n\n\n\n****************** \n\n\n" + feedbackCreatorId + " | "
             }
         }
 
-        ////////////////
-
         String addAssignedUser = request.getParameter("addAssignedUser");
         String delAssignedUser = request.getParameter("delAssignedUser");
 
-        log.error("\n\n\n\n\n********#############********** \n\n\n" + addAssignedUser + " | "
-                               + delAssignedUser + " | " + request.getParameter("delAssigned") + " \n\n\n\n************");
+//        log.error("\n\n\n\n\n********#############********** \n\n\n" + addAssignedUser + " | "
+//                               + delAssignedUser + " | " + request.getParameter("delAssigned") + " \n\n\n\n************");
 
         if (Context.getAuthenticatedUser().isSuperUser()) {
 
@@ -212,8 +200,6 @@ log.error("\n\n\n\n\n****************** \n\n\n" + feedbackCreatorId + " | "
             }
             else if(StringUtils.hasLength(delAssignedUser) && request.getParameter("delAssigned") != null) {
                 try {
-//                    FeedbackUser feedbackUser = new FeedbackUser();
-//                    feedbackUser.setFeedback(feedback);
                     User user = Context.getUserService().getUserByUsername(delAssignedUser);
                     service.deleteFeedbackUser(feedback, user);
                 } catch (Exception e) {
@@ -222,12 +208,8 @@ log.error("\n\n\n\n\n****************** \n\n\n" + feedbackCreatorId + " | "
             }
         }
 
-        ///////////////
-
         String feedbackId = request.getParameter("feedbackId");
-
         log.debug("Returning feedback text: " + feedbackId);
-
         return feedbackId;
     }
 
@@ -274,6 +256,5 @@ log.error("\n\n\n\n\n****************** \n\n\n" + feedbackCreatorId + " | "
         return map;
     }
 }
-
 
 //~ Formatted by Jindent --- http://www.jindent.com

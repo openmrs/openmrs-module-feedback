@@ -29,6 +29,7 @@
         <property length="38" name="uuid" not-null="true" type="string"/>
         <property column="attachment" name="message" not-null="false" type="binary"/>
         <property column="screenshot" name="screenshot" not-null="false" type="binary"/>
+        <property name="pageinfo" type="string" length="5000" not-null="false" />
 
     </class>
 </hibernate-mapping>

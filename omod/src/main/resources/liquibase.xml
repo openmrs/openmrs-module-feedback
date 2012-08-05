@@ -201,4 +201,14 @@
         </addColumn>
     </changeSet>
 
+    <changeSet id="feedback-2012-08-05-23:25" author="harshadura">
+        <comment>
+            Adding new column called Pageinfo into Feedback_Feedback Table.
+        </comment>
+
+        <addColumn tableName="feedback_feedback">
+            <column name="pageinfo" type="mediumtext"/>
+        </addColumn>
+    </changeSet>
+
 </databaseChangeLog>

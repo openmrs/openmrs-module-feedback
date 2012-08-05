@@ -21,7 +21,6 @@ package org.openmrs.module.feedback.web;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import org.hibernate.criterion.Example;
 import org.openmrs.User;
 import org.openmrs.api.context.Context;
 import org.openmrs.module.feedback.Feedback;
@@ -51,11 +50,10 @@ public class FileDownloadServlet extends HttpServlet {
         try {
             if (Context.getAuthenticatedUser().isSuperUser() || Context.hasPrivilege("Admin Feedback")
                     || Context.hasPrivilege("Add Feedback")) {
+
                 String   feedbackId = request.getParameter("feedbackId");
                 Feedback feedback;
-
                 feedback = new Feedback();
-
                 User u = Context.getUserContext().getAuthenticatedUser();
 
                 try {
@@ -67,13 +65,13 @@ public class FileDownloadServlet extends HttpServlet {
                     }
                 } catch (Exception e) {
                     log.error(e);
-                     e.printStackTrace();
+                    e.printStackTrace();
                 }
 
                 if (!"".equals(request.getParameter("feedbackId")) && (request.getParameter("feedbackId") != null)
                         && (service.getFeedback(Integer.parseInt(feedbackId)) != null)
                         && (u.isSuperUser() || Context.hasPrivilege("Admin Feedback")
-                            || u.getUserId().equals(feedback.getCreator().getUserId()))) {
+                        || u.getUserId().equals(feedback.getCreator().getUserId()))) {
 
                     feedback = service.getFeedback(Integer.parseInt(feedbackId));
                     byte[] attachment = feedback.getMessage();
@@ -91,27 +89,8 @@ public class FileDownloadServlet extends HttpServlet {
                     response.getOutputStream().write(feedback.getMessage());
                 }
 
-
-                try{
-//                    String screenshot = feedback.getScreenshot();
-                    log.error("\n\n\n\n*************************HERE 1 ******************\n\n\n\n");
-                }catch (Exception e){
-                    log.error(">>>>>>>" + e);
-                    e.printStackTrace();
-                }
-
                 if (!"".equals(request.getParameter("feedbackScreenshotId")) && (request.getParameter("feedbackScreenshotId") != null)
                         && (u.isSuperUser() || Context.hasPrivilege("Admin Feedback") || Context.hasPrivilege("Add Feedback"))) {
-
-
-                    try{
-//                    String screenshot = feedback.getScreenshot();
-                                   log.error("\n\n\n\n*************************HERE 222 ******************\n\n\n\n");
-                               }catch (Exception e){
-                                   log.error(">>>>>>>" + e);
-                                   e.printStackTrace();
-                               }
-
 
                     byte[] screenshot = feedback.getScreenshot();
 
@@ -126,15 +105,14 @@ public class FileDownloadServlet extends HttpServlet {
                     // String contentType = vf.getContentType() != null ? vf.getContentType() : defaultContentType;
                     response.setContentType("images");
                     response.getOutputStream().write(feedback.getScreenshot());
-
                 }
 
                 if (!"".equals(request.getParameter("feedbackCommentId"))
-                           && (request.getParameter("feedbackCommentId") != null)
-                           && (service.getFeedbackComment(Integer.parseInt(request.getParameter("feedbackCommentId")))
-                               != null)) {
+                        && (request.getParameter("feedbackCommentId") != null)
+                        && (service.getFeedbackComment(Integer.parseInt(request.getParameter("feedbackCommentId")))
+                        != null)) {
                     FeedbackComment feedbackComment =
-                        service.getFeedbackComment(Integer.parseInt(request.getParameter("feedbackCommentId")));
+                            service.getFeedbackComment(Integer.parseInt(request.getParameter("feedbackCommentId")));
                     byte[] attachment = feedbackComment.getAttachment();
 
                     // Keeping these same as these are for the versionedfilemodule. Modify response to disable caching
@@ -158,15 +136,9 @@ public class FileDownloadServlet extends HttpServlet {
         }
     }
 
-    /**
-     *
-     */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         doGet(request, response);
     }
 }
-
-
-//~ Formatted by Jindent --- http://www.jindent.com

@@ -47,6 +47,8 @@ $j(document).ready(function(){
         $j('#feedbackSummary_severity').html($j('#severity option:selected').val());
         $j('#feedbackSummary_receiver').html($j('#fdbk_receiver option:selected').val());
 
+        $j('#feedbackSummary_attach').html($j('#file').val());
+
         try {
             if(overlayBlackout !== undefined ) {
                 var overlayChildrenBlackout = overlayBlackout.children();

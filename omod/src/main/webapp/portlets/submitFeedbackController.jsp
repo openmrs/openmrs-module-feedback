@@ -9,9 +9,11 @@
     $j(document).ready(function(){ logging: true;
         var $j = jQuery.noConflict();
 
-        var browser_os_info = "Browser: " + BrowserDetect.browser + " - " + BrowserDetect.version + " | O/S: " + BrowserDetect.OS;
+        var browser_os_info = "Browser: " + BrowserDetect.browser + "-" + BrowserDetect.version + " | O/S: " + BrowserDetect.OS;
         var pageURL = document.location.href
-        document.getElementById("pageInfo").innerText = "URL: " + pageURL + " | " + browser_os_info;
+        var pageInformation = "URL: " + pageURL + " | " + browser_os_info;
+        document.getElementById("pageInfo").innerText = pageInformation;
+        $j("#pageInfoPass").val(pageInformation);
 
         $j("#quick").click(function(){
 
@@ -169,6 +171,7 @@
                     <span class="stepHeading"><spring:message code="feedback.wizard.step5"/></span>
 	                <br /><br/>
                     <center>
+                        <input type=hidden name=pageInfoPass id=pageInfoPass />
                         <input type=hidden name=screenshotFile id=screenshotFile />
                         <a id="screenshot_thumbnail" target="_blank">
                             <img id="fdbk_processed_screenshot" name="fdbk_processed_screenshot" width="500" height="250" style="border:3px solid #c3c3c3;" /><br/>
@@ -178,7 +181,7 @@
                         <hr/>
                     </center>
                        <spring:message code="feedback.wizard.attachment"/><br /><br />
-                       <input type="file" name="file" size="40"/> < <spring:message code="feedback.wizard.attach2"/><br />
+                       <input type="file" name="file" id="file" size="40"/> < <spring:message code="feedback.wizard.attach2"/><br />
 				</span>
                 <span id="confirmation" class="step">
                     <span class="stepHeading"><spring:message code="feedback.wizard.step6"/></span>

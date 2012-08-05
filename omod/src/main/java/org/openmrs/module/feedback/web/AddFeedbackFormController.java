@@ -59,6 +59,7 @@ public class AddFeedbackFormController extends SimpleFormController {
         String  severity        = request.getParameter("severity");
         String  feedback        = request.getParameter("feedback");
         String  receiver        = request.getParameter("fdbk_receiver");
+        String  pageinfo        = request.getParameter("pageInfoPass");
 
         if (StringUtils.hasLength(subject) && StringUtils.hasLength(severity) && StringUtils.hasLength(severity)) {
             Object          o       = Context.getService(FeedbackService.class);
@@ -67,6 +68,7 @@ public class AddFeedbackFormController extends SimpleFormController {
 
             s.setSubject(request.getParameter("subject"));
             s.setSeverity(request.getParameter("severity"));
+            s.setPageinfo(pageinfo);
 
             /* To get the Stacktrace of the page from which the feedback is submitted */
             StackTraceElement[] c = Thread.currentThread().getStackTrace();
@@ -106,15 +108,9 @@ public class AddFeedbackFormController extends SimpleFormController {
                 }
             }
 
-            /////////////////
-
             String screenshotURL = request.getParameter("screenshotFile");
 
-            log.error("\n\n\n\n***************************" + screenshotURL + "\n\n******************\n\n\n\n");
-
-
             if (screenshotURL != null) {
-
                 try {
                     String parts[] = screenshotURL.split(",");
                     BASE64Decoder decoder = new BASE64Decoder();
@@ -124,33 +120,7 @@ public class AddFeedbackFormController extends SimpleFormController {
                 } catch(Exception e){
                     e.printStackTrace();
                 }
-//                log.error("\n\n\n\n***************************" + screenshotURL + "\n\n******************\n\n\n\n");
-
-
-//                MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) request;
-//                MultipartFile               file             = (MultipartFile) multipartRequest.getFile("file");
-//
-//                if (!file.isEmpty()) {
-//                    if (file.getSize() <= 5242880) {
-//                        if () {
-//                            s.setScreenshot(file.getBytes());
-//                        } else {
-//                            request.getSession().setAttribute(WebConstants.OPENMRS_ERROR_ATTR,
-//                                                              "feedback.notification.feedback.error");
-//
-//                            return false;
-//                        }
-//                    } else {
-//                        request.getSession().setAttribute(WebConstants.OPENMRS_ERROR_ATTR,
-//                                                          "feedback.notification.feedback.error");
-//
-//                        return false;
-//                    }
-//                }
             }
-
-            //////////////////
-
 
             /* Save the Feedback */
             service.saveFeedback(s);
@@ -189,7 +159,6 @@ public class AddFeedbackFormController extends SimpleFormController {
             }
 
             try {
-
                 // Create Message
                 Message message = new Message();
 

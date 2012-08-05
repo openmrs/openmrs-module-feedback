@@ -58,6 +58,14 @@
                 <th width="400"><spring:message code="feedback.dateCreated"/></th>
                 <td><openmrs:formatDate date="${feedback.dateCreated}" type="long" /></td>
             </tr>
+
+            <tr>
+                <th width="400"><spring:message code="feedback.pageinfo"/></th>
+                <td>
+                    <c:out value="${feedback.pageinfo}"/>
+                </td>
+            </tr>
+
             <tr>
                 <th width="400"><spring:message code="feedback.content"/></th>
                 <td>
