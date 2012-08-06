@@ -19,24 +19,21 @@
 
         $j("#quick").click(function() {
 
-            $j('#feedbackForm').submit();
-//            return true;
-//
+            var dataString = 'feedback='+ $j("#feedback").val()
+                    + '&subject=' + "Add Concept" + '&severity=' + "Medium" + '&fdbk_receiver=' + "daemon";
 
-            var closeButton = $j("#dialog").parent().find('.ui-dialog-titlebar a');
-            closeButton.click();
-            alert("Thanks! Your Feedback Submitted Successfully!");
-
+            $j.ajax({
+                type: "POST",
+                url: "<openmrs:contextPath/>/module/feedback/addFeedback.form",
+                data: dataString,
+                success: function() {
+                    var closeButton = $j("#dialog").parent().find('.ui-dialog-titlebar a');
+                    closeButton.click();
+                    alert("Thanks! Your Feedback Submitted Successfully!");
+                    $j("#feedback").val("");
+                }
+            });
         });
-
-//              $j('#feedbackForm').submit(function(){
-//                $j('<input />').attr('type', 'hidden')
-//                        .attr('subject', "Default")
-//                        .attr('severity', "Default")
-//                        .attr('fdbk_receiver', "Admin" )
-//                        .appendTo('#feedbackForm');
-//                return true;
-//            });
 
         /////////////////////
 
@@ -92,7 +89,7 @@
 </script>
 
 <div id="dialog" title="<spring:message code="feedback.submit"/>">
-<form id="feedbackForm" method="post" action="<openmrs:contextPath/>/module/feedback/addFeedback.form" class="bbq" enctype="multipart/form-data" >
+<form id="feedbackForm" name="feedbackForm" method="post" action="<openmrs:contextPath/>/module/feedback/addFeedback.form" class="bbq" enctype="multipart/form-data" >
     <div id="fieldWrapper">
                 <span id="step1" class="step">
                     <span class="stepHeading"><spring:message code="feedback.wizard.step1"/></span>

@@ -61,6 +61,9 @@ public class AddFeedbackFormController extends SimpleFormController {
         String  receiver        = request.getParameter("fdbk_receiver");
         String  pageinfo        = request.getParameter("pageInfoPass");
 
+
+        log.error("\n\n\n\n\n********** " + subject + severity + feedback + receiver + "\n\n\n\n\n**********");
+
         if (StringUtils.hasLength(subject) && StringUtils.hasLength(severity) && StringUtils.hasLength(severity)) {
             Object          o       = Context.getService(FeedbackService.class);
             FeedbackService service = (FeedbackService) o;
