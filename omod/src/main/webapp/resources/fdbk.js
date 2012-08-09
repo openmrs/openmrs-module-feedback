@@ -1,5 +1,6 @@
 // Feedback Module javascript for feedback submission 
 
+var $j = jQuery.noConflict();
 
 $j(document).ready(function() {
     	$j('#dialog').dialog({

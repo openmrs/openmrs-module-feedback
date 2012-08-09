@@ -1,21 +1,18 @@
 <%@ include file="/WEB-INF/template/include.jsp" %>
 
-<openmrs:htmlInclude file="/scripts/jquery/jquery.min.js" />
-<openmrs:htmlInclude file="/scripts/jquery-ui/js/jquery-ui.custom.min.js" />
 <link href="<openmrs:contextPath/>/scripts/jquery-ui/css/<spring:theme code='jqueryui.theme.name' />/jquery-ui.custom.css" type="text/css" rel="stylesheet" />
 
 <script type="text/javascript">
 
+    var $j = jQuery.noConflict();
+
     $j(document).ready(function(){ logging: true;
-        var $j = jQuery.noConflict();
 
         var browser_os_info = "Browser: " + BrowserDetect.browser + "-" + BrowserDetect.version + " | O/S: " + BrowserDetect.OS;
         var pageURL = document.location.href
         var pageInformation = "URL: " + pageURL + " | " + browser_os_info;
         document.getElementById("pageInfo").innerText = pageInformation;
         $j("#pageInfoPass").val(pageInformation);
-
-        /////////////////////
 
         $j("#quick").click(function() {
 
@@ -34,9 +31,6 @@
                 }
             });
         });
-
-        /////////////////////
-
 
         $j("#next").click(function() {
             if ($j("#next").val() == "Submit" ) {

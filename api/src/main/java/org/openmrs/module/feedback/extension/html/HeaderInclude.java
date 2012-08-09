@@ -27,6 +27,9 @@ public class HeaderInclude extends HeaderIncludeExt {
     public List<String> getHeaderFiles() {
         List<String> myHeaderFiles = new ArrayList<String>();
 
+        myHeaderFiles.add("/scripts/jquery/jquery.min.js");
+        myHeaderFiles.add("/scripts/jquery-ui/js/jquery-ui.custom.min.js");
+
         myHeaderFiles.add("/moduleResources/feedback/fdbk.js");
         myHeaderFiles.add("/moduleResources/feedback/wizard/jquery.ba-bbq.min.js");
         myHeaderFiles.add("/moduleResources/feedback/wizard/jquery.form.js");
