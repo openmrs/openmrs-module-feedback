@@ -70,7 +70,7 @@
             focusFirstInput : true
         });
 
-        $j('#stackCheckbox').click(function() {
+        $j('#pagecontext').click(function() {
             if( $j(this).is(':checked')) {
                 $j("#stack").show("slow");
             } else {
@@ -107,7 +107,7 @@
                         <tr>
                             <td>
                                 <label>
-                                    <input type="checkbox" id="stackCheckbox" />
+                                    <input type="checkbox" id="pagecontext"  name="pagecontext" />
                                     <spring:message code="feedback.wizard.stack.checkbox"/>
                                 </label>
                                 <br />

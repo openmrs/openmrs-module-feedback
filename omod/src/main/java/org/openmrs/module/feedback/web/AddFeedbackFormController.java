@@ -62,7 +62,7 @@ public class AddFeedbackFormController extends SimpleFormController {
         String  pageinfo        = request.getParameter("pageInfoPass");
 
 
-        log.error("\n\n\n\n\n********** " + subject + severity + feedback + receiver + "\n\n\n\n\n**********");
+        log.error("\n\n\n\n\n********** " + subject + severity + feedback + receiver + ">" + request.getParameter("pagecontext") + "\n\n\n\n\n**********");
 
         if (StringUtils.hasLength(subject) && StringUtils.hasLength(severity) && StringUtils.hasLength(severity)) {
             Object          o       = Context.getService(FeedbackService.class);
@@ -76,10 +76,16 @@ public class AddFeedbackFormController extends SimpleFormController {
             /* To get the Stacktrace of the page from which the feedback is submitted */
             StackTraceElement[] c = Thread.currentThread().getStackTrace();
 
-            if ("Yes".equals(request.getParameter("pagecontext"))) {
+            if ("on".equals(request.getParameter("pagecontext"))) {
+
+                String manualStack = request.getParameter("stack");
+                if(manualStack != null){
+                    feedback = "Feedback: " + feedback + " | User Generated Stacktrace: " + manualStack;
+                }
+
+                feedback = feedback + " | Automatic System Generated Stacktrace: ";
                 for (int i = 0; i < c.length; i++) {
-                    feedback = feedback + System.getProperty("line.separator") + c[i].getFileName()
-                               + c[i].getMethodName() + c[i].getClass() + c[i].getLineNumber();
+                    feedback = feedback + System.getProperty("line.separator") + c[i].getFileName() + c[i].getMethodName() + c[i].getClass() + c[i].getLineNumber();
                 }
             }
 
