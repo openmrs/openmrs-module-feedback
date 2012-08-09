@@ -234,6 +234,12 @@
 </form>
 
 </br>
+
+<a href="<openmrs:contextPath/>/module/feedback/feedbackUser.list" target="_blank">
+    <spring:message code="feedback.show.sent.list"/>
+</a>
+<br/><br/>
+
 <b class="boxHeader"><spring:message code="feedback.help"/></b>
 <ul>
     <li><i><spring:message code="feedback.submitfeedback.help.l1"/></i></li>

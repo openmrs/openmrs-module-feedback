@@ -12,7 +12,7 @@
 </c:if>
     
 <ul id="menu">
-	<openmrs:hasPrivilege privilege="Admin Feedback,Add Feedback">
+	<openmrs:hasPrivilege privilege="Admin Feedback">
         <li class="first">
                 <a href="${pageContext.request.contextPath}/admin"><spring:message code="admin.title.short"/></a>
         </li>
