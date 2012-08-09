@@ -39,15 +39,15 @@ public interface FeedbackService {
      * @param //saying to be created
      * @throws APIException
      */
+
+    @Authorized({ "Admin Feedback" })
     public void saveSeverity(Severity feedbackSeverity) throws APIException;
 
     public void saveStatus(Status Status) throws APIException;
 
-//    @Authorized({ "Admin Feedback" })
     public void savePredefinedSubject(PredefinedSubject PredefinedSubject) throws APIException;
 
     @Authorized({ "Add Feedback" })
-
     public void saveFeedback(Feedback Feedback) throws APIException;
 
     public void saveFeedbackComment(FeedbackComment FeedbackComment) throws APIException;

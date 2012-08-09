@@ -134,10 +134,19 @@ public class AddFeedbackFormController extends SimpleFormController {
             /* Save the Feedback */
             service.saveFeedback(s);
 
-            FeedbackUser feedbackUser = new FeedbackUser();
-            feedbackUser.setFeedback(s);
-            feedbackUser.setUser(Context.getUserService().getUserByUsername(receiver));
-            service.saveFeedbackUser(feedbackUser);
+            try{
+                FeedbackUser feedbackUser = new FeedbackUser();
+                feedbackUser.setFeedback(s);
+
+                Context.addProxyPrivilege("View Users");
+                feedbackUser.setUser(Context.getUserService().getUserByUsername(receiver));
+                Context.removeProxyPrivilege("View Users");
+
+                service.saveFeedbackUser(feedbackUser);
+            }
+            catch(Exception e){
+                log.error(e);
+            }
 
             request.getSession().setAttribute(
                 WebConstants.OPENMRS_MSG_ATTR,
