@@ -60,12 +60,13 @@
                             <a href="<openmrs:contextPath/>/module/feedback/preference.form"><spring:message code="feedback.user.preference"/></a>
             </li>
     </openmrs:hasPrivilege>
-    <openmrs:hasPrivilege privilege="Add Feedback,Admin Feedback">
-        <li 
-            <c:if test='<%= request.getRequestURI().contains("addFeedback") %>'>class="active"</c:if>>
-                        <a href="<openmrs:contextPath/>/module/feedback/addFeedback.form"><spring:message code="feedback.addFeedback.new"/></a>
-        </li>
-	</openmrs:hasPrivilege>
+
+    <%--<openmrs:hasPrivilege privilege="Add Feedback,Admin Feedback">--%>
+        <%--<li --%>
+            <%--<c:if test='<%= request.getRequestURI().contains("addFeedback") %>'>class="active"</c:if>>--%>
+                        <%--<a href="<openmrs:contextPath/>/module/feedback/addFeedback.form"><spring:message code="feedback.addFeedback.new"/></a>--%>
+        <%--</li>--%>
+	<%--</openmrs:hasPrivilege>--%>
 
     <%--<openmrs:hasPrivilege privilege="Add Feedback,Admin Feedback">--%>
         <%--<li--%>

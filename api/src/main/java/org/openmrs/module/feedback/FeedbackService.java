@@ -43,14 +43,15 @@ public interface FeedbackService {
 
     public void saveStatus(Status Status) throws APIException;
 
-    @Authorized({ "Admin Feedback" })
+//    @Authorized({ "Admin Feedback" })
     public void savePredefinedSubject(PredefinedSubject PredefinedSubject) throws APIException;
+
+    @Authorized({ "Add Feedback" })
 
     public void saveFeedback(Feedback Feedback) throws APIException;
 
     public void saveFeedbackComment(FeedbackComment FeedbackComment) throws APIException;
 
-    @Authorized({ "Add Feedback" })
     public void saveFeedbackUser(FeedbackUser FeedbackUser) throws APIException;
 
     /**

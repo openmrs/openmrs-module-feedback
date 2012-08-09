@@ -48,6 +48,7 @@ public class FileDownloadServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         try {
+
             if (Context.getAuthenticatedUser().isSuperUser() || Context.hasPrivilege("Admin Feedback")
                     || Context.hasPrivilege("Add Feedback")) {
 
