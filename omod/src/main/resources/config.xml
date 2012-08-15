@@ -11,7 +11,7 @@
 	<author>Gaurav Paliwal, Harsha Siriwardena</author>
 
 	<description>
-			General Feedback Mechanism Module
+		Feedback module provides a mechanism for general Users to communicate with system Supporters/Admins regarding System-related Feedback/messages/issues.
 	</description>
 
 	<activator>@MODULE_PACKAGE@.FeedbackActivator</activator>
