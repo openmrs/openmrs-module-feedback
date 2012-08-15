@@ -18,8 +18,6 @@ package org.openmrs.module.feedback.web;
 
 //~--- non-JDK imports --------------------------------------------------------
 
-import junit.framework.Assert;
-
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -28,12 +26,10 @@ import org.junit.Test;
 
 import org.openmrs.api.context.Context;
 import org.openmrs.module.feedback.FeedbackService;
-import org.openmrs.module.feedback.Severity;
 import org.openmrs.web.test.BaseModuleWebContextSensitiveTest;
 
 import org.springframework.mock.web.MockHttpServletRequest;
 import org.springframework.mock.web.MockHttpServletResponse;
-import org.springframework.mock.web.MockHttpSession;
 import org.springframework.web.servlet.ModelAndView;
 
 //~--- JDK imports ------------------------------------------------------------
@@ -72,29 +68,36 @@ public class AddFeedbackFormControllerTest extends BaseModuleWebContextSensitive
 
         /* this file is in the same folder of test resources where the hibernate mapping file is located */
         initializeInMemoryDatabase();
+        executeDataSet("initialInMemoryTestDataSet.xml");
         executeDataSet("FeedbackDataset.xml");
 
-        /* Sample data is loaded into the system */
         authenticate();
+//        Context.authenticate("test", "Password123");
+        System.out.println("\nCurrent User > " + Context.getAuthenticatedUser().getUsername());
+
+        /* Sample data is loaded into the system */
+
     }
 
     @After
     public void tearDown() {}
 
-    /**
+  /**
      * Test of formBackingObject method, of class AddFeedbackFormController.
      */
     @Test
     public void testFormBackingObject() throws Exception {
         System.out.println("formBackingObject");
 
+        ModelAndView mv = new ModelAndView();
+
         HttpServletRequest            req      = null;
         forwardFeedbackFormController instance = new forwardFeedbackFormController();
 
-        /* No testing now as their are a number of the Extra Credit dtuff that will effect these test cases */
+        authenticate();
     }
 
-    /**
+  /**
      * Test of referenceData method, of class AddFeedbackFormController.
      */
     @Test
