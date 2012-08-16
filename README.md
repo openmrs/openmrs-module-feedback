@@ -1,6 +1,11 @@
-openmrs-module-feedback
-=======================
+---------------------------------
+      README
+---------------------------------
 
-Allows users to communicate with system admins with system-related (not patient-specific) messages
+GSoC 2012 Project (General Feedback Mechanism Enhancements)
 
-https://wiki.openmrs.org/display/docs/Feedback+Module
+Project : Better Error Submission Process for FDBK Module 
+Student : Harsha Siriwardena
+Mentor  : Gaurav Paliwal
+
+[Project-Home] https://wiki.openmrs.org/display/projects/Better+Error+Submission+Process+for+FDBK+Module
