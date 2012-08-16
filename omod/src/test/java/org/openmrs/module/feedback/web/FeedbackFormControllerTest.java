@@ -206,6 +206,7 @@ public class FeedbackFormControllerTest extends BaseModuleWebContextSensitiveTes
             Assert.assertEquals(this.expResult, this.result);
         }
         catch(Exception e){
+
         }
     }
 
