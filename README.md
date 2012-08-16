@@ -1,7 +1,7 @@
 openmrs-module-feedback
 =======================
 
-Allows users to communicate with system admins with system-related (non patient-specific) messages
+Allows general OpenMRS Users to communicate with System Admins/Supporters regarding System-related (non patient-specific) messages/issues.
 
 https://wiki.openmrs.org/display/docs/Feedback+Module
 
