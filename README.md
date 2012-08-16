@@ -1,7 +1,7 @@
 Project : Better Error Submission Process for FDBK Module
 =========================================================
 
-GSoC 2012 Project (General Feedback Mechanism Enhancements)
+*GSoC 2012 Project*
 
 Student : Harsha Siriwardena
 
