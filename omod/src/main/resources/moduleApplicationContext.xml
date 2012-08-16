@@ -2,142 +2,151 @@
 <!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
 
 <!-- Beans to add to the current Application context definition -->
-  
+
 <beans>
-	
+
     <bean id="feedbackUrlMapping" class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
-        <property name="order"><value>1</value></property> 
+        <property name="order"><value>1</value></property>
         <property name="mappings">
             <props>
-				<prop key="/module/feedback/addSeverity.form">addSeverityForm</prop>
-                                <prop key="/module/feedback/addStatus.form">addStatusForm</prop>
-                                <prop key="/module/feedback/addPredefinedSubject.form">addPredefinedSubjectForm</prop>
-                                <prop key="/module/feedback/predefinedSubject.form">predefinedSubjectForm</prop>
-                                <prop key="/module/feedback/severity.form">severityForm</prop>
-                                <prop key="/module/feedback/status.form">statusForm</prop>
-                                <prop key="/module/feedback/addFeedback.form">addFeedbackForm</prop>
-                                <prop key="/module/feedback/feedbackAdmin.list">feedbackAdminList</prop>
-				<prop key="/module/feedback/feedbackUser.list">feedbackUserList</prop>
-                                <prop key="/module/feedback/feedback.form">feedbackForm</prop>
-				<prop key="/module/feedback/forwardFeedback.form">forwardFeedbackForm</prop>
-				<prop key="/module/feedback/preference.form">preferenceForm</prop>
-				<prop key="/module/feedback/feedbackProperties.form">feedbackPropertiesForm</prop>
-                                <prop key="**/submitFeedbackController.portlet">SubmitFeedbackController</prop>
+                <prop key="/module/feedback/addSeverity.form">addSeverityForm</prop>
+                <prop key="/module/feedback/addStatus.form">addStatusForm</prop>
+                <prop key="/module/feedback/addPredefinedSubject.form">addPredefinedSubjectForm</prop>
+                <prop key="/module/feedback/predefinedSubject.form">predefinedSubjectForm</prop>
+                <prop key="/module/feedback/severity.form">severityForm</prop>
+                <prop key="/module/feedback/status.form">statusForm</prop>
+                <prop key="/module/feedback/addFeedback.form">addFeedbackForm</prop>
+                <prop key="/module/feedback/feedbackAdmin.list">feedbackAdminList</prop>
+                <prop key="/module/feedback/feedbackUser.list">feedbackUserList</prop>
+                <prop key="/module/feedback/feedback.form">feedbackForm</prop>
+
+                <prop key="/module/feedback/feedbackUserAccess.form">addFeedbackUserAccess</prop>
+
+                <prop key="/module/feedback/forwardFeedback.form">forwardFeedbackForm</prop>
+                <prop key="/module/feedback/preference.form">preferenceForm</prop>
+                <prop key="/module/feedback/feedbackProperties.form">feedbackPropertiesForm</prop>
+                <prop key="**/submitFeedbackController.portlet">SubmitFeedbackController</prop>
             </props>
-	</property>
-	</bean>
+        </property>
+    </bean>
     <bean id="multipartResolver"
-        class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+          class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
         <!-- one of the properties available; the maximum file size in bytes -->
         <property name="maxUploadSize" value="900000"/>
     </bean>
-	<bean id="addSeverityForm" class="org.openmrs.module.feedback.web.AddSeverityFormController">
-		<property name="commandName"><value>feedbackPageMessage</value></property>
-		<property name="formView"><value>/module/feedback/addSeverityForm</value></property>
-		<property name="successView"><value>redirect:addSeverity.form</value></property>
-	</bean>
-        
-        <bean id="addStatusForm" class="org.openmrs.module.feedback.web.AddStatusFormController">
-		<property name="commandName"><value></value></property>
-		<property name="formView"><value>/module/feedback/addStatusForm</value></property>
-		<property name="successView"><value>redirect:addStatus.form</value></property>
-	</bean>
-        
-        <bean id="addPredefinedSubjectForm" class="org.openmrs.module.feedback.web.AddPredefinedSubjectFormController">
-		<property name="commandName"><value>feedbackMessage</value></property>
-		<property name="formView"><value>/module/feedback/addPredefinedSubjectForm</value></property>
-		<property name="successView"><value>redirect:addPredefinedSubject.form</value></property>
-	</bean>
-        
-        <bean id="predefinedSubjectForm" class="org.openmrs.module.feedback.web.PredefinedSubjectFormController">
-		<property name="commandName"><value>predefinedsubjectid</value></property>
-		<property name="formView"><value>/module/feedback/predefinedSubjectForm</value></property>
-		<property name="successView"><value>redirect:predefinedSubject.form</value></property>
-	</bean>
-        
-        <bean id="severityForm" class="org.openmrs.module.feedback.web.SeverityFormController">
-		<property name="commandName"><value>feedbackSeverityId</value></property>
-		<property name="formView"><value>/module/feedback/severityForm</value></property>
-		<property name="successView"><value>redirect:severity.form</value></property>
-	</bean>
-	
-        <bean id="statusForm" class="org.openmrs.module.feedback.web.StatusFormController">
-		<property name="commandName"><value>feedbackStatusId</value></property>
-		<property name="formView"><value>/module/feedback/statusForm</value></property>
-		<property name="successView"><value>redirect:status.form</value></property>
-	</bean>
-        
-        <bean id="addFeedbackForm" class="org.openmrs.module.feedback.web.AddFeedbackFormController">
-		<property name="commandName"><value></value></property>
-		<property name="formView"><value>/module/feedback/addFeedbackForm</value></property>
-		<property name="successView"><value>redirect:addFeedback.form</value></property>
-	</bean>
-        
-         <bean id="feedbackAdminList" class="org.openmrs.module.feedback.web.FeedbackAdminListController">
-		<property name="commandName"><value>helloWorldObject</value></property>
-		<property name="formView"><value>/module/feedback/feedbackAdminList</value></property>
-		<property name="successView"><value>redirect:feedbackAdmin.list</value></property>
-	</bean>
-	
-	<bean id="feedbackUserList" class="org.openmrs.module.feedback.web.FeedbackUserListController">
-		<property name="commandName"><value>helloWorldObject</value></property>
-		<property name="formView"><value>/module/feedback/feedbackUserList</value></property>
-		<property name="successView"><value>redirect:feedbackUser.list</value></property>
-	</bean>
-        
-        <bean id="feedbackForm" class="org.openmrs.module.feedback.web.FeedbackFormController">
-		<property name="commandName"><value>feedbackId</value></property>
-		<property name="formView"><value>/module/feedback/feedbackForm</value></property>
-		<property name="successView"><value>redirect:feedback.form</value></property>
-	</bean>
-	
-	<bean id="forwardFeedbackForm" class="org.openmrs.module.feedback.web.forwardFeedbackFormController">
-		<property name="commandName"><value>feedbackId</value></property>
-		<property name="formView"><value>/module/feedback/forwardFeedbackForm</value></property>
-		<property name="successView"><value>redirect:forwardFeedback.form</value></property>
-	</bean>
-        
-	<bean id="preferenceForm" class="org.openmrs.module.feedback.web.PreferenceFormController">
-		<property name="commandName"><value>feedbackMessage</value></property>
-		<property name="formView"><value>/module/feedback/preferenceForm</value></property>
-		<property name="successView"><value>redirect:preference.form</value></property>
-	</bean>
-	
-	<bean id="feedbackPropertiesForm" class="org.openmrs.module.feedback.web.FeedbackPropertiesFormController">
-		<property name="commandName"><value></value></property>
-		<property name="formView"><value>/module/feedback/feedbackPropertiesForm</value></property>
-		<property name="successView"><value>redirect:feedbackProperties.form</value></property>
-	</bean>
-	
-        <bean id="SubmitFeedbackController" class="org.openmrs.module.feedback.web.SubmitFeedbackController">
-        </bean>
-        
-        
-	<bean parent="serviceContext">
-		<property name="moduleService">
-			<list>
-				<value>org.openmrs.module.feedback.FeedbackService</value> <!-- service interface name -->
-				<bean class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
-					<property name="transactionManager"><ref bean="transactionManager"/></property>
-					<property name="target">
-						<bean class="org.openmrs.module.feedback.impl.FeedbackServiceImpl">
-							<property name="FeedbackdDAO">
-								<bean class="org.openmrs.module.feedback.db.hibernate.HibernateFeedbackDAO">
-									<property name="sessionFactory"><ref bean="sessionFactory"/></property>	
-								</bean>
-							</property>	
-						</bean>
-					</property>
-                                        <property name="preInterceptors">
-                                                <ref bean="serviceInterceptors"/>
-                                        </property> 
-					<property name="transactionAttributeSource">
-						<bean class="org.springframework.transaction.annotation.AnnotationTransactionAttributeSource"/>
-					</property>
-				</bean>
-			</list>
-		</property>
-	</bean>
-	
-	
+    <bean id="addSeverityForm" class="org.openmrs.module.feedback.web.AddSeverityFormController">
+        <property name="commandName"><value>feedbackPageMessage</value></property>
+        <property name="formView"><value>/module/feedback/addSeverityForm</value></property>
+        <property name="successView"><value>redirect:addSeverity.form</value></property>
+    </bean>
+
+    <bean id="addStatusForm" class="org.openmrs.module.feedback.web.AddStatusFormController">
+        <property name="commandName"><value></value></property>
+        <property name="formView"><value>/module/feedback/addStatusForm</value></property>
+        <property name="successView"><value>redirect:addStatus.form</value></property>
+    </bean>
+
+    <bean id="addPredefinedSubjectForm" class="org.openmrs.module.feedback.web.AddPredefinedSubjectFormController">
+        <property name="commandName"><value>feedbackMessage</value></property>
+        <property name="formView"><value>/module/feedback/addPredefinedSubjectForm</value></property>
+        <property name="successView"><value>redirect:addPredefinedSubject.form</value></property>
+    </bean>
+
+    <bean id="predefinedSubjectForm" class="org.openmrs.module.feedback.web.PredefinedSubjectFormController">
+        <property name="commandName"><value>predefinedsubjectid</value></property>
+        <property name="formView"><value>/module/feedback/predefinedSubjectForm</value></property>
+        <property name="successView"><value>redirect:predefinedSubject.form</value></property>
+    </bean>
+
+    <bean id="severityForm" class="org.openmrs.module.feedback.web.SeverityFormController">
+        <property name="commandName"><value>feedbackSeverityId</value></property>
+        <property name="formView"><value>/module/feedback/severityForm</value></property>
+        <property name="successView"><value>redirect:severity.form</value></property>
+    </bean>
+
+    <bean id="statusForm" class="org.openmrs.module.feedback.web.StatusFormController">
+        <property name="commandName"><value>feedbackStatusId</value></property>
+        <property name="formView"><value>/module/feedback/statusForm</value></property>
+        <property name="successView"><value>redirect:status.form</value></property>
+    </bean>
+
+    <bean id="addFeedbackForm" class="org.openmrs.module.feedback.web.AddFeedbackFormController">
+        <property name="commandName"><value></value></property>
+        <property name="formView"><value>/module/feedback/addFeedbackForm</value></property>
+        <property name="successView"><value>redirect:addFeedback.form</value></property>
+    </bean>
+
+    <bean id="feedbackAdminList" class="org.openmrs.module.feedback.web.FeedbackAdminListController">
+        <property name="commandName"><value>helloWorldObject</value></property>
+        <property name="formView"><value>/module/feedback/feedbackAdminList</value></property>
+        <property name="successView"><value>redirect:feedbackAdmin.list</value></property>
+    </bean>
+
+    <bean id="feedbackUserList" class="org.openmrs.module.feedback.web.FeedbackUserListController">
+        <property name="commandName"><value>helloWorldObject</value></property>
+        <property name="formView"><value>/module/feedback/feedbackUserList</value></property>
+        <property name="successView"><value>redirect:feedbackUser.list</value></property>
+    </bean>
+
+    <bean id="feedbackForm" class="org.openmrs.module.feedback.web.FeedbackFormController">
+        <property name="commandName"><value>feedbackId</value></property>
+        <property name="formView"><value>/module/feedback/feedbackForm</value></property>
+        <property name="successView"><value>redirect:feedback.form</value></property>
+    </bean>
+
+    <bean id="forwardFeedbackForm" class="org.openmrs.module.feedback.web.forwardFeedbackFormController">
+        <property name="commandName"><value>feedbackId</value></property>
+        <property name="formView"><value>/module/feedback/forwardFeedbackForm</value></property>
+        <property name="successView"><value>redirect:forwardFeedback.form</value></property>
+    </bean>
+
+    <bean id="preferenceForm" class="org.openmrs.module.feedback.web.PreferenceFormController">
+        <property name="commandName"><value>feedbackMessage</value></property>
+        <property name="formView"><value>/module/feedback/preferenceForm</value></property>
+        <property name="successView"><value>redirect:preference.form</value></property>
+    </bean>
+
+    <bean id="addFeedbackUserAccess" class="org.openmrs.module.feedback.web.AddFeedbackUserAccessController">
+        <property name="commandName"><value>addFeedbackUserAccess</value></property>
+        <property name="formView"><value>/module/feedback/addFeedbackUser</value></property>
+        <property name="successView"><value>redirect:feedbackUserAccess.form</value></property>
+    </bean>
+
+    <bean id="feedbackPropertiesForm" class="org.openmrs.module.feedback.web.FeedbackPropertiesFormController">
+        <property name="commandName"><value></value></property>
+        <property name="formView"><value>/module/feedback/feedbackPropertiesForm</value></property>
+        <property name="successView"><value>redirect:feedbackProperties.form</value></property>
+    </bean>
+
+    <bean id="SubmitFeedbackController" class="org.openmrs.module.feedback.web.SubmitFeedbackController">
+    </bean>
+
+
+    <bean parent="serviceContext">
+        <property name="moduleService">
+            <list>
+                <value>org.openmrs.module.feedback.FeedbackService</value> <!-- service interface name -->
+                <bean class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
+                    <property name="transactionManager"><ref bean="transactionManager"/></property>
+                    <property name="target">
+                        <bean class="org.openmrs.module.feedback.impl.FeedbackServiceImpl">
+                            <property name="FeedbackdDAO">
+                                <bean class="org.openmrs.module.feedback.db.hibernate.HibernateFeedbackDAO">
+                                    <property name="sessionFactory"><ref bean="sessionFactory"/></property>
+                                </bean>
+                            </property>
+                        </bean>
+                    </property>
+                    <property name="preInterceptors">
+                        <ref bean="serviceInterceptors"/>
+                    </property>
+                    <property name="transactionAttributeSource">
+                        <bean class="org.springframework.transaction.annotation.AnnotationTransactionAttributeSource"/>
+                    </property>
+                </bean>
+            </list>
+        </property>
+    </bean>
+
+
 </beans>

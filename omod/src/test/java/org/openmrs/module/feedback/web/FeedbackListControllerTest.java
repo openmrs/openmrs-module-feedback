@@ -113,7 +113,7 @@ public class FeedbackListControllerTest extends BaseModuleWebContextSensitiveTes
         Map                         result    = instance.referenceData(req);
 
         /* to checl wheather the data is sent or not binded into the key feedback */
-        if (!result.containsKey("feedbacks")) {
+        if (!result.containsKey("assigned_feedbacks")) {
             Assert.fail("Do not contain the object feedbacks");
         }
     }

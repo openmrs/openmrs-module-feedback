@@ -6,11 +6,12 @@
 	<!-- Feedback Module Properties -->
 	<id>feedback</id>
 	<name>General Feedback Mechanism</name>
-	<version>1.0.0</version>
+	<version>2.0</version>
 	<package>org.openmrs.module.@MODULE_ID@</package>
-	<author>Gaurav Paliwal</author>
+	<author>Gaurav Paliwal, Harsha Siriwardena</author>
+
 	<description>
-			General Feedback Mechanism Module
+		Feedback module provides a mechanism for general Users to communicate with system Supporters/Admins regarding System-related Feedback/messages/issues.
 	</description>
 
 	<activator>@MODULE_PACKAGE@.FeedbackActivator</activator>

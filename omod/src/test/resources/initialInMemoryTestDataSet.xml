@@ -1,9 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <dataset>
-  <person person_id="1" gender="" birthdate="1975-06-30" birthdate_estimated="false" dead="false" creator="1" date_created="2005-01-01 00:00:00.0" changed_by="1" date_changed="2007-09-20 21:54:12.0" voided="false" void_reason="" uuid="6adb7c42-cfd2-4301-b53b-ff17c5654ff7"/>
-  <role role="Anonymous" description="Everyone and their brother should have this role" uuid="5b773b4d-90be-4d3f-81ca-cbb1441541ec"/>
-  <role role="Authenticated" description="Every person logged in automatically has this role." uuid="0dc8933e-7105-4c3b-b86c-15618d854660"/>
-  <role role="System Developer" description="Administrators of the OpenMRS .. have additional access to change fundamental structure of the database model." uuid="0e43640b-67d1-4458-b47f-b64fd8ce4b0d"/>
-  <user_role user_id="1" role="System Developer"/>
-  <users user_id="1" person_id="1" system_id="1-8" username="admin" password="4a1750c8607d0fa237de36c6305715c223415189" salt="c788c6ad82a157b712392ca695dfcf2eed193d7f" secret_question="" creator="1" date_created="2005-01-01 00:00:00.0" changed_by="1" date_changed="2007-09-20 21:54:12.0" retired="false" retire_reason="" uuid="1010d442-e134-11de-babe-001e378eb67e"/>
+  <person person_id="2" gender="" birthdate="1975-06-30" birthdate_estimated="false" dead="false" creator="1" date_created="2005-01-01 00:00:00.0" changed_by="1" date_changed="2007-09-20 21:54:12.0" voided="false" void_reason="" uuid="22227c42-cfd2-4301-b53b-ff17c5654ff7"/>
+  <person person_id="3" gender="" birthdate="1990-07-23" birthdate_estimated="false" dead="false" creator="1" date_created="2005-01-01 00:00:00.0" changed_by="1" date_changed="2007-09-20 21:54:12.0" voided="false" void_reason="" uuid="111b7c42-cfd2-4301-b53b-ff17c5654ff7"/>
+
+  <role role="Anonymous" description="Everyone and their brother should have this role" uuid="33333b4d-90be-4d3f-81ca-cbb1441541ec"/>
+  <role role="Authenticated" description="Every person logged in automatically has this role." uuid="3334933e-7105-4c3b-b86c-15618d854660"/>
+  <role role="System Developer" description="Administrators of the OpenMRS .. have additional access to change fundamental structure of the database model." uuid="4444640b-67d1-4458-b47f-b64fd8ce4b0d"/>
+  <role role="Provider" description="Providers of the OpenMRS .. have additional access to change privileged Modules." uuid="7744640b-67d1-4458-b47f-b64fd8ce4b0d"/>
+
+  <user_role user_id="2" role="System Developer"/>
+  <user_role user_id="3" role="System Developer"/>
+
+  <!--<user_role user_id="3" role="Provider"/>-->
+
+  <users user_id="2" person_id="2" system_id="1-8" username="admin2" password="4a1750c8607d0fa237de36c6305715c223415189" salt="5432c6ad82a157b712392ca695dfcf2eed193d7f" secret_question="" creator="1" date_created="2005-01-01 00:00:00.0" changed_by="1" date_changed="2007-09-20 21:54:12.0" retired="false" retire_reason="" uuid="4545d442-e134-11de-babe-001e378eb67e"/>
+
+  <!-- Normal user ; Name = test ; Role = Provider ; Password = Password123  -->
+  <users user_id="3" person_id="3" system_id="9-10" username="test" password="d09330b75a13df50e32bb07af864445b8b10f1f9c720e693953500acdb327b7508fec8571019ed3e1a72ccd338fd9632bde399578040a5a0d304f41d46a586be" salt="71d7b439827ce8221c43af7ca78e29dcdf858edbc660ed43a3c5aafbf225b800f0f7b2dcc51041f32fa0d641a61586757ed12f9d0bdf931a9d7f08ebd53a1ba2" secret_question="" creator="1" date_created="2008-01-01 00:00:00.0" changed_by="2" date_changed="2007-09-20 21:54:12.0" retired="false" retire_reason="" uuid="5656d442-e134-11de-babe-001e378eb67e"/>
+
 </dataset>

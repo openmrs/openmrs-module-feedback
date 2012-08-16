@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="org.openmrs.module.feedback">
+    <class name="org.openmrs.module.feedback.FeedbackUser" table="feedback_userAccess">
+
+        <id name="id" type="java.lang.Integer">
+            <column name="id"/>
+            <generator class="native"/>
+        </id>
+
+        <many-to-one class="org.openmrs.module.feedback.Feedback" column="feedback_id" name="feedback" />
+
+        <many-to-one class="org.openmrs.User" column="user_id" name="user" />
+
+    </class>
+</hibernate-mapping>

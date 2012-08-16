@@ -21,9 +21,11 @@ package org.openmrs.module.feedback.web;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+import org.openmrs.User;
 import org.openmrs.api.context.Context;
 import org.openmrs.module.feedback.Feedback;
 import org.openmrs.module.feedback.FeedbackService;
+import org.openmrs.module.feedback.FeedbackUser;
 import org.openmrs.notification.Message;
 import org.openmrs.web.WebConstants;
 
@@ -32,6 +34,7 @@ import org.springframework.web.bind.ServletRequestUtils;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.mvc.SimpleFormController;
+import sun.misc.BASE64Decoder;
 
 //~--- JDK imports ------------------------------------------------------------
 
@@ -55,6 +58,11 @@ public class AddFeedbackFormController extends SimpleFormController {
         String  subject         = request.getParameter("subject");
         String  severity        = request.getParameter("severity");
         String  feedback        = request.getParameter("feedback");
+        String  receiver        = request.getParameter("fdbk_receiver");
+        String  pageinfo        = request.getParameter("pageInfoPass");
+
+
+        log.error("\n\n\n\n\n********** " + subject + severity + feedback + receiver + ">" + request.getParameter("pagecontext") + "\n\n\n\n\n**********");
 
         if (StringUtils.hasLength(subject) && StringUtils.hasLength(severity) && StringUtils.hasLength(severity)) {
             Object          o       = Context.getService(FeedbackService.class);
@@ -63,14 +71,21 @@ public class AddFeedbackFormController extends SimpleFormController {
 
             s.setSubject(request.getParameter("subject"));
             s.setSeverity(request.getParameter("severity"));
+            s.setPageinfo(pageinfo);
 
             /* To get the Stacktrace of the page from which the feedback is submitted */
             StackTraceElement[] c = Thread.currentThread().getStackTrace();
 
-            if ("Yes".equals(request.getParameter("pagecontext"))) {
+            if ("on".equals(request.getParameter("pagecontext"))) {
+
+                String manualStack = request.getParameter("stack");
+                if(manualStack != null){
+                    feedback = "Feedback: " + feedback + " | User Generated Stacktrace: " + manualStack;
+                }
+
+                feedback = feedback + " | Automatic System Generated Stacktrace: ";
                 for (int i = 0; i < c.length; i++) {
-                    feedback = feedback + System.getProperty("line.separator") + c[i].getFileName()
-                               + c[i].getMethodName() + c[i].getClass() + c[i].getLineNumber();
+                    feedback = feedback + System.getProperty("line.separator") + c[i].getFileName() + c[i].getMethodName() + c[i].getClass() + c[i].getLineNumber();
                 }
             }
 
@@ -102,8 +117,37 @@ public class AddFeedbackFormController extends SimpleFormController {
                 }
             }
 
+            String screenshotURL = request.getParameter("screenshotFile");
+
+            if (screenshotURL != null) {
+                try {
+                    String parts[] = screenshotURL.split(",");
+                    BASE64Decoder decoder = new BASE64Decoder();
+                    byte[] decodedBytes = decoder.decodeBuffer(parts[1]);
+                    s.setScreenshot(decodedBytes);
+
+                } catch(Exception e){
+                    e.printStackTrace();
+                }
+            }
+
             /* Save the Feedback */
             service.saveFeedback(s);
+
+            try{
+                FeedbackUser feedbackUser = new FeedbackUser();
+                feedbackUser.setFeedback(s);
+
+                Context.addProxyPrivilege("View Users");
+                feedbackUser.setUser(Context.getUserService().getUserByUsername(receiver));
+                Context.removeProxyPrivilege("View Users");
+
+                service.saveFeedbackUser(feedbackUser);
+            }
+            catch(Exception e){
+                log.error(e);
+            }
+
             request.getSession().setAttribute(
                 WebConstants.OPENMRS_MSG_ATTR,
                 Context.getAdministrationService().getGlobalProperty("feedback.ui.notification"));
@@ -133,7 +177,6 @@ public class AddFeedbackFormController extends SimpleFormController {
             }
 
             try {
-
                 // Create Message
                 Message message = new Message();
 

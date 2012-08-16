@@ -36,24 +36,28 @@ public interface FeedbackService {
     /**
      * Saves (creates) a new feedback module data
      *
-     * @param saying to be created
+     * @param //saying to be created
      * @throws APIException
      */
+
+    @Authorized({ "Admin Feedback" })
     public void saveSeverity(Severity feedbackSeverity) throws APIException;
 
     public void saveStatus(Status Status) throws APIException;
 
-    @Authorized({ "Admin Feedback" })
     public void savePredefinedSubject(PredefinedSubject PredefinedSubject) throws APIException;
 
+    @Authorized({ "Add Feedback" })
     public void saveFeedback(Feedback Feedback) throws APIException;
 
     public void saveFeedbackComment(FeedbackComment FeedbackComment) throws APIException;
 
+    public void saveFeedbackUser(FeedbackUser FeedbackUser) throws APIException;
+
     /**
      * Get response by internal identifier
      *
-     * @param responseId internal saying identifier
+     * @param //responseId internal saying identifier
      * @return response with given internal identifier
      * @throws APIException
      */
@@ -69,15 +73,19 @@ public interface FeedbackService {
 
     public FeedbackComment getFeedbackComment(Integer feedbackCommentId) throws APIException;
 
+    public List<User> getFeedbackUser(Feedback feedback) throws APIException;
+
     /**
      * Save response
      *
-     * @param response to be updated
+     * @param //response to be updated
      * @throws APIException
      */
     public void updateSeverity(Severity severity) throws APIException;
 
     public void updateStatus(Status status) throws APIException;
+
+    public void updateFeedbackUser(FeedbackUser feedbackUser) throws APIException;
 
     @Authorized({ "Admin Feedback" })
     public void updatePredefinedSubject(PredefinedSubject PredefinedSubject) throws APIException;
@@ -91,6 +99,8 @@ public interface FeedbackService {
 
     public void deleteFeedback(Feedback Feedback) throws APIException;
 
+    public void deleteFeedbackUser(Feedback feedback, User user) throws APIException;
+
     @Transactional(readOnly = true)
     public List<Severity> getSeverities() throws APIException;
 
@@ -99,6 +109,8 @@ public interface FeedbackService {
     public List<PredefinedSubject> getPredefinedSubjects() throws APIException;
 
     public List<Feedback> getFeedbacks() throws APIException;
+
+    public List<Feedback> getAssignedFeedbacks(User assignedUser) throws APIException;
 
     public List<Feedback> getFeedbacks(User user) throws APIException;
 

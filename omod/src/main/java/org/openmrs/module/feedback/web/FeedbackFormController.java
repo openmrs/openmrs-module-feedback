@@ -2,14 +2,17 @@ package org.openmrs.module.feedback.web;
 
 //~--- non-JDK imports --------------------------------------------------------
 
-import java.util.Date;
+import java.util.*;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+import org.openmrs.User;
 import org.openmrs.api.context.Context;
 import org.openmrs.module.feedback.Feedback;
 import org.openmrs.module.feedback.FeedbackComment;
 import org.openmrs.module.feedback.FeedbackService;
+import org.openmrs.module.feedback.FeedbackUser;
 import org.openmrs.web.WebConstants;
 
 import org.springframework.util.StringUtils;
@@ -18,9 +21,6 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.mvc.SimpleFormController;
 
 //~--- JDK imports ------------------------------------------------------------
-
-import java.util.HashMap;
-import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import org.openmrs.notification.Message;
@@ -40,6 +40,23 @@ public class FeedbackFormController extends SimpleFormController {
         String              comment = request.getParameter("comment");
         Map<String, Object> map     = new HashMap<String, Object>();
 
+        FeedbackService     hService = (FeedbackService) Context.getService(FeedbackService.class);
+        boolean assignedOrNot = false;
+        int fId = Integer.parseInt(request.getParameter("feedbackId"));
+        Feedback feedback = hService.getFeedback(fId);
+        int loggedUserId = Context.getAuthenticatedUser().getUserId();
+        int feedbackCreatorId = hService.getFeedback(fId).getCreator().getUserId();
+
+        List<User> usersList = hService.getFeedbackUser(feedback);
+        Iterator<User> iterator = usersList.iterator();
+        while (iterator.hasNext()) {
+            int feedbackAssignedUserId =  iterator.next().getUserId();
+            if(loggedUserId == feedbackAssignedUserId) {
+                assignedOrNot = true;
+                break;
+            }
+        }
+
         if (StringUtils.hasLength(status)
                 && (Context.getAuthenticatedUser().isSuperUser()
                     || Context.getAuthenticatedUser().hasPrivilege("Admin Feedback"))) {
@@ -51,7 +68,12 @@ public class FeedbackFormController extends SimpleFormController {
             } catch (Exception e) {
                 log.error(e);
             }
-        } else if (StringUtils.hasLength(comment)) {
+        } else if (StringUtils.hasLength(comment) &&
+                (assignedOrNot==true || (loggedUserId == feedbackCreatorId) || Context.getAuthenticatedUser().isSuperUser())) {
+
+//        log.error("\n\n\n\n\n****************** \n\n\n" + feedbackCreatorId + " | "
+//               + " | " + loggedUserId + " \n\n\n\n************");
+
             try {
                 Feedback        s = service.getFeedback((Integer.parseInt(request.getParameter("feedbackId"))));
                 FeedbackComment k = new FeedbackComment();
@@ -88,9 +110,11 @@ public class FeedbackFormController extends SimpleFormController {
                     }
                 }
 
-                if (Context.getAuthenticatedUser().isSuperUser() || Context.hasPrivilege("Admin Feedback")
-                        || Context.getAuthenticatedUser().equals(s.getCreator())) {
-                    service.saveFeedbackComment(k);
+                service.saveFeedbackComment(k);
+
+//                if (Context.getAuthenticatedUser().isSuperUser() || Context.hasPrivilege("Admin Feedback")
+//                        || Context.getAuthenticatedUser().equals(s.getCreator())) {
+
 		    try {
 
                 // Create Message
@@ -142,7 +166,7 @@ public class FeedbackFormController extends SimpleFormController {
 		    
                     request.getSession().setAttribute(WebConstants.OPENMRS_MSG_ATTR,
                                                       "feedback.notification.comment.submitted");
-                }
+//                }
             } catch (Exception exception) {
                 log.error(exception);
             }
@@ -151,17 +175,46 @@ public class FeedbackFormController extends SimpleFormController {
                        || Context.getAuthenticatedUser().isSuperUser())) {
             try {
                 Feedback s = service.getFeedback((Integer.parseInt(request.getParameter("feedbackId"))));
-
                 service.deleteFeedback(s);
+                request.getSession().setAttribute(WebConstants.OPENMRS_MSG_ATTR, "feedback.notification.delete");
+
             } catch (Exception exception) {
                 log.error(exception);
             }
         }
 
+        String addAssignedUser = request.getParameter("addAssignedUser");
+        String delAssignedUser = request.getParameter("delAssignedUser");
+
+//        log.error("\n\n\n\n\n********#############********** \n\n\n" + addAssignedUser + " | "
+//                               + delAssignedUser + " | " + request.getParameter("delAssigned") + " \n\n\n\n************");
+
+        if (Context.getAuthenticatedUser().isSuperUser()) {
+
+            if(StringUtils.hasLength(addAssignedUser) && request.getParameter("addAssigned") != null) {
+                try {
+                    FeedbackUser feedbackUser = new FeedbackUser();
+                    feedbackUser.setFeedback(feedback);
+                    feedbackUser.setUser(Context.getUserService().getUserByUsername(addAssignedUser));
+                    service.saveFeedbackUser(feedbackUser);
+                    request.getSession().setAttribute(WebConstants.OPENMRS_MSG_ATTR, "feedback.notification.added.new.user");
+                } catch (Exception e) {
+                    log.error(e);
+                }
+            }
+            else if(StringUtils.hasLength(delAssignedUser) && request.getParameter("delAssigned") != null) {
+                try {
+                    User user = Context.getUserService().getUserByUsername(delAssignedUser);
+                    service.deleteFeedbackUser(feedback, user);
+                    request.getSession().setAttribute(WebConstants.OPENMRS_MSG_ATTR, "feedback.notification.remove.user");
+                } catch (Exception e) {
+                    log.error(e);
+                }
+            }
+        }
+
         String feedbackId = request.getParameter("feedbackId");
-
         log.debug("Returning feedback text: " + feedbackId);
-
         return feedbackId;
     }
 
@@ -171,38 +224,34 @@ public class FeedbackFormController extends SimpleFormController {
         FeedbackService     hService = (FeedbackService) Context.getService(FeedbackService.class);
         Object              o        = Context.getService(FeedbackService.class);
         FeedbackService     service  = (FeedbackService) o;
+        Feedback feedback = service.getFeedback((Integer.parseInt(req.getParameter("feedbackId"))));
 
-        /* Make sure that the feedback ID is not empty */
-        if (!"".equals(req.getParameter("feedbackId"))) {
+        if (!req.getParameter("feedbackId").equals("")) {
             try {
 
-                /* This return the feedback object and status to the feedbackform page. */
-                if (hService.getFeedback((Integer.parseInt(req.getParameter("feedbackId")))) == null) {
-                    req.getSession().setAttribute(WebConstants.OPENMRS_MSG_ATTR, "feedback.notification.delete");
+//                if (Context.getUserContext().getAuthenticatedUser().isSuperUser()
+//                        || Context.hasPrivilege("Admin Feedback")
+//                        || Context.getAuthenticatedUser().equals(
+//                            service.getFeedback(Integer.parseInt(req.getParameter("feedbackId"))).getCreator())) {
 
-                    return map;
-                }
+                map.put("statuses", hService.getStatuses());
+                map.put("comments", hService.getFeedbackComments(Integer.parseInt(req.getParameter("feedbackId"))));
+                map.put("feedbackId", req.getParameter("feedbackId"));
+                map.put("feedback", hService.getFeedback((Integer.parseInt(req.getParameter("feedbackId")))));
+                map.put("assigned_users", hService.getFeedbackUser(feedback));
 
-                if (Context.getUserContext().getAuthenticatedUser().isSuperUser()
-                        || Context.hasPrivilege("Admin Feedback")
-                        || Context.getAuthenticatedUser().equals(
-                            service.getFeedback(Integer.parseInt(req.getParameter("feedbackId"))).getCreator())) {
-                    map.put("statuses", hService.getStatuses());
-                    map.put("comments", hService.getFeedbackComments(Integer.parseInt(req.getParameter("feedbackId"))));
-                    map.put("feedbackId", req.getParameter("feedbackId"));
-                    map.put("feedback", hService.getFeedback((Integer.parseInt(req.getParameter("feedbackId")))));
-                }
+                Context.addProxyPrivilege("View Users");
+                map.put("allusers", Context.getUserService().getAllUsers());
+                Context.removeProxyPrivilege("View Users");
+//                }
+
             } catch (Exception exception) {
                 log.error(exception);
-                req.getSession().setAttribute(WebConstants.OPENMRS_MSG_ATTR, "feedback.notification.delete");
             }
-        } else {
-            req.getSession().setAttribute(WebConstants.OPENMRS_MSG_ATTR, "feedback.notification.delete");
         }
 
         return map;
     }
 }
-
 
 //~ Formatted by Jindent --- http://www.jindent.com

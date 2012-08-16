@@ -35,6 +35,12 @@ public class SubmitFeedbackController extends PortletController {
 
         model.put("predefinedsubjects", hService.getPredefinedSubjects());
         model.put("severities", hService.getSeverities());
+
+        /* Normal Users haven't got the privilege to "View All Users" in the System,
+                  So need  to use Proxy privileges to overcome the issue. */
+        Context.addProxyPrivilege("View Users");
+        model.put("allusers", Context.getUserService().getAllUsers());
+        Context.removeProxyPrivilege("View Users");
     }
 }
 

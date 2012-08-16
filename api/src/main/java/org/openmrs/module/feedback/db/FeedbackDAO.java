@@ -22,6 +22,7 @@ import org.openmrs.User;
 import org.openmrs.api.db.DAOException;
 import org.openmrs.module.feedback.Feedback;
 import org.openmrs.module.feedback.FeedbackComment;
+import org.openmrs.module.feedback.FeedbackUser;
 import org.openmrs.module.feedback.PredefinedSubject;
 import org.openmrs.module.feedback.Severity;
 import org.openmrs.module.feedback.Status;
@@ -40,7 +41,7 @@ public interface FeedbackDAO {
     /**
      * Creates a new GeneralFeedbackModule record
      *
-     * @param GeneralFeedbackModule to be created
+     * @param //GeneralFeedbackModule to be created
      * @throws DAOException
      */
     public void saveSeverity(Severity Severity) throws DAOException;
@@ -53,10 +54,12 @@ public interface FeedbackDAO {
 
     public void saveFeedbackComment(FeedbackComment FeedbackComment) throws DAOException;
 
+    public void saveFeedbackUser(FeedbackUser FeedbackUser) throws DAOException;
+
     /**
      * Get GeneralFeedbackModule by internal identifier
      *
-     * @param GeneralFeedbackModule internal identifier
+     * @param //GeneralFeedbackModule internal identifier
      * @return GeneralFeedbackModule with given internal identifier
      * @throws DAOException
      */
@@ -70,10 +73,12 @@ public interface FeedbackDAO {
 
     public FeedbackComment getFeedbackComment(Integer FeedbackCommentId) throws DAOException;
 
+    public List<User> getFeedbackUser(Feedback Feedback) throws DAOException;
+
     /**
      * Update GeneralFeedbackModule
      *
-     * @param GeneralFeedbackModule to be updated
+     * @param //GeneralFeedbackModule to be updated
      * @throws DAOException
      */
     public void updateSeverity(Severity Severity) throws DAOException;
@@ -84,6 +89,9 @@ public interface FeedbackDAO {
 
     public void updateFeedback(Feedback Feedback) throws DAOException;
 
+    public void updateFeedbackUser(FeedbackUser FeedbackUser) throws DAOException;
+
+
     public List<Severity> getSeverities() throws DAOException;
 
     public List<Status> getStatuses() throws DAOException;
@@ -91,6 +99,8 @@ public interface FeedbackDAO {
     public List<PredefinedSubject> getPredefinedSubjects() throws DAOException;
 
     public List<Feedback> getFeedbacks() throws DAOException;
+
+    public List<Feedback> getAssignedFeedbacks(User assignedUser) throws DAOException;
 
     public List<Feedback> getFeedbacks(User user) throws DAOException;
 
@@ -103,6 +113,9 @@ public interface FeedbackDAO {
     public void deleteSeverity(Severity Severity) throws DAOException;
 
     public void deleteFeedback(Feedback Feedback) throws DAOException;
+
+    public void deleteFeedbackUser(Feedback feedback, User user) throws DAOException;
+
 }
 
 

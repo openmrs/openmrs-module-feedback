@@ -38,6 +38,8 @@ public class Feedback extends BaseOpenmrsObject implements Auditable {
     private Date    dateCreated;
     private Integer feedbackId;
     private byte[]  message;
+    private byte[]  screenshot;
+    private String  pageinfo;
 
     /*
      *     Default no arguement constructor
@@ -172,6 +174,22 @@ public class Feedback extends BaseOpenmrsObject implements Auditable {
 
     public void setMessage(byte[] message) {
         this.message = message;
+    }
+
+    public byte[] getScreenshot() {
+        return screenshot;
+    }
+
+    public void setScreenshot(byte[] screenshot) {
+        this.screenshot = screenshot;
+    }
+
+    public String getPageinfo() {
+        return this.pageinfo;
+    }
+
+    public void setPageinfo(String pageinfo) {
+        this.pageinfo = pageinfo;
     }
 }
 

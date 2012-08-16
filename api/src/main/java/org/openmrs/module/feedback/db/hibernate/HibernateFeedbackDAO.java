@@ -23,15 +23,13 @@ import org.apache.commons.logging.LogFactory;
 
 import org.hibernate.Criteria;
 import org.hibernate.SessionFactory;
-import org.hibernate.criterion.Expression;
-import org.hibernate.criterion.Order;
-import org.hibernate.criterion.Property;
-import org.hibernate.criterion.Restrictions;
+import org.hibernate.criterion.*;
 
 import org.openmrs.User;
 import org.openmrs.api.db.DAOException;
 import org.openmrs.module.feedback.Feedback;
 import org.openmrs.module.feedback.FeedbackComment;
+import org.openmrs.module.feedback.FeedbackUser;
 import org.openmrs.module.feedback.PredefinedSubject;
 import org.openmrs.module.feedback.Severity;
 import org.openmrs.module.feedback.Status;
@@ -39,6 +37,7 @@ import org.openmrs.module.feedback.db.FeedbackDAO;
 
 //~--- JDK imports ------------------------------------------------------------
 
+import javax.mail.Session;
 import java.util.List;
 
 public class HibernateFeedbackDAO implements FeedbackDAO {
@@ -60,9 +59,6 @@ public class HibernateFeedbackDAO implements FeedbackDAO {
         this.sessionFactory = sessionFactory;
     }
 
-    /**
-     * @see org.openmrs.api.db.HelloWorldResponseService#getHelloWorldResponse(java.lang.Long)
-     */
     public Severity getSeverity(Integer SeverityId) {
         return (Severity) sessionFactory.getCurrentSession().get(Severity.class, SeverityId);
     }
@@ -77,6 +73,15 @@ public class HibernateFeedbackDAO implements FeedbackDAO {
 
     public Feedback getFeedback(Integer FeedbackId) {
         return (Feedback) sessionFactory.getCurrentSession().get(Feedback.class, FeedbackId);
+    }
+
+    public List<User> getFeedbackUser(Feedback feedback) {
+//        return (FeedbackUser) sessionFactory.getCurrentSession().get(FeedbackUser.class, id);
+
+         Criteria criteria = sessionFactory.getCurrentSession().createCriteria(FeedbackUser.class);
+         criteria.setProjection(Projections.property("user")).add(Restrictions.eq("feedback", feedback)).list();
+         return criteria.list();
+
     }
 
     public FeedbackComment getFeedbackComment(Integer FeedbackCommentId) {
@@ -103,6 +108,10 @@ public class HibernateFeedbackDAO implements FeedbackDAO {
         sessionFactory.getCurrentSession().saveOrUpdate(FeedbackComment);
     }
 
+    public void saveFeedbackUser(FeedbackUser FeedbackUser) throws DAOException {
+        sessionFactory.getCurrentSession().saveOrUpdate(FeedbackUser);
+    }
+
     public void updateSeverity(Severity Severity) throws DAOException {
         sessionFactory.getCurrentSession().delete(Severity);
     }
@@ -117,6 +126,10 @@ public class HibernateFeedbackDAO implements FeedbackDAO {
 
     public void updateFeedback(Feedback Feedback) throws DAOException {
         sessionFactory.getCurrentSession().delete(Feedback);
+    }
+
+    public void updateFeedbackUser(FeedbackUser FeedbackUser) throws DAOException {
+        sessionFactory.getCurrentSession().delete(FeedbackUser);
     }
 
     @SuppressWarnings("unchecked")
@@ -144,6 +157,15 @@ public class HibernateFeedbackDAO implements FeedbackDAO {
 
         return criteria.list();
     }
+
+    public List<Feedback> getAssignedFeedbacks(User assignedUser) throws DAOException {
+        Criteria criteria = sessionFactory.getCurrentSession().createCriteria(FeedbackUser.class);
+//        criteria.add(Restrictions.eq("userId", assignedUser.getUserId()));
+
+        criteria.setProjection(Projections.property("feedback")).add(Restrictions.eq("user", assignedUser)).list();
+        return criteria.list();
+     }
+
 
     public List<Feedback> getFeedbacks(User user) throws DAOException {
         Criteria criteria = sessionFactory.getCurrentSession().createCriteria(Feedback.class);
@@ -175,6 +197,18 @@ public class HibernateFeedbackDAO implements FeedbackDAO {
 
     public void deleteFeedback(Feedback Feedback) throws DAOException {
         sessionFactory.getCurrentSession().delete(Feedback);
+    }
+
+    public void deleteFeedbackUser(Feedback feedback, User user) throws DAOException {
+//        sessionFactory.getCurrentSession().delete(FeedbackUser);
+
+        Criteria criteria = sessionFactory.getCurrentSession().createCriteria(FeedbackUser.class);
+        criteria.add(Restrictions.eq("feedback", feedback));
+        criteria.add(Restrictions.eq("user", user));
+        FeedbackUser feedbackUser = (FeedbackUser)criteria.uniqueResult();
+        sessionFactory.getCurrentSession().delete(feedbackUser);
+//
+
     }
 }
 

@@ -23,12 +23,7 @@ import org.apache.commons.logging.LogFactory;
 
 import org.openmrs.User;
 import org.openmrs.api.APIException;
-import org.openmrs.module.feedback.Feedback;
-import org.openmrs.module.feedback.FeedbackComment;
-import org.openmrs.module.feedback.FeedbackService;
-import org.openmrs.module.feedback.PredefinedSubject;
-import org.openmrs.module.feedback.Severity;
-import org.openmrs.module.feedback.Status;
+import org.openmrs.module.feedback.*;
 import org.openmrs.module.feedback.db.FeedbackDAO;
 
 //~--- JDK imports ------------------------------------------------------------
@@ -57,7 +52,7 @@ public class FeedbackServiceImpl implements FeedbackService {
     /**
      * Creates a new helloWorldResponse record
      *
-     * @param helloWorldResponse to be created
+     * @param //helloWorldResponse to be created
      * @throws APIException
      */
     public void saveSeverity(Severity Severity) throws APIException {
@@ -80,6 +75,10 @@ public class FeedbackServiceImpl implements FeedbackService {
         getFeedbackdDAO().saveFeedbackComment(FeedbackComment);
     }
 
+    public void saveFeedbackUser(FeedbackUser FeedbackUser) throws APIException {
+        getFeedbackdDAO().saveFeedbackUser(FeedbackUser);
+    }
+
     public Severity getSeverity(Integer SeverityId) throws APIException {
         return getFeedbackdDAO().getSeverity(SeverityId);
     }
@@ -94,6 +93,10 @@ public class FeedbackServiceImpl implements FeedbackService {
 
     public Feedback getFeedback(Integer FeedbackId) throws APIException {
         return getFeedbackdDAO().getFeedback(FeedbackId);
+    }
+
+    public List<User> getFeedbackUser(Feedback feedback) throws APIException {
+        return getFeedbackdDAO().getFeedbackUser(feedback);
     }
 
     public FeedbackComment getFeedbackComment(Integer FeedbackCommentId) throws APIException {
@@ -116,6 +119,10 @@ public class FeedbackServiceImpl implements FeedbackService {
         getFeedbackdDAO().updateFeedback(Feedback);
     }
 
+    public void updateFeedbackUser(FeedbackUser FeedbackUser) throws APIException {
+        getFeedbackdDAO().updateFeedbackUser(FeedbackUser);
+    }
+
     public List<Severity> getSeverities() throws APIException {
         return getFeedbackdDAO().getSeverities();
     }
@@ -130,6 +137,10 @@ public class FeedbackServiceImpl implements FeedbackService {
 
     public List<Feedback> getFeedbacks() throws APIException {
         return getFeedbackdDAO().getFeedbacks();
+    }
+
+    public List<Feedback> getAssignedFeedbacks(User assignedUser) throws APIException {
+        return getFeedbackdDAO().getAssignedFeedbacks(assignedUser);
     }
 
     public List<Feedback> getFeedbacks(User user) throws APIException {
@@ -154,6 +165,10 @@ public class FeedbackServiceImpl implements FeedbackService {
 
     public void deleteFeedback(Feedback Feedback) throws APIException {
         getFeedbackdDAO().deleteFeedback(Feedback);
+    }
+
+    public void deleteFeedbackUser(Feedback feedback, User user) throws APIException {
+        getFeedbackdDAO().deleteFeedbackUser(feedback, user);
     }
 }
 
