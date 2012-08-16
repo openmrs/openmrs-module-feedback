@@ -76,6 +76,7 @@ public class FeedbackListControllerTest extends BaseModuleWebContextSensitiveTes
 
         /* Sample data is loaded into the system */
         authenticate();
+
     }
 
     @After
