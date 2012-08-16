@@ -3,7 +3,7 @@ openmrs-module-feedback
 
 Allows general OpenMRS Users to communicate with System Admins/Supporters regarding System-related (non patient-specific) messages/issues.
 
-https://wiki.openmrs.org/display/docs/Feedback+Module
+Feedback Module - User Documentation : https://wiki.openmrs.org/x/uIAvAg
 
 Installation
 ============
