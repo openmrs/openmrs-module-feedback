@@ -11,9 +11,10 @@
 	<url>http://wiki.openmrs.org/display/docs/Feedback+Module</url>
 
 	<scm>
-		<connection>scm:svn:http://svn.openmrs.org/openmrs-modules/feedback/tags/feedback-2.0</connection>
-		<developerConnection>scm:svn:http://svn.openmrs.org/openmrs-modules/feedback/tags/feedback-2.0</developerConnection>
-		<url>http://svn.openmrs.org/openmrs-modules/feedback/tags/feedback-2.0</url>
+		<connection>scm:git:https://github.com/openmrs/openmrs-module-feedback</connection>
+		<developerConnection>scm:git:https://github.com/openmrs/openmrs-module-feedback</developerConnection>
+		<url>https://github.com/openmrs/openmrs-module-feedback</url>
+		<tag>HEAD</tag>
 	</scm>
 
 	<modules>
