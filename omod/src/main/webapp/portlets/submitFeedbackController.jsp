@@ -28,6 +28,7 @@
                     closeButton.click();
                     alert("Thanks! Your Feedback Submitted Successfully!");
                     $j("#feedback").val("");
+                    location.reload();
                 }
             });
         });
@@ -37,6 +38,7 @@
                 var closeButton = $j("#dialog").parent().find('.ui-dialog-titlebar a');
                 closeButton.click();
                 alert("Thanks! Your Feedback Submitted Successfully!");
+                location.reload();
             }
 
             if ($j("#stepHeading").text() != "Step 1 of 6"){
