@@ -3,7 +3,7 @@
 
 	<groupId>org.openmrs.module</groupId>
 	<artifactId>feedback</artifactId>
-	<version>2.0</version>
+	<version>2.0-SNAPSHOT</version>
 	<packaging>pom</packaging>
 	<name>General Feedback Mechanism Module</name>
 	<description>Parent project for General Feedback Mechanism Module</description>
