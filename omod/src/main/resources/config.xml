@@ -6,13 +6,13 @@
 	<!-- Feedback Module Properties -->
 	<id>feedback</id>
 	<name>General Feedback Mechanism</name>
-	<version>2.0</version>
+	<version>2.0.5</version>
 	<package>org.openmrs.module.@MODULE_ID@</package>
 	<author>Gaurav Paliwal, Harsha Siriwardena</author>
 
 	<description>
-		Feedback module provides a mechanism for general Users to communicate with system Supporters/Admins regarding System-related Feedback/messages/issues.
-	</description>
+	    Allows general OpenMRS Users to communicate with System Admins/Supporters regarding System-related (non patient-specific) messages/issues.
+    </description>
 
 	<activator>@MODULE_PACKAGE@.FeedbackActivator</activator>
 	
