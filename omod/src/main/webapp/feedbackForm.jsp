@@ -21,7 +21,7 @@
 </style>
 
 <h2>
-    <spring:message code="feedback.manageFeedback"/>
+    <spring:message code="feedback.infoFeedback"/>
 </h2>
 <div id="feedbackPhotoDialog">
     <img src="<openmrs:contextPath/>/moduleServlet/feedback/fileDownloadServlet?feedbackId=<c:out value="${feedback.feedbackId}"/>" >

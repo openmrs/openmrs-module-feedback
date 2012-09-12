@@ -16,29 +16,42 @@
 
         $j("#quick").click(function() {
 
-            var dataString = 'feedback='+ $j("#feedback").val()
-                    + '&subject=' + "Add Concept" + '&severity=' + "Medium" + '&fdbk_receiver=' + "daemon";
+            if($j.trim($j('#feedback').val()) == '')
+            {
+                alert("Please enter the Feedback Message Content!");
+            }
+            else {
+                var dataString = 'feedback='+ $j("#feedback").val()
+                        + '&subject=' + "Add Concept" + '&severity=' + "Medium" + '&fdbk_receiver=' + "daemon";
 
-            $j.ajax({
-                type: "POST",
-                url: "<openmrs:contextPath/>/module/feedback/addFeedback.form",
-                data: dataString,
-                success: function() {
-                    var closeButton = $j("#dialog").parent().find('.ui-dialog-titlebar a');
-                    closeButton.click();
-                    alert("Thanks! Your Feedback Submitted Successfully!");
-                    $j("#feedback").val("");
-                    location.reload();
-                }
-            });
+                $j.ajax({
+                    type: "POST",
+                    url: "<openmrs:contextPath/>/module/feedback/addFeedback.form",
+                    data: dataString,
+                    success: function() {
+                        var closeButton = $j("#dialog").parent().find('.ui-dialog-titlebar a');
+                        closeButton.click();
+                        alert("Thanks! Your Feedback Submitted Successfully!");
+                        $j("#feedback").val("");
+                        location.reload();
+                    }
+                });
+            }
         });
 
         $j("#next").click(function() {
-            if ($j("#next").val() == "Submit" ) {
-                var closeButton = $j("#dialog").parent().find('.ui-dialog-titlebar a');
-                closeButton.click();
-                alert("Thanks! Your Feedback Submitted Successfully!");
-                location.reload();
+
+            if($j.trim($j('#feedback').val()) == '')
+            {
+                alert("Please enter the Feedback Message Content!");
+            }
+            else {
+                if ($j("#next").val() == "Submit" ) {
+                    var closeButton = $j("#dialog").parent().find('.ui-dialog-titlebar a');
+                    closeButton.click();
+                    alert("Thanks! Your Feedback Submitted Successfully!");
+                    location.reload();
+                }
             }
 
             if ($j("#stepHeading").text() != "Step 1 of 6"){

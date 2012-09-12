@@ -36,7 +36,7 @@
 	} );
 </script>
 
-<h2><spring:message code="feedback.manageFeedback"/></h2>
+<h2><spring:message code="feedback.submittedFeedback"/></h2>
 
 
     <b class="boxHeader"><spring:message code="feedback.submit"/></b>
