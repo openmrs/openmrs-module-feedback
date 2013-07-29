@@ -14,11 +14,7 @@
 
 package org.openmrs.module.feedback.extension.html;
 
-//~--- non-JDK imports --------------------------------------------------------
-
 import org.openmrs.module.web.extension.HeaderIncludeExt;
-
-//~--- JDK imports ------------------------------------------------------------
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,23 +23,7 @@ public class HeaderInclude extends HeaderIncludeExt {
     public List<String> getHeaderFiles() {
         List<String> myHeaderFiles = new ArrayList<String>();
 
-        myHeaderFiles.add("/scripts/jquery/jquery.min.js");
-        myHeaderFiles.add("/scripts/jquery-ui/js/jquery-ui.custom.min.js");
-
-        myHeaderFiles.add("/moduleResources/feedback/fdbk.js");
-        myHeaderFiles.add("/moduleResources/feedback/wizard/jquery.ba-bbq.min.js");
-        myHeaderFiles.add("/moduleResources/feedback/wizard/jquery.form.js");
-        myHeaderFiles.add("/moduleResources/feedback/wizard/jquery.form.wizard-min.js");
-        myHeaderFiles.add("/moduleResources/feedback/wizard/jquery.validate.js");
-        myHeaderFiles.add("/moduleResources/feedback/wizard/BrowserDetect.js");
-
-        myHeaderFiles.add("/moduleResources/feedback/jsFeedback/feedback.css");
-        myHeaderFiles.add("/moduleResources/feedback/jsFeedback/html2canvas.js");
-        myHeaderFiles.add("/moduleResources/feedback/jsFeedback/jsfeedback.js");
-        myHeaderFiles.add("/moduleResources/feedback/jsFeedback/jquery.blockUI.js");
-
         return myHeaderFiles;
     }
 }
 
-//~ Formatted by Jindent --- http://www.jindent.com

@@ -1,6 +1,19 @@
 <%@ include file="/WEB-INF/template/include.jsp" %>
 
-<link href="<openmrs:contextPath/>/scripts/jquery-ui/css/<spring:theme code='jqueryui.theme.name' />/jquery-ui.custom.css" type="text/css" rel="stylesheet" />
+<link href="" type="text/css" rel="stylesheet" />
+
+<openmrs:htmlInclude file="/moduleResources/feedback/jsFeedback/feedback.css" />
+
+<openmrs:htmlInclude file="/moduleResources/feedback/fdbk.js" />
+<openmrs:htmlInclude file="/moduleResources/feedback/wizard/jquery.ba-bbq.min.js" />
+<openmrs:htmlInclude file="/moduleResources/feedback/wizard/jquery.form.wizard-min.js" />
+<openmrs:htmlInclude file="/moduleResources/feedback/wizard/jquery.form.js" />
+<openmrs:htmlInclude file="/moduleResources/feedback/wizard/jquery.validate.js" />
+<openmrs:htmlInclude file="/moduleResources/feedback/wizard/BrowserDetect.js" />
+
+<openmrs:htmlInclude file="/moduleResources/feedback/jsFeedback/html2canvas.js" />
+<openmrs:htmlInclude file="/moduleResources/feedback/jsFeedback/jsfeedback.js" />
+<openmrs:htmlInclude file="/moduleResources/feedback/jsFeedback/jquery.blockUI.js" />
 
 <script type="text/javascript">
 
@@ -97,7 +110,7 @@
 
 </script>
 
-<div id="dialog" title="<spring:message code="feedback.submit"/>">
+<div id="dialog" style="display: none" title="<spring:message code="feedback.submit"/>">
 <form id="feedbackForm" name="feedbackForm" method="post" action="<openmrs:contextPath/>/module/feedback/addFeedback.form" class="bbq" enctype="multipart/form-data" >
     <div id="fieldWrapper">
                 <span id="step1" class="step">
