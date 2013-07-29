@@ -16,7 +16,7 @@ $j(document).ready(function() {
 function popUp() {
     	$j('#dialog').dialog({
             autoOpen: true,
-	    width: '90%'
+	    width: '50%'
 	});
 
 }
@@ -24,7 +24,7 @@ function popUp() {
 function fdbkPhotoPopUp() {
     	$j('#feedbackPhotoDialog').dialog({
             autoOpen: true,
-	    width: '90%'
+	    width: '50%'
 	});
 
 }
