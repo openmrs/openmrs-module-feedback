@@ -106,6 +106,10 @@
             }
         });
 
+        $j('#showHelp').click(function(){
+            $j('#helpBox').slideToggle('slow'); //toggle();
+        });
+
     });
 
 </script>
@@ -263,17 +267,20 @@
 
 </br>
 
-<a href="<openmrs:contextPath/>/module/feedback/feedbackUser.list" target="_blank">
-    <spring:message code="feedback.show.sent.list"/>
-</a>
+<a href="<openmrs:contextPath/>/module/feedback/feedbackUser.list" target="_blank"><spring:message code="feedback.show.sent.list"/></a> |
+<a href="javascript:void(0);" id="showHelp"><spring:message code="feedback.show.help.box"/></a>
+
 <br/><br/>
 
-<b class="boxHeader"><spring:message code="feedback.help"/></b>
-<ul>
-    <li><i><spring:message code="feedback.submitfeedback.help.l1"/></i></li>
-    <li><i><spring:message code="feedback.submitfeedback.help.l2"/></i></li>
-    <li><i><spring:message code="feedback.submitfeedback.help.l3"/></i></li>
-    <li><i><spring:message code="feedback.submitfeedback.help.l4"/></i></li>
-</ul>
+<div id="helpBox" style="display:none;">
+
+    <b class="boxHeader"><spring:message code="feedback.help"/></b>
+    <ul>
+        <li><i><spring:message code="feedback.submitfeedback.help.l1"/></i></li>
+        <li><i><spring:message code="feedback.submitfeedback.help.l2"/></i></li>
+        <li><i><spring:message code="feedback.submitfeedback.help.l3"/></i></li>
+        <li><i><spring:message code="feedback.submitfeedback.help.l4"/></i></li>
+    </ul>
+</div>
 
 </div>
