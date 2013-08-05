@@ -18,6 +18,19 @@
         </li>
 	</openmrs:hasPrivilege>
 
+    <openmrs:hasPrivilege privilege="Add Feedback,Admin Feedback">
+        <li
+        <c:if test='<%= request.getRequestURI().contains("feedback/feedbackAdmin") %>'>class="active"</c:if>>
+        <a href="<openmrs:contextPath/>/module/feedback/feedbackAdmin.list"><spring:message code="feedback.manageFeedback"/></a>
+        </li>
+    </openmrs:hasPrivilege>
+    <openmrs:hasPrivilege privilege="Add Feedback,Admin Feedback">
+        <li
+        <c:if test='<%= request.getRequestURI().contains("feedback/feedbackUser") %>'>class="active"</c:if>>
+        <a href="<openmrs:contextPath/>/module/feedback/feedbackUser.list"><spring:message code="feedback.user.manageFeedback"/></a>
+        </li>
+    </openmrs:hasPrivilege>
+
 	<openmrs:hasPrivilege privilege="Admin Feedback">
         <li 
             <c:if test='<%= request.getRequestURI().contains("addPredefinedSubject") %>'>class="active"</c:if>>
@@ -36,18 +49,7 @@
                         <a href="<openmrs:contextPath/>/module/feedback/addStatus.form"><spring:message code="feedback.statuses"/></a>
         </li>
 	</openmrs:hasPrivilege>
-	<openmrs:hasPrivilege privilege="Add Feedback,Admin Feedback">
-        <li 
-            <c:if test='<%= request.getRequestURI().contains("feedback/feedbackAdmin") %>'>class="active"</c:if>>
-                        <a href="<openmrs:contextPath/>/module/feedback/feedbackAdmin.list"><spring:message code="feedback.manageFeedback"/></a>
-        </li>
-    </openmrs:hasPrivilege>
-    <openmrs:hasPrivilege privilege="Add Feedback,Admin Feedback">
-        <li
-        <c:if test='<%= request.getRequestURI().contains("feedback/feedbackUser") %>'>class="active"</c:if>>
-        <a href="<openmrs:contextPath/>/module/feedback/feedbackUser.list"><spring:message code="feedback.user.manageFeedback"/></a>
-        </li>
-    </openmrs:hasPrivilege>
+
     <openmrs:hasPrivilege privilege="Admin Feedback">
         <li
         <c:if test='<%= request.getRequestURI().contains("feedbackProperties") %>'>class="active"</c:if>>

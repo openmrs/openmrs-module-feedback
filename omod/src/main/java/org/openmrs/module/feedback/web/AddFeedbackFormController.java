@@ -80,13 +80,13 @@ public class AddFeedbackFormController extends SimpleFormController {
 
                 String manualStack = request.getParameter("stack");
                 if(manualStack != null){
-                    feedback = "Feedback: " + feedback + " | User Generated Stacktrace: " + manualStack;
+                    feedback = "Feedback: " + feedback + " | User Generated Stacktrace: " + manualStack + " | Automatic System Generated Stacktrace: ";
+
+                    for (int i = 0; i < c.length; i++) {
+                        feedback = feedback + System.getProperty("line.separator") + c[i].getFileName() + c[i].getMethodName() + c[i].getClass() + c[i].getLineNumber();
+                    }
                 }
 
-                feedback = feedback + " | Automatic System Generated Stacktrace: ";
-                for (int i = 0; i < c.length; i++) {
-                    feedback = feedback + System.getProperty("line.separator") + c[i].getFileName() + c[i].getMethodName() + c[i].getClass() + c[i].getLineNumber();
-                }
             }
 
             s.setContent(feedback);
