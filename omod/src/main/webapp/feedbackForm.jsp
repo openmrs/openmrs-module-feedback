@@ -107,29 +107,6 @@
 </div>
 
 
-<b class="boxHeader"><spring:message code="feedback.manage.form.comments"/></b>
-<div class="box" >
-    <%--<table id="table3">--%>
-    <%--<tr>--%>
-    <%--<th width="400"><spring:message code="feedback.reply.list"/></th>--%>
-    <%--<td colspan="2">--%>
-    <c:forEach items="${comments}" var="commentObj" >
-        <c:out value="${commentObj.comment}"/>
-        <div class="description">
-            <c:if test="${not empty commentObj.attachment}">
-                <a href="<openmrs:contextPath/>/moduleServlet/feedback/fileDownloadServlet?feedbackCommentId=<c:out value="${commentObj.feedbackCommentId}"/> ">
-                Attachment
-                </a>
-            </c:if >
-
-            <c:out value="${commentObj.creator.personName}"/>
-            <kc:prettyTime date="${commentObj.dateCreated}"></kc:prettyTime>
-        </div>
-    </c:forEach>
-    <%--</td>--%>
-    <%--</tr>--%>
-    <%--</table>--%>
-</div>
 
 <%----%>
 
@@ -244,6 +221,32 @@
         </openmrs:hasPrivilege>
     </table>
 </div>
+
+
+<b class="boxHeader"><spring:message code="feedback.manage.form.comments"/></b>
+<div class="box" >
+    <%--<table id="table3">--%>
+    <%--<tr>--%>
+    <%--<th width="400"><spring:message code="feedback.reply.list"/></th>--%>
+    <%--<td colspan="2">--%>
+    <c:forEach items="${comments}" var="commentObj" >
+        <c:out value="${commentObj.comment}"/>
+        <div class="description">
+            <c:if test="${not empty commentObj.attachment}">
+                <a href="<openmrs:contextPath/>/moduleServlet/feedback/fileDownloadServlet?feedbackCommentId=<c:out value="${commentObj.feedbackCommentId}"/> ">
+                Attachment
+                </a>
+            </c:if >
+
+            <c:out value="${commentObj.creator.personName}"/>
+            <kc:prettyTime date="${commentObj.dateCreated}"></kc:prettyTime>
+        </div>
+    </c:forEach>
+    <%--</td>--%>
+    <%--</tr>--%>
+    <%--</table>--%>
+</div>
+
 </openmrs:hasPrivilege>
 
 <%@ include file="/WEB-INF/template/footer.jsp" %>
