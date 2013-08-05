@@ -56,7 +56,7 @@
 
             if($j.trim($j('#feedback').val()) == '')
             {
-                alert("Please enter the Feedback Message Content!");
+//                alert("Please enter the Feedback Message Content!");
             }
             else {
                 if ($j("#next").val() == "Submit" ) {
@@ -65,17 +65,17 @@
                     alert("Thanks! Your Feedback Submitted Successfully!");
                     location.reload();
                 }
-            }
 
-            if ($j("#stepHeading").text() != "Step 1 of 6"){
-                $j('#quick').hide();
-            }
-
-            $j(":contains('Feedback Confirmation')").each(function() {
-                if($j(this).find(":contains('Feedback Confirmation')").length > 0) {
-                    $j('#feedbackSummary_attach').html($j('#file').val());
+                if ($j("#stepHeading").text() != "Step 1 of 6"){
+                    $j('#quick').hide();
                 }
-            });
+
+                $j(":contains('Feedback Confirmation')").each(function() {
+                    if($j(this).find(":contains('Feedback Confirmation')").length > 0) {
+                        $j('#feedbackSummary_attach').html($j('#file').val());
+                    }
+                });
+            }
         });
 
         $j("#back").click(function() {
@@ -125,7 +125,7 @@
                             <td><spring:message code="feedback.feedback"/></td>
                         </tr>
                         <tr>
-                            <td><textarea id="feedback" name="feedback" rows="4" cols="40" ></textarea></td>
+                            <td><textarea class="required" id="feedback" name="feedback" rows="4" cols="40" ></textarea></td>
                         </tr>
                     </table>
 		        </span>
