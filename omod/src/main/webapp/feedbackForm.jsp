@@ -182,6 +182,32 @@
     </div>
 </openmrs:hasPrivilege>
 
+
+<openmrs:hasPrivilege privilege="Admin Feedback">
+    <%--<b class="boxHeader"><spring:message code="feedback.manage.form.comments"/></b>--%>
+    <div class="box" >
+
+        <table id="table75">
+            <tr>
+                <th width="400"></th>
+                <td>
+                    <%--<form method="post">--%>
+                    <%--<input type=hidden name=delete value= "1"/>--%>
+                    <%--<input type=hidden name=feedbackId value="${feedback.feedbackId}"/>--%>
+                    <%--<input type="submit" value="<spring:message code="feedback.delete"/>" />--%>
+                    <%--</form>--%>
+                    <form method="get" action="<openmrs:contextPath/>/module/feedback/forwardFeedback.form">
+                        <input type=hidden name=feedbackId value="${feedback.feedbackId}"/>
+                        <input type="submit" value="<spring:message code="feedback.forward"/>" />
+                    </form>
+                </td>
+            </tr>
+
+        </table>
+    </div>
+</openmrs:hasPrivilege>
+
+
 <b class="boxHeader"><spring:message code="feedback.manage.form.add.comment"/></b>
 <div class="box" >
     <table id="table6">
@@ -205,20 +231,9 @@
             <td>
                 <input type=hidden name=feedbackId value=<c:out value="${feedback.feedbackId}"/> >
                 <input type="submit" value="<spring:message code="feedback.comment.add" />" />
+            </td>
         </form>
 
-        <openmrs:hasPrivilege privilege="Admin Feedback">
-            <form method="post">
-                <input type=hidden name=delete value= "1"/>
-                <input type=hidden name=feedbackId value="${feedback.feedbackId}"/>
-                <input type="submit" value="<spring:message code="general.delete"/>" />
-            </form>
-            <form method="get" action="<openmrs:contextPath/>/module/feedback/forwardFeedback.form">
-                <input type=hidden name=feedbackId value="${feedback.feedbackId}"/>
-                <input type="submit" value="<spring:message code="feedback.forward"/>" />
-            </form>
-            </td>
-        </openmrs:hasPrivilege>
     </table>
 </div>
 
@@ -246,6 +261,7 @@
     <%--</tr>--%>
     <%--</table>--%>
 </div>
+
 
 </openmrs:hasPrivilege>
 
