@@ -5,7 +5,7 @@
 	<artifactId>feedback</artifactId>
 	<version>2.2.1-SNAPSHOT</version>
 	<packaging>pom</packaging>
-	<name>General Feedback Mechanism Module</name>
+	<name>Feedback Module</name>
 	<description>Parent project for General Feedback Mechanism Module</description>
 
 	<url>http://wiki.openmrs.org/display/docs/Feedback+Module</url>
@@ -17,6 +17,19 @@
 		<tag>HEAD</tag>
 	</scm>
 
+    <distributionManagement>
+        <repository>
+            <id>openmrs-repo-modules</id>
+            <name>Modules</name>
+            <url>http://mavenrepo.openmrs.org/nexus/content/repositories/modules/</url>
+        </repository>
+        <snapshotRepository>
+            <id>openmrs-repo-snapshots</id>
+            <name>OpenMRS Snapshots</name>
+            <url>http://mavenrepo.openmrs.org/nexus/content/repositories/snapshots</url>
+        </snapshotRepository>
+    </distributionManagement>
+
 	<modules>
 		<module>api</module>
 		<module>omod</module>
@@ -24,19 +37,6 @@
 
 	<dependencyManagement>
 		<dependencies>
-			<!--
-			Libraries from lib to add as dependencies with compile or runtime scope:
-			
-				
-			Find matching dependencies in maven central repository.
-			<dependency>
-				<groupId>org.other.library</groupId>
-				<artifactId>library-name</artifactId>
-				<version>library.version</version>
-				<scope>compile</scope>
-			</dependency>
-			-->
-			
 			<dependency>
 				<groupId>org.openmrs.api</groupId>
 				<artifactId>openmrs-api</artifactId>
