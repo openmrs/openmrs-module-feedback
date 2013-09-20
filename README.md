@@ -1,7 +1,7 @@
 openmrs-module-feedback
 =======================
 
-[![Build Status](https://secure.travis-ci.org/harshadura/openmrs-module-feedback.png)](http://travis-ci.org/harshadura/openmrs-module-feedback)
+[![Build Status](https://travis-ci.org/openmrs/openmrs-module-feedback.png?branch=master)](https://travis-ci.org/openmrs/openmrs-module-feedback)
 
 Allows general OpenMRS Users to communicate with System Admins/Supporters regarding System-related (non patient-specific) messages/issues.
 
